@@ -6,7 +6,7 @@ nav { max-width:1180px; margin:0 auto; display:flex; flex-wrap:wrap; align-items
 nav a.tab { color:#f5f0dc; text-decoration:none; padding:9px 14px; border-radius:6px; font-size:16px; }
 nav a.tab:hover { background:rgba(212,175,55,.18); }
 nav a.tab.active { background:#d4af37; color:#10101e; font-weight:bold; }
-.hero img { width:100%; height:340px; object-fit:cover; object-position:50% 56%; display:block; }
+.hero img { width:100%; height:clamp(180px, 32vw, 340px); object-fit:cover; object-position:50% 56%; display:block; }
 .wrap { max-width:1180px; margin:0 auto; padding:34px 18px 10px; }
 h1 { font-size:40px; letter-spacing:1px; color:#e8c56a; margin-bottom:12px; }
 h2 { font-size:26px; color:#e8c56a; margin:26px 0 10px; }
@@ -29,7 +29,7 @@ body.mustang { background:linear-gradient(180deg,#241203 0%,#3a2410 55%,#170c04 
 body.tejano { background:linear-gradient(180deg,#1d0633 0%,#47106b 55%,#12041f 100%); }
 .stationart { width:100%; height:460px; object-fit:cover; object-position:center; border-radius:12px; border:2px solid #d4af37; display:block; margin-bottom:22px; }
 .bannerart { width:100%; display:block; border-radius:12px; border:2px solid #d4af37; margin-bottom:22px; }
-@media (max-width:640px){ h1{font-size:30px} .brand{font-size:21px} .hero img{height:auto} .stationart{height:auto} }
+@media (max-width:640px){ h1{font-size:30px} .brand{font-size:21px} }
 
 .pickbtn { display:block; width:100%; text-align:left; background:rgba(212,175,55,.10); color:#e8c56a; border:2px solid #d4af37; border-radius:10px; font-family:inherit; font-size:24px; font-weight:bold; letter-spacing:2px; padding:18px 22px; margin:14px 0 6px; cursor:pointer; }
 .pickbtn:hover { background:rgba(212,175,55,.22); }
