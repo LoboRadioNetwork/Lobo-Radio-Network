@@ -44,3 +44,6 @@ nav a.tab { text-align:center; }
 nav a.tab .stname { display:block; }
 nav a.tab .stlive { display:block; font-size:.72em; letter-spacing:.06em; opacity:.85; line-height:1.3; }
 .medallion { display:block; margin:20px auto 4px; width:min(280px,72vw); }
+
+.brandlogo { height:58px; width:auto; display:block; }
+@media (max-width:640px){ .brandlogo{height:46px} }
