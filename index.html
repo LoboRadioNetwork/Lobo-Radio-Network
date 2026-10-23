@@ -1,8 +1,9 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Lobo Radio Network — loboradio.com</title><link rel="stylesheet" href="style.css"></head>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Lobo Radio Network — loboradio.com</title><link rel="stylesheet" href="style.css"><link rel="manifest" href="./manifest.json"><meta name="theme-color" content="#10101e"><link rel="apple-touch-icon" href="./icon-192.png"></head>
 <body class="lobo"><header><nav><a class="brand" href="index.html"><img class="brandlogo" src="assets/mustang-medallion-clear.png" alt="Lobo Radio Network"></a><a class="tab active" href="index.html"><span class="stname">Lobo Radio</span><span class="stlive">Network</span></a><a class="tab" href="mustang.html"><span class="stname">Mustang Dallas</span><span class="stlive">Listen Live 📻</span></a><a class="tab" href="tejano.html"><span class="stname">Tejano Ritmo</span><span class="stlive">Listen Live 📻</span></a><a class="tab" href="choose-your-city.html">Choose Your City</a><a class="tab" href="index.html#contact">Contact</a></nav></header>
 <div class="hero"><picture><source media="(max-width:640px)" srcset="assets/lobo-hero.jpg"><img src="assets/lobo-hero-trim.jpg" alt="Lobo Radio Network"></picture></div>
 <div class="wrap">
 <h1>LOBO RADIO NETWORK</h1>
+<p style="text-align:center"><button id="installAppBtn" class="btn" style="display:none;cursor:pointer">📻 Get the App — install Mustang Dallas on your device</button></p>
 <p>Welcome to the Lobo Radio Network — Dallas-born internet radio, broadcasting worldwide, 24/7. Four stations, one pack:</p>
 <div class="cards">
 <div class="card"><h3>Mustang Dallas</h3><p>Your Country Star 24/7 — classic country legends and today's independent artists. <strong>ON AIR NOW.</strong></p><a href="mustang.html">Listen Live →</a></div>
@@ -14,4 +15,15 @@
 <p>The Lobo Radio Network is part of the Lobo Broadcasting Group, built in Dallas, Texas by Perry Sanders — 30 years a chef and kitchen man, now running radio his way: independent, listener-first, and always on.</p>
 <h2>Featured Sponsor</h2>
 <div class="sponsors"><a href="https://cowboyrevolution.com/?ref=mustang"><img src="assets/tile-cowboy.jpg" alt="Cowboy Revolution"></a></div>
-</div><footer><p>© 2026 Lobo Radio Network · Lobo Broadcasting Group · Dallas, Texas</p><p id="contact">Questions &amp; requests: <a href="mailto:info@loboradio.com">info@loboradio.com</a> · Sponsors: <a href="mailto:sponsors@loboradio.com">sponsors@loboradio.com</a> · Affiliates: <a href="mailto:affiliates@loboradio.com">affiliates@loboradio.com</a></p></footer></body></html>
+</div><footer><p>© 2026 Lobo Radio Network · Lobo Broadcasting Group · Dallas, Texas</p><p id="contact">Questions &amp; requests: <a href="mailto:info@loboradio.com">info@loboradio.com</a> · Sponsors: <a href="mailto:sponsors@loboradio.com">sponsors@loboradio.com</a> · Affiliates: <a href="mailto:affiliates@loboradio.com">affiliates@loboradio.com</a></p></footer><script>
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+  navigator.serviceWorker.register('./sw.js').catch(function(){});
+}
+</script>
+<script>
+let deferredPrompt = null;
+const installBtn = document.getElementById('installAppBtn');
+window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; if (installBtn) installBtn.style.display = 'inline-block'; });
+if (installBtn) installBtn.addEventListener('click', async () => { if (!deferredPrompt) return; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; installBtn.style.display = 'none'; });
+</script>
+</body></html>

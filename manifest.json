@@ -1,0 +1,21 @@
+{
+ "background_color": "#10101e",
+ "description": "Official web player for Mustang Dallas and the Lobo Radio Network. Powered by Live365.",
+ "display": "standalone",
+ "icons": [
+  {
+   "sizes": "192x192",
+   "src": "icon-192.png",
+   "type": "image/png"
+  },
+  {
+   "sizes": "512x512",
+   "src": "icon-512.png",
+   "type": "image/png"
+  }
+ ],
+ "name": "Mustang Dallas | Lobo Radio Network",
+ "short_name": "Mustang Dallas",
+ "start_url": "./index.html",
+ "theme_color": "#10101e"
+}
