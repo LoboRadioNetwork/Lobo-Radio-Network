@@ -49,7 +49,7 @@ nav a.tab .stlive { display:block; font-size:.72em; letter-spacing:.06em; opacit
 @media (max-width:640px){ .brandlogo{height:46px} }
 
 .playerbox { border:2px solid #d4af37; animation:pulseGold 2.8s ease-in-out infinite alternate; }
-@keyframes pulseGold { from { box-shadow:0 0 8px rgba(212,175,55,.25), inset 0 0 6px rgba(212,175,55,.12); } to { box-shadow:0 0 26px rgba(212,175,55,.6), inset 0 0 12px rgba(212,175,55,.22); } }
+@keyframes pulseGold { from { box-shadow:0 0 14px rgba(232,178,60,.38), 0 0 30px rgba(232,178,60,.14), inset 0 0 6px rgba(232,178,60,.12); } to { box-shadow:0 0 30px rgba(232,178,60,.75), 0 0 64px rgba(232,178,60,.30), inset 0 0 12px rgba(232,178,60,.22); } }
 @media (prefers-reduced-motion: reduce){ .playerbox{ animation:none; } }
 
 .duo { display:flex; gap:18px; flex-wrap:wrap; justify-content:center; align-items:flex-start; margin:22px 0; }
