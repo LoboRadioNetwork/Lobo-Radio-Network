@@ -73,3 +73,6 @@ canvas.game{background:#05050f;border:2px solid #d4af37;border-radius:8px;width:
 @media (max-width: 360px) {
   .patreon-bar { font-size:.68em; padding:4px 6px; line-height:1.3; }
 }
+@media (max-width: 480px) {
+  .patreon-tiers { display: none; }
+}
