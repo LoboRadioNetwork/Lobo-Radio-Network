@@ -10,6 +10,21 @@
 <div class="playerbox"><h2 style="margin-top:0">Recently Played</h2><iframe title="Recently played songs on Mustang Dallas" width="300" height="640" frameborder="0" loading="lazy" style="max-width:100%;border:0" src="https://live365.com/embeds/v1/played/a87622?s=sm&m=dark"></iframe></div>
 </div>
 <p style="text-align:center"><button id="installAppBtn" class="btn" style="display:none;cursor:pointer">📻 Get the App — install Mustang Dallas on your device</button></p>
+
+<div class="playerbox">
+<h2 style="margin-top:0">🎮 Play While You Listen</h2>
+<p style="margin-top:0"><strong>HIGH NOON SHOOTOUT</strong> — wait for the DRAW, then click the outlaw fast as you can. Jump the gun and you lose the round.</p>
+<div id="hn-stage">
+<span class="hn-deco" style="top:12px;right:18px;font-size:44px">🌞</span>
+<span class="hn-deco" style="bottom:8px;left:14px;font-size:40px">🌵</span>
+<span class="hn-deco" style="bottom:8px;right:16px;font-size:34px">🌵</span>
+<div id="hn-outlaw">🤠</div>
+<div id="hn-msg">Click START when you're ready, partner.</div>
+</div>
+<button id="hn-start" class="btn" style="cursor:pointer">START — It's High Noon</button>
+<p id="hn-score" style="margin-bottom:0">Best draw: — · Wins: 0</p>
+</div>
+
 <h2>On the Air</h2>
 <ul>
 <li>Country legends and classics, around the clock</li>
@@ -32,4 +47,34 @@ const installBtn = document.getElementById('installAppBtn');
 window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; if (installBtn) installBtn.style.display = 'inline-block'; });
 if (installBtn) installBtn.addEventListener('click', async () => { if (!deferredPrompt) return; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; installBtn.style.display = 'none'; });
 </script>
+
+<script>
+(function(){
+  var outlaw=document.getElementById('hn-outlaw'), msg=document.getElementById('hn-msg'),
+      startBtn=document.getElementById('hn-start'), score=document.getElementById('hn-score'),
+      stage=document.getElementById('hn-stage');
+  if(!outlaw) return;
+  var state='idle', t0=0, timer=null, wins=0, best=Number(localStorage.getItem('hn-best')||0);
+  function render(){ score.textContent='Best draw: '+(best?best+' ms':'—')+' · Wins: '+wins; }
+  render();
+  function start(){
+    state='waiting'; outlaw.style.visibility='hidden'; startBtn.style.display='none';
+    msg.textContent='Get ready… hand on your holster…';
+    timer=setTimeout(function(){ state='draw'; t0=performance.now(); outlaw.style.visibility='visible'; msg.textContent='DRAW!'; }, 1500+Math.random()*3000);
+  }
+  outlaw.addEventListener('click', function(){
+    if(state!=='draw') return;
+    var t=Math.round(performance.now()-t0); wins++;
+    if(!best||t<best){ best=t; try{localStorage.setItem('hn-best',best);}catch(e){} }
+    var rank = t<200 ? 'Lightning! Faster than Billy the Kid.' : t<300 ? 'Quick draw, partner!' : t<450 ? 'Solid shooting.' : 'You got him… eventually. The buzzards were circling.';
+    msg.textContent='💥 Got him in '+t+' ms — '+rank;
+    state='done'; outlaw.style.visibility='hidden'; startBtn.textContent='DRAW AGAIN'; startBtn.style.display='inline-block'; render();
+  });
+  stage.addEventListener('click', function(){
+    if(state==='waiting'){ clearTimeout(timer); state='done'; msg.textContent='🚫 You jumped the gun! No shooting before the DRAW.'; startBtn.textContent='TRY AGAIN'; startBtn.style.display='inline-block'; }
+  });
+  startBtn.addEventListener('click', start);
+})();
+</script>
+
 </body></html>

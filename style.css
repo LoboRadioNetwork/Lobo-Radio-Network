@@ -54,3 +54,8 @@ nav a.tab .stlive { display:block; font-size:.72em; letter-spacing:.06em; opacit
 
 .duo { display:flex; gap:18px; flex-wrap:wrap; justify-content:center; align-items:flex-start; margin:22px 0; }
 .duo .playerbox { margin:0; }
+
+#hn-stage { position:relative; height:300px; border-radius:10px; overflow:hidden; margin:14px auto; max-width:560px; background:linear-gradient(#f7b733 0%, #e2703a 58%, #8a4b2a 58.3%, #6e3b20 100%); }
+#hn-outlaw { position:absolute; left:50%; bottom:38px; transform:translateX(-50%); font-size:110px; line-height:1; visibility:hidden; cursor:pointer; user-select:none; }
+#hn-msg { position:absolute; left:0; right:0; bottom:8px; text-align:center; font-weight:bold; color:#fff8e6; text-shadow:0 1px 3px rgba(0,0,0,.6); padding:0 10px; }
+.hn-deco { position:absolute; user-select:none; }
