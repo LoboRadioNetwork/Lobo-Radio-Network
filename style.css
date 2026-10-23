@@ -63,3 +63,13 @@ nav a.tab .stlive { display:block; font-size:.72em; letter-spacing:.06em; opacit
 canvas.game{background:#05050f;border:2px solid #d4af37;border-radius:8px;width:100%;max-width:600px;display:block;margin:10px auto}
 .gbtn{background:#1b1b2f;color:#ffd95e;border:1px solid #d4af37;border-radius:8px;font-size:20px;line-height:1;padding:9px 18px;margin:3px;cursor:pointer}
 .gamemsg{text-align:center;min-height:1.5em;font-weight:bold;margin:6px 0}
+
+/* Patreon announcement bar (top of home + Mustang pages) */
+.patreon-bar { background: linear-gradient(90deg,#8a6d1d,#d4af37,#8a6d1d); color:#10101e; text-align:center; padding:10px 12px; font-weight:bold; font-size:1.05em; }
+.patreon-bar a { color:#10101e; text-decoration:underline; }
+@media (max-width: 480px) {
+  .patreon-bar { font-size:.8em; padding:6px 8px; line-height:1.35; }
+}
+@media (max-width: 360px) {
+  .patreon-bar { font-size:.68em; padding:4px 6px; line-height:1.3; }
+}
