@@ -59,6 +59,18 @@
 </div>
 
 
+<div class="playerbox" id="vc-box">
+<h3 style="margin-top:0">🚗 Vibe Dallas's Urban Mix — Vibe City Cruise</h3>
+<p>Cruise the neon streets of Vibe City. Steer with the arrow keys, A/D, or the pad — dodge the traffic, grab the gold records 💿, and slide past the patrol cars 🚓 for bonus points. One crash ends the cruise. Arriving in the Arcade first; it moves to the Vibe page when the station launches.</p>
+<canvas id="vc-canvas" class="game" width="600" height="400"></canvas>
+<div id="vc-msg" class="gamemsg">Press START to cruise.</div>
+<div style="text-align:center;margin:6px 0">
+<button class="gbtn" data-dir="left" aria-label="Left">◀</button><button class="gbtn" data-dir="right" aria-label="Right">▶</button>
+</div>
+<div style="text-align:center"><button id="vc-start" class="btn" style="cursor:pointer">START — Cruise the City</button></div>
+<p id="vc-score" style="margin-bottom:0;text-align:center">Score: 0 · Records: 0 · Best: —</p>
+</div>
+
 <p style="margin-top:22px">Your city not here yet? The pack is growing — every major city gets its own four-station cluster: country, Tejano, urban mix, and dance.</p>
 </div><p style="text-align:center"><a class="btn" href="https://www.patreon.com/cw/MustangDallas" target="_blank" rel="noopener">❤️ Support Us on Patreon</a></p>
 <footer><p>© 2026 Lobo Radio Network · Lobo Broadcasting Group · Dallas, Texas</p><p id="contact">Questions &amp; requests: <a href="mailto:info@loboradio.com">info@loboradio.com</a> · Sponsors: <a href="mailto:sponsors@loboradio.com">sponsors@loboradio.com</a> · Affiliates: <a href="mailto:affiliates@loboradio.com">affiliates@loboradio.com</a></p></footer>
@@ -271,6 +283,116 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
     if(running && (e.key===' '||e.key==='Spacebar')){ throwRope(); e.preventDefault(); }
   });
   showScore(); draw();
+})();
+</script>
+
+<script>
+(function(){
+  var cv=document.getElementById('vc-canvas'); if(!cv) return;
+  var ctx=cv.getContext('2d');
+  var msg=document.getElementById('vc-msg'), scoreEl=document.getElementById('vc-score'),
+      startBtn=document.getElementById('vc-start');
+  var ROAD_L=150, ROAD_R=450, LANES=[200,300,400];
+  var running=false, timer=null, tickN=0;
+  var px=300, keys={l:false,r:false}, speed=4, scroll=0;
+  var cars=[], discs=[], score=0, records=0, spawnT=0, discT=0;
+  var best=Number(localStorage.getItem('vc-best')||0);
+  function showScore(){ scoreEl.textContent='Score: '+score+' · Records: '+records+' · Best: '+(best?best:'—'); }
+  function laneX(){ return LANES[Math.floor(Math.random()*3)]; }
+  function spawnCar(){
+    var cop = Math.random()<0.22;
+    cars.push({ x:laneX(), y:-70, sp:1.6+Math.random()*2.2, cop:cop, passed:false,
+                emoji: cop?'🚓':(['🚗','🚕','🚙','🛻'])[Math.floor(Math.random()*4)] });
+  }
+  function spawnDisc(){ discs.push({ x:laneX(), y:-40 }); }
+  function draw(){
+    // city sides
+    ctx.fillStyle='#150a24'; ctx.fillRect(0,0,600,400);
+    ctx.fillStyle='#1e1038';
+    for(var i=0;i<8;i++){ ctx.fillRect(18,(i*64+((scroll*0.5)%64))-20,110,44); ctx.fillRect(472,(i*64+((scroll*0.5)%64))-20,110,44); }
+    ctx.fillStyle='#ffd95e';
+    for(var j=0;j<10;j++){ ctx.fillRect(30,(j*48+(scroll%48))-10,6,6); ctx.fillRect(564,(j*48+(scroll%48))-10,6,6); }
+    // road
+    ctx.fillStyle='#23232e'; ctx.fillRect(ROAD_L,0,ROAD_R-ROAD_L,400);
+    ctx.strokeStyle='#f5f5f5'; ctx.lineWidth=4;
+    ctx.beginPath(); ctx.moveTo(ROAD_L+4,0); ctx.lineTo(ROAD_L+4,400); ctx.moveTo(ROAD_R-4,0); ctx.lineTo(ROAD_R-4,400); ctx.stroke();
+    ctx.strokeStyle='#d4af37'; ctx.lineWidth=3; ctx.setLineDash([26,30]); ctx.lineDashOffset=scroll;
+    ctx.beginPath(); ctx.moveTo(250,0); ctx.lineTo(250,400); ctx.moveTo(350,0); ctx.lineTo(350,400); ctx.stroke();
+    ctx.setLineDash([]);
+    // discs
+    ctx.font='34px serif'; ctx.textAlign='left';
+    for(var d=0;d<discs.length;d++) ctx.fillText('💿', discs[d].x-17, discs[d].y+12);
+    // traffic
+    ctx.font='46px serif';
+    for(var c=0;c<cars.length;c++) ctx.fillText(cars[c].emoji, cars[c].x-23, cars[c].y+16);
+    // player
+    ctx.font='50px serif';
+    ctx.fillText('🏎️', px-25, 352);
+  }
+  function overlap(ax,ay,aw,ah,bx,by,bw,bh){ return ax<bx+bw && ax+aw>bx && ay<by+bh && ay+ah>by; }
+  function tick(){
+    if(!running) return;
+    tickN++;
+    if(tickN%600===0 && speed<8) speed+=0.5;
+    scroll += speed*2;
+    score += 1;
+    if(keys.l) px-=6; if(keys.r) px+=6;
+    if(px<ROAD_L+28) px=ROAD_L+28; if(px>ROAD_R-28) px=ROAD_R-28;
+    spawnT--; if(spawnT<=0){ spawnCar(); spawnT = Math.max(38, 85 - tickN/40) + Math.random()*25; }
+    discT--; if(discT<=0){ spawnDisc(); discT = 110 + Math.random()*90; }
+    var i;
+    for(i=cars.length-1;i>=0;i--){
+      var car=cars[i]; car.y += (speed*2 - car.sp);
+      if(!car.passed && car.y>352){ car.passed=true;
+        if(Math.abs(car.x-px)>52 && Math.abs(car.x-px)<118){ score += car.cop?50:25; msg.textContent = car.cop?'😎 Heat dodged! +50':'🔥 So close! +25'; } }
+      if(car.y>470){ cars.splice(i,1); continue; }
+      if(overlap(px-22,318,44,58, car.x-22,car.y-26,44,56)){ crash(car); return; }
+    }
+    for(i=discs.length-1;i>=0;i--){
+      var dc=discs[i]; dc.y += speed*2;
+      if(dc.y>460){ discs.splice(i,1); continue; }
+      if(overlap(px-24,316,48,60, dc.x-17,dc.y-16,34,34)){ records++; score+=100; msg.textContent='💿 Gold record! +100'; discs.splice(i,1); }
+    }
+    draw(); showScore();
+  }
+  function crash(car){
+    running=false; if(timer){clearInterval(timer); timer=null;}
+    draw();
+    ctx.font='64px serif'; ctx.fillText('💥', px-32, 345);
+    msg.textContent = car.cop ? '🚨 Busted by the patrol! Cruise over. Final score: '+score
+                              : '💥 Wrecked! Cruise over. Final score: '+score;
+    if(score>best){ best=score; try{localStorage.setItem('vc-best',best);}catch(e){} }
+    showScore(); startBtn.textContent='CRUISE AGAIN';
+  }
+  function start(){
+    px=300; speed=4; scroll=0; cars=[]; discs=[]; score=0; records=0; tickN=0; spawnT=30; discT=70;
+    running=true; msg.textContent='Cruise! Dodge traffic, grab the gold records.';
+    startBtn.textContent='RESTART';
+    draw(); showScore();
+    if(timer) clearInterval(timer);
+    timer=setInterval(tick,30);
+  }
+  startBtn.addEventListener('click',start);
+  document.addEventListener('keydown',function(e){
+    if(!running) return;
+    var k=(e.key||'').toLowerCase();
+    if(k==='arrowleft'||k==='a'){ keys.l=true; e.preventDefault(); }
+    else if(k==='arrowright'||k==='d'){ keys.r=true; e.preventDefault(); }
+  });
+  document.addEventListener('keyup',function(e){
+    var k=(e.key||'').toLowerCase();
+    if(k==='arrowleft'||k==='a') keys.l=false;
+    else if(k==='arrowright'||k==='d') keys.r=false;
+  });
+  var btns=document.querySelectorAll('#vc-box .gbtn');
+  for(var i=0;i<btns.length;i++){ (function(b){
+    var d=b.getAttribute('data-dir');
+    function on(e){ if(d==='left') keys.l=true; else keys.r=true; e.preventDefault(); }
+    function off(){ if(d==='left') keys.l=false; else keys.r=false; }
+    b.addEventListener('pointerdown',on); b.addEventListener('pointerup',off);
+    b.addEventListener('pointerleave',off); b.addEventListener('click',function(e){e.preventDefault();});
+  })(btns[i]); }
+  draw(); showScore();
 })();
 </script>
 
