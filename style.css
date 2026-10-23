@@ -59,3 +59,7 @@ nav a.tab .stlive { display:block; font-size:.72em; letter-spacing:.06em; opacit
 #hn-outlaw { position:absolute; left:50%; bottom:38px; transform:translateX(-50%); font-size:110px; line-height:1; visibility:hidden; cursor:pointer; user-select:none; }
 #hn-msg { position:absolute; left:0; right:0; bottom:8px; text-align:center; font-weight:bold; color:#fff8e6; text-shadow:0 1px 3px rgba(0,0,0,.6); padding:0 10px; }
 .hn-deco { position:absolute; user-select:none; }
+
+canvas.game{background:#05050f;border:2px solid #d4af37;border-radius:8px;width:100%;max-width:600px;display:block;margin:10px auto}
+.gbtn{background:#1b1b2f;color:#ffd95e;border:1px solid #d4af37;border-radius:8px;font-size:20px;line-height:1;padding:9px 18px;margin:3px;cursor:pointer}
+.gamemsg{text-align:center;min-height:1.5em;font-weight:bold;margin:6px 0}

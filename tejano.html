@@ -12,10 +12,112 @@
 <h2>Síguenos</h2>
 <p>Noticias del lanzamiento en la página de Facebook de Mustang Dallas y en @mustang.dallas.radio en Instagram, mientras abren los canales propios de Tejano Ritmo.</p>
 <h2>Nuestros Patrocinadores</h2><div class="sponsors"><a href="https://cowboyrevolution.com/?ref=mustang"><img src="assets/tile-cowboy.jpg" alt="Cowboy Revolution"></a><a href="https://www.theloadedteashop.com/PERRY00437"><img src="assets/tile-tea.jpg" alt="The Loaded Tea Shop"></a><a href="https://www.dubby.gg/discount/LOBORADIO"><img src="assets/tile-dubby.jpg" alt="Dubby"></a></div>
+<div class="playerbox" id="vq-box">
+<h2 style="margin-top:0">🐴 Juega Mientras Escuchas — El Vaquero</h2>
+<p>El novillo corre por el corral. Oprime <strong>¡LAZAR!</strong> (o toca el corral) para tirar la soga. Ojo: la soga tarda un instante en llegar, así que apunta un poco adelante del novillo. Tienes diez tiros — ¡atrapa los que puedas!</p>
+<canvas id="vq-canvas" class="game" width="600" height="360"></canvas>
+<div id="vq-msg" class="gamemsg">Oprime ¡A JUGAR! para empezar.</div>
+<div style="text-align:center;margin-top:6px">
+<button id="vq-start" class="btn" style="cursor:pointer">¡A JUGAR!</button>
+<button id="vq-throw" class="btn" style="cursor:pointer">🤠 ¡LAZAR!</button>
+</div>
+<p id="vq-score" style="margin-bottom:0;text-align:center">Atrapados: 0 · Tiros que quedan: 10 · Récord: 0</p>
+</div>
+
 </div><p style="text-align:center"><a class="btn" href="https://www.patreon.com/cw/MustangDallas" target="_blank" rel="noopener">❤️ Apóyanos en Patreon</a></p>
 <footer><p>© 2026 Lobo Radio Network · Lobo Broadcasting Group · Dallas, Texas</p><p id="contact">Preguntas y peticiones: <a href="mailto:info@loboradio.com">info@loboradio.com</a> · Patrocinadores: <a href="mailto:sponsors@loboradio.com">sponsors@loboradio.com</a> · Afiliados: <a href="mailto:affiliates@loboradio.com">affiliates@loboradio.com</a></p></footer><script>
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
   navigator.serviceWorker.register('./sw.js').catch(function(){});
 }
 </script>
+<script>
+(function(){
+  var cv=document.getElementById('vq-canvas'); if(!cv) return;
+  var ctx=cv.getContext('2d');
+  var msg=document.getElementById('vq-msg'), score=document.getElementById('vq-score'),
+      startBtn=document.getElementById('vq-start'), throwBtn=document.getElementById('vq-throw');
+  var steer=null, rope=null, timer=null, running=false, busy=false;
+  var throwsLeft=10, caught=0;
+  var best=Number(localStorage.getItem('vq-best')||0);
+  function showScore(){ score.textContent='Atrapados: '+caught+' · Tiros que quedan: '+throwsLeft+' · Récord: '+best; }
+  function newSteer(){
+    var dir=Math.random()<0.5?1:-1;
+    steer={ x: dir>0 ? -60 : 610, dir:dir, sp:2.2+Math.random()*2.6 };
+  }
+  function draw(){
+    ctx.fillStyle='#0d1b2e'; ctx.fillRect(0,0,600,360);
+    ctx.fillStyle='#8a6d3b'; ctx.fillRect(0,250,600,110);
+    ctx.strokeStyle='#d4af37'; ctx.lineWidth=3;
+    ctx.beginPath(); ctx.moveTo(0,250); ctx.lineTo(600,250); ctx.stroke();
+    ctx.fillStyle='#5b4423';
+    for(var x=20;x<600;x+=70) ctx.fillRect(x,238,8,26);
+    ctx.textAlign='left'; ctx.textBaseline='alphabetic';
+    if(steer){ ctx.font='52px serif'; ctx.fillText('🐂', steer.x, 165); }
+    ctx.font='56px serif'; ctx.fillText('🤠', 272, 338);
+    if(rope){
+      ctx.strokeStyle='#f5e6c4'; ctx.lineWidth=3;
+      ctx.beginPath(); ctx.arc(rope.x, 150, rope.r, 0, Math.PI*2); ctx.stroke();
+    }
+  }
+  function tick(){
+    if(!running || !steer) return;
+    if(!busy){
+      steer.x += steer.sp*steer.dir;
+      if(steer.x>650) steer.dir=-1;
+      if(steer.x<-60) steer.dir=1;
+      if(Math.random()<0.01) steer.sp=2.2+Math.random()*2.6;
+    }
+    draw();
+  }
+  function finish(){
+    running=false; if(timer){clearInterval(timer); timer=null;}
+    if(caught>best){ best=caught; try{localStorage.setItem('vq-best',best);}catch(e){} }
+    msg.textContent='🏁 ¡Se acabaron los tiros! Atrapaste '+caught+' de 10. ¿Otra vez, vaquero?';
+    startBtn.textContent='¡JUGAR OTRA VEZ!';
+    showScore(); draw();
+  }
+  function throwRope(){
+    if(!running || rope || busy || throwsLeft<=0) return;
+    throwsLeft--;
+    var targetX=steer.x+26, flight=0;
+    rope={ x:targetX, r:8 };
+    showScore();
+    var iv=setInterval(function(){
+      rope.r+=9; flight++; draw();
+      if(flight>=7){
+        clearInterval(iv);
+        var dx=Math.abs((steer.x+26)-rope.x);
+        rope=null;
+        if(dx<=58){
+          caught++; busy=true;
+          msg.textContent='🎉 ¡Atrapado! ¡Buen tiro, vaquero!';
+          showScore(); draw();
+          setTimeout(function(){ busy=false; if(running){ newSteer(); draw(); } }, 650);
+        } else {
+          msg.textContent='💨 ¡Se escapó! Apunta un poco más adelante.';
+          showScore(); draw();
+        }
+        if(throwsLeft<=0){ setTimeout(finish, 1000); }
+      }
+    },45);
+  }
+  function start(){
+    caught=0; throwsLeft=10; busy=false; rope=null;
+    newSteer(); running=true;
+    msg.textContent='¡Ahí viene el novillo! La soga tarda un instante — ¡apunta adelante!';
+    startBtn.textContent='OTRA VEZ';
+    showScore(); draw();
+    if(timer) clearInterval(timer);
+    timer=setInterval(tick,30);
+  }
+  startBtn.addEventListener('click',start);
+  throwBtn.addEventListener('click',throwRope);
+  cv.addEventListener('click',throwRope);
+  document.addEventListener('keydown',function(e){
+    if(running && (e.key===' '||e.key==='Spacebar')){ throwRope(); e.preventDefault(); }
+  });
+  showScore(); draw();
+})();
+</script>
+
 </body></html>
