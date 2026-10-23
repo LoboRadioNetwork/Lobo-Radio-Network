@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Mustang Dallas — Listen Live</title><link rel="stylesheet" href="style.css"></head>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Mustang Dallas — Listen Live</title><link rel="stylesheet" href="style.css"><link rel="manifest" href="./manifest.json"><meta name="theme-color" content="#10101e"><link rel="apple-touch-icon" href="./icon-192.png"></head>
 <body class="mustang"><header><nav><a class="brand" href="index.html"><img class="brandlogo" src="assets/mustang-medallion-clear.png" alt="Lobo Radio Network"></a><a class="tab" href="index.html"><span class="stname">Lobo Radio</span><span class="stlive">Network</span></a><a class="tab active" href="mustang.html"><span class="stname">Mustang Dallas</span><span class="stlive">Listen Live 📻</span></a><a class="tab" href="tejano.html"><span class="stname">Tejano Ritmo</span><span class="stlive">Listen Live 📻</span></a><a class="tab" href="choose-your-city.html">Choose Your City</a><a class="tab" href="index.html#contact">Contact</a></nav></header>
 <div class="wrap">
 <picture><source media="(max-width:640px)" srcset="assets/mustang-hero.jpg"><img class="bannerart" src="assets/mustang-banner.jpg" alt="Mustang Dallas"></picture>
@@ -6,9 +6,10 @@
 <h1>MUSTANG DALLAS</h1>
 <p><strong>Your Country Star 24/7.</strong> Mustang Dallas plays the legends the way they deserve to be heard — George Jones, Patsy Cline, Dolly Parton, Merle Haggard — alongside the independent artists carrying country forward today: Ariel Franz, Cooper Alan, Lizziy G, Britnee Kellogg, and Cole Phillips.</p>
 <div class="duo">
-<div class="playerbox"><h2 style="margin-top:0">🎧 Listen Live</h2><iframe title="Mustang Dallas Live365 player" width="300" height="536" frameborder="0" loading="lazy" style="max-width:100%;border:0" src="https://live365.com/embeds/v1/player/a87622?s=sm&m=dark&c=mp3"></iframe><br><a class="btn" href="https://live365.com/station/Mustang-Dallas-a87622">Open on Live365</a></div>
-<div class="playerbox"><h2 style="margin-top:0">Recently Played</h2><iframe title="Recently played songs on Mustang Dallas" width="300" height="600" frameborder="0" loading="lazy" style="max-width:100%;border:0" src="https://live365.com/embeds/v1/played/a87622?s=sm&m=dark"></iframe></div>
+<div class="playerbox"><h2 style="margin-top:0">🎧 Listen Live</h2><iframe title="Mustang Dallas Live365 player" width="300" height="640" frameborder="0" loading="lazy" style="max-width:100%;border:0" src="https://live365.com/embeds/v1/player/a87622?s=sm&m=dark&c=mp3"></iframe><br><a class="btn" href="https://live365.com/station/Mustang-Dallas-a87622">Open on Live365</a></div>
+<div class="playerbox"><h2 style="margin-top:0">Recently Played</h2><iframe title="Recently played songs on Mustang Dallas" width="300" height="640" frameborder="0" loading="lazy" style="max-width:100%;border:0" src="https://live365.com/embeds/v1/played/a87622?s=sm&m=dark"></iframe></div>
 </div>
+<p style="text-align:center"><button id="installAppBtn" class="btn" style="display:none;cursor:pointer">📻 Get the App — install Mustang Dallas on your device</button></p>
 <h2>On the Air</h2>
 <ul>
 <li>Country legends and classics, around the clock</li>
@@ -20,4 +21,15 @@
 <p>Facebook — Mustang Dallas · Instagram — @mustang.dallas.radio · TikTok — @mustangdallasradio · YouTube — @mustangdallas · Discord — discord.gg/GFGtJZXZw</p>
 <p><strong>Shop:</strong> Mustang Dallas merch is in our WhatsApp store — message us on WhatsApp Business to browse the catalog and order.</p>
 <h2>Our Sponsors</h2><div class="sponsors"><a href="https://cowboyrevolution.com/?ref=mustang"><img src="assets/tile-cowboy.jpg" alt="Cowboy Revolution"></a><a href="https://www.theloadedteashop.com/PERRY00437"><img src="assets/tile-tea.jpg" alt="The Loaded Tea Shop"></a><a href="https://www.dubby.gg/discount/LOBORADIO"><img src="assets/tile-dubby.jpg" alt="Dubby"></a></div>
-</div><footer><p>© 2026 Lobo Radio Network · Lobo Broadcasting Group · Dallas, Texas</p><p id="contact">Questions &amp; requests: <a href="mailto:info@loboradio.com">info@loboradio.com</a> · Sponsors: <a href="mailto:sponsors@loboradio.com">sponsors@loboradio.com</a> · Affiliates: <a href="mailto:affiliates@loboradio.com">affiliates@loboradio.com</a></p></footer></body></html>
+</div><footer><p>© 2026 Lobo Radio Network · Lobo Broadcasting Group · Dallas, Texas</p><p id="contact">Questions &amp; requests: <a href="mailto:info@loboradio.com">info@loboradio.com</a> · Sponsors: <a href="mailto:sponsors@loboradio.com">sponsors@loboradio.com</a> · Affiliates: <a href="mailto:affiliates@loboradio.com">affiliates@loboradio.com</a></p></footer><script>
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+  navigator.serviceWorker.register('./sw.js').catch(function(){});
+}
+</script>
+<script>
+let deferredPrompt = null;
+const installBtn = document.getElementById('installAppBtn');
+window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; if (installBtn) installBtn.style.display = 'inline-block'; });
+if (installBtn) installBtn.addEventListener('click', async () => { if (!deferredPrompt) return; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; installBtn.style.display = 'none'; });
+</script>
+</body></html>
