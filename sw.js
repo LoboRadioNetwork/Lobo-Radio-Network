@@ -1,6 +1,6 @@
 // Minimal service worker for the Lobo Radio Network web player.
 // Required for the "install app" prompt. Cache name bump when updating.
-const CACHE = 'lobo-radio-v7';
+const CACHE = 'lobo-radio-v8';
 const ASSETS = ['./', './index.html', './mustang.html', './tejano.html', './manifest.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', (e) => {
