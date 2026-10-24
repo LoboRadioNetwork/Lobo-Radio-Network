@@ -1,0 +1,326 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Lobo Television — loboradio.com</title><link rel="stylesheet" href="style.css"><link rel="manifest" href="./manifest.json"><meta name="theme-color" content="#10101e"><link rel="apple-touch-icon" href="./icon-192.png">
+<style>
+.tvstage { max-width:980px; margin:26px auto 8px; padding:0 12px; }
+.tvintro { text-align:center; color:#f5f0dc; }
+.tvintro h1 { margin-bottom:4px; }
+.tvintro p { opacity:.9; margin-top:2px; }
+/* ---- the DVR box on top of the set ---- */
+.dvr {
+  max-width:640px; margin:0 auto; position:relative; z-index:2;
+  background:linear-gradient(180deg,#2c2c31,#131316 70%,#0b0b0d);
+  border:2px solid #000; border-bottom:none; border-radius:12px 12px 4px 4px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.18);
+  padding:10px 16px; display:flex; align-items:center; gap:14px;
+}
+.dvr .brand { color:#cfc7a8; font-size:12px; letter-spacing:.22em; }
+.dvr .display {
+  flex:1 1 auto; background:#050807; border-radius:5px; border:1px solid #1e2b22;
+  color:#67ff9e; font-family:"Courier New", monospace; font-size:15px; letter-spacing:.14em;
+  padding:6px 10px; text-align:center; box-shadow: inset 0 0 12px rgba(0,0,0,.9);
+  white-space:nowrap; overflow:hidden;
+}
+.dvr .dbtn {
+  cursor:pointer; background:linear-gradient(180deg,#3d3d44,#1b1b1f); color:#f5f0dc;
+  border:1px solid #55555e; border-radius:6px; padding:8px 12px; font-size:13px; letter-spacing:.08em;
+  box-shadow:0 2px 5px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.15);
+}
+.dvr .dbtn:hover { border-color:#d4af37; color:#f0d489; }
+.dvr .dbtn.active { background:linear-gradient(180deg,#e9c766,#c49a26); color:#241703; border-color:#6d4d08; font-weight:bold; }
+.dvrfeet { max-width:640px; margin:0 auto; display:flex; justify-content:space-between; padding:0 26px; }
+.dvrfeet span { display:block; width:44px; height:7px; background:#0a0a0c; border-radius:0 0 5px 5px; }
+/* ---- the console set ---- */
+.console {
+  background:
+    repeating-linear-gradient(93deg, rgba(0,0,0,.14) 0 3px, rgba(255,255,255,.03) 3px 7px, rgba(0,0,0,0) 7px 26px),
+    linear-gradient(160deg, #7a4a21 0%, #5d3517 34%, #6e421f 55%, #4a2a10 100%);
+  border:6px solid #2e1a08; border-radius:26px; margin-top:2px;
+  box-shadow: 0 24px 60px rgba(0,0,0,.65), inset 0 2px 0 rgba(255,210,130,.35), inset 0 -6px 18px rgba(0,0,0,.55);
+  padding:26px 26px 18px;
+}
+.console-inner { display:flex; gap:22px; align-items:stretch; }
+.screenbezel {
+  flex:1 1 auto; background:linear-gradient(165deg,#1c1c22,#0a0a0e 60%,#16161c);
+  border-radius:38px; padding:18px;
+  box-shadow: inset 0 0 0 3px #000, inset 0 0 34px rgba(0,0,0,.9), 0 2px 0 rgba(255,210,130,.25);
+}
+.screen { position:relative; border-radius:26px; overflow:hidden; background:#000; aspect-ratio:4/3; box-shadow: inset 0 0 60px rgba(0,0,0,.8); }
+.screen video { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:#000; }
+.screen::after { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(115deg, rgba(255,255,255,.13) 0%, rgba(255,255,255,0) 34%); }
+.offair {
+  position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
+  text-align:center; color:#f0d489; padding:20px; z-index:3;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.05) 0 2px, rgba(0,0,0,.12) 2px 4px),
+    radial-gradient(ellipse at center, #2a2f45 0%, #101018 75%);
+}
+.offair .big { font-size:30px; letter-spacing:.18em; font-weight:bold; }
+.offair .small { color:#cfc7a8; font-size:15px; letter-spacing:.04em; }
+.sidepanel { flex:0 0 178px; display:flex; flex-direction:column; align-items:center; gap:13px; }
+.badge {
+  background:linear-gradient(180deg,#e9c766,#b98a1e); color:#241703; font-weight:bold; letter-spacing:.14em;
+  text-align:center; padding:7px 10px; border-radius:6px; border:2px solid #6d4d08;
+  box-shadow: inset 0 1px 0 #fff8, 0 2px 6px rgba(0,0,0,.5); font-size:15px; width:100%;
+}
+.onairlight { display:flex; align-items:center; gap:8px; color:#f5e7bd; font-size:13px; letter-spacing:.16em; }
+.onairdot { width:13px; height:13px; border-radius:50%; background:#3a3a3a; box-shadow: inset 0 1px 2px rgba(0,0,0,.8); }
+.onairdot.live { background:#ff3b30; box-shadow:0 0 12px #ff3b30, inset 0 1px 2px rgba(255,255,255,.5); }
+.onairdot.dvr { background:#ffb340; box-shadow:0 0 12px #ffb340, inset 0 1px 2px rgba(255,255,255,.5); }
+.grille { width:100%; height:96px; border-radius:10px;
+  background: radial-gradient(circle, rgba(0,0,0,.75) 2.2px, rgba(255,220,150,.14) 2.9px, transparent 3.6px) 0 0/13px 13px, linear-gradient(180deg,#3a2210,#2a1708);
+  box-shadow: inset 0 2px 10px rgba(0,0,0,.8), inset 0 -1px 0 rgba(255,210,130,.2); }
+.knobs { display:flex; gap:16px; }
+.knob {
+  width:56px; height:56px; border-radius:50%; cursor:pointer; padding:0;
+  background:radial-gradient(circle at 34% 30%, #f4e2a0, #c39a35 45%, #7a5a10 80%, #57400a);
+  border:2px solid #3d2a04; box-shadow:0 3px 8px rgba(0,0,0,.6), inset 0 -4px 8px rgba(0,0,0,.45); position:relative;
+}
+.knob::after { content:""; position:absolute; left:50%; top:5px; width:4px; height:16px; margin-left:-2px; background:#241703; border-radius:2px; }
+.knob:active { transform:scale(.96); }
+.knoblabel { font-size:11px; color:#f0d489; letter-spacing:.12em; text-align:center; margin-top:-6px; }
+.knoblabel span { display:inline-block; width:56px; }
+.guidebox { width:100%; background:linear-gradient(180deg,#31240f,#1d1406); border:2px solid #8a6a1f; border-radius:8px; padding:10px 11px; color:#f5e7bd; font-size:13px; line-height:1.5; box-shadow: inset 0 1px 0 rgba(255,230,160,.25); }
+.guidebox .glabel { color:#d4af37; font-size:11px; letter-spacing:.16em; }
+.libbtn { display:block; width:100%; text-align:left; margin-top:7px; cursor:pointer;
+  background:linear-gradient(180deg,#3a2c10,#241a05); color:#f5e7bd; border:1px solid #8a6a1f; border-radius:6px;
+  padding:7px 9px; font-size:13px; line-height:1.35; }
+.libbtn small { display:block; opacity:.75; font-size:11px; }
+.libbtn:hover { border-color:#d4af37; }
+.nowshowing { text-align:center; color:#f0d489; margin:14px 0 2px; font-size:17px; letter-spacing:.03em; }
+.feet { display:flex; justify-content:space-between; padding:0 36px; }
+.feet span { display:block; width:64px; height:16px; background:linear-gradient(180deg,#3a2410,#1d1004); border-radius:0 0 8px 8px; }
+.rotation { max-width:820px; margin:18px auto 4px; color:#f5f0dc; }
+.rotation h2 { text-align:center; color:#d4af37; }
+.rotation table { width:100%; border-collapse:collapse; font-size:15px; }
+.rotation td { padding:7px 10px; border-bottom:1px solid rgba(212,175,55,.25); }
+.rotation td.t { text-align:right; color:#f0d489; white-space:nowrap; }
+.tvfineprint { text-align:center; color:#cfc7a8; opacity:.75; font-size:13px; margin:10px auto 0; max-width:760px; }
+@media (max-width:760px){
+  .console-inner { flex-direction:column; }
+  .sidepanel { flex:none; width:100%; }
+  .grille { height:52px; }
+  .dvr .brand { display:none; }
+}
+</style></head>
+<body class="lobo"><header><nav><a class="brand" href="index.html"><img class="brandlogo" src="assets/mustang-medallion-clear.png" alt="Lobo Radio Network"></a><a class="tab" href="index.html"><span class="stname">Lobo Radio</span><span class="stlive">Network</span></a><a class="tab" href="mustang.html"><span class="stname">Mustang Dallas</span><span class="stlive">Listen Live 📻</span></a><a class="tab" href="tejano.html"><span class="stname">Tejano Ritmo</span><span class="stlive">Listen Live 📻</span></a><a class="tab active" href="tv.html"><span class="stname">Lobo TV</span><span class="stlive">Watch 📺</span></a><a class="tab" href="choose-your-city.html">Choose Your City</a><a class="tab" href="index.html#contact">Contact</a></nav>
+</header>
+<div class="tvstage">
+  <div class="tvintro">
+    <h1>LOBO TELEVISION</h1>
+    <p>One channel, on the air around the clock — classic westerns with a word from our sponsors. Turn the set on and tune in… or pop open the DVR and pick a classic yourself.</p>
+  </div>
+
+  <div class="dvr" id="dvrbox">
+    <span class="brand">LOBO&nbsp;DVR</span>
+    <span class="display" id="dvrdisplay">-- STANDBY --</span>
+    <button class="dbtn" id="dvrLibBtn">📼 LIBRARY</button>
+    <button class="dbtn active" id="dvrLiveBtn">📺 LIVE TV</button>
+  </div>
+  <div class="dvrfeet" aria-hidden="true"><span></span><span></span></div>
+
+  <div class="console">
+    <div class="console-inner">
+      <div class="screenbezel">
+        <div class="screen">
+          <video id="tv" playsinline preload="none"></video>
+          <div class="offair" id="offair">
+            <div class="big">LOBO TELEVISION</div>
+            <div class="small">The channel is on the air right now.<br>Click the POWER knob to tune in — or hit LIBRARY on the DVR to pick a classic.</div>
+          </div>
+        </div>
+      </div>
+      <div class="sidepanel">
+        <div class="badge">LOBO<br>TELEVISION</div>
+        <div class="onairlight"><span class="onairdot" id="onairdot"></span><span id="onairtext">STANDBY</span></div>
+        <div class="grille" aria-hidden="true"></div>
+        <div class="knobs">
+          <button class="knob" id="powerBtn" aria-label="Power"></button>
+          <button class="knob" id="muteBtn" aria-label="Volume"></button>
+        </div>
+        <div class="knoblabel"><span>POWER</span><span>VOLUME</span></div>
+        <div class="guidebox" id="guideLive">
+          <div class="glabel">ON NOW</div>
+          <div id="guideNow">—</div>
+          <div class="glabel" style="margin-top:8px">UP NEXT</div>
+          <div id="guideNext">—</div>
+        </div>
+        <div class="guidebox" id="guideLibrary" style="display:none">
+          <div class="glabel">📼 DVR LIBRARY — PICK A CLASSIC</div>
+          <div id="libList"></div>
+          <div style="margin-top:8px; opacity:.8">Watching from the library? Hit <strong>LIVE TV</strong> on the DVR to go back to the broadcast.</div>
+        </div>
+      </div>
+    </div>
+    <p class="nowshowing" id="nowshowing">Lobo Television is standing by.</p>
+  </div>
+  <div class="feet" aria-hidden="true"><span></span><span></span></div>
+
+  <div class="rotation">
+    <h2>Today's Rotation</h2>
+    <table>
+      <tr><td>🤠 <strong>The Lone Ranger</strong> — “Enter the Lone Ranger” (1949)</td><td class="t">1 hr 9 min</td></tr>
+      <tr><td>📺 Commercial break — a word from our sponsors</td><td class="t">~½ min</td></tr>
+      <tr><td>🎬 <strong>Angel and the Badman</strong> (1947) — John Wayne &amp; Gail Russell</td><td class="t">1 hr 40 min</td></tr>
+      <tr><td>📺 Commercial break — a word from our sponsors</td><td class="t">~½ min</td></tr>
+      <tr><td>🎬 <strong>Blue Steel</strong> (1934) — John Wayne &amp; Gabby Hayes</td><td class="t">54 min</td></tr>
+      <tr><td>📺 Commercial break — then the rotation starts again</td><td class="t">~½ min</td></tr>
+    </table>
+  </div>
+  <p class="tvfineprint">All programs on Lobo Television are public-domain classics, streamed courtesy of the Internet Archive. The broadcast rotation runs continuously — whenever you tune in live, you're joining the program already in progress, same as everybody else. The DVR library holds the same classics, ready to watch from the beginning whenever you like.</p>
+</div>
+<footer><p>© 2026 Lobo Radio Network · Lobo Broadcasting Group · Dallas, Texas</p><p id="contact">Questions &amp; requests: <a href="mailto:info@loboradio.com">info@loboradio.com</a> · Sponsors: <a href="mailto:sponsors@loboradio.com">sponsors@loboradio.com</a> · Affiliates: <a href="mailto:affiliates@loboradio.com">affiliates@loboradio.com</a></p></footer>
+<script>
+// ---- Lobo Television: a broadcast clock + a DVR library. ----
+// Live mode: the schedule loops forever; everyone joins the same moment.
+// DVR mode: pick any classic from the library and watch from the start.
+const POD = [
+  { type:'ad', title:'Mustang Dallas — station promo', src:'assets/spots/spot-mustang-promo.mp4', dur:8 },
+  { type:'ad', title:'Cowboy Revolution — a word from our sponsor', src:'assets/spots/spot-cowboy-tumbler.mp4', dur:5 },
+  { type:'ad', title:'Lobo Arcade — High Noon Shootout', src:'assets/spots/spot-high-noon.mp4', dur:5 },
+  { type:'ad', title:'Cowboy Revolution — a word from our sponsor', src:'assets/spots/spot-cowboy-tumbler.mp4', dur:5 }
+];
+const LIBRARY = [
+  { type:'show', title:'The Lone Ranger — “Enter the Lone Ranger” (1949)', src:'https://archive.org/download/EnterTheLoneRanger/EnterTheLoneRanger_512kb.mp4', dur:4148 },
+  { type:'show', title:'Angel and the Badman (1947) — John Wayne & Gail Russell', src:'https://archive.org/download/angel-and-the-badman-1947/Angel%20and%20the%20Badman%20(1947).ia.mp4', dur:6007 },
+  { type:'show', title:'Blue Steel (1934) — John Wayne & Gabby Hayes', src:'https://archive.org/download/BlueSteel/BlueSteel_512kb.mp4', dur:3256 }
+];
+const PROGRAM = [ LIBRARY[0], ...POD, LIBRARY[1], ...POD, LIBRARY[2], ...POD ];
+const LOOP = PROGRAM.reduce((a,s)=>a+s.dur,0);
+const EPOCH = Date.UTC(2026,0,1,6,0,0); // schedule anchored 2026-01-01 06:00 UTC
+const video = document.getElementById('tv');
+const offair = document.getElementById('offair');
+const nowEl = document.getElementById('nowshowing');
+const gNow = document.getElementById('guideNow');
+const gNext = document.getElementById('guideNext');
+const guideLive = document.getElementById('guideLive');
+const guideLibrary = document.getElementById('guideLibrary');
+const dot = document.getElementById('onairdot');
+const onairText = document.getElementById('onairtext');
+const dvrDisplay = document.getElementById('dvrdisplay');
+const libBtn = document.getElementById('dvrLibBtn');
+const liveBtn = document.getElementById('dvrLiveBtn');
+let mode = 'standby'; // standby | live | dvr
+let currentIdx = -1;
+
+function slotAt(nowMs){
+  let pos = (((nowMs - EPOCH)/1000) % LOOP + LOOP) % LOOP;
+  let acc = 0;
+  for (let i=0;i<PROGRAM.length;i++){
+    if (pos < acc + PROGRAM[i].dur) return { idx:i, offset: pos-acc, slotStartMs: nowMs - (pos-acc)*1000 };
+    acc += PROGRAM[i].dur;
+  }
+  return { idx:0, offset:0, slotStartMs: nowMs };
+}
+function nextShow(fromIdx){
+  for (let k=1;k<=PROGRAM.length;k++){ const s = PROGRAM[(fromIdx+k)%PROGRAM.length]; if (s.type==='show') return s; }
+  return PROGRAM[0];
+}
+function fmtTime(ms){ return new Date(ms).toLocaleTimeString([], {hour:'numeric', minute:'2-digit'}); }
+function fmtClock(){ const d=new Date(); let h=d.getHours()%12; if(h===0)h=12; return h + ':' + String(d.getMinutes()).padStart(2,'0'); }
+function guide(){
+  const nowMs = Date.now();
+  const { idx, slotStartMs } = slotAt(nowMs);
+  const slot = PROGRAM[idx];
+  const endsMs = slotStartMs + slot.dur*1000;
+  if (mode === 'dvr') return;
+  if (slot.type==='show'){
+    gNow.textContent = slot.title;
+    gNext.textContent = nextShow(idx).title;
+    nowEl.textContent = (mode==='live') ? ('On the air: ' + slot.title + ' · ends ' + fmtTime(endsMs)) : 'Lobo Television is standing by.';
+  } else {
+    gNow.textContent = 'Commercial break — a word from our sponsors';
+    gNext.textContent = nextShow(idx).title;
+    nowEl.textContent = (mode==='live') ? 'Commercial break — back to the picture in a moment.' : 'Lobo Television is standing by.';
+  }
+}
+function setLights(){
+  dot.classList.remove('live','dvr');
+  if (mode==='live'){ dot.classList.add('live'); onairText.textContent = video.muted ? 'MUTED' : 'ON AIR'; }
+  else if (mode==='dvr'){ dot.classList.add('dvr'); onairText.textContent = video.muted ? 'MUTED' : 'DVR'; }
+  else { onairText.textContent = 'STANDBY'; }
+}
+function dvrClock(){
+  if (mode==='live'){ const { idx } = slotAt(Date.now()); dvrDisplay.textContent = 'LIVE · ' + fmtClock() + ' · ' + (PROGRAM[idx].type==='show' ? 'FEATURE' : 'COMMERCIAL'); }
+  else if (mode==='dvr'){ dvrDisplay.textContent = 'DVR PLAY · ' + fmtClock(); }
+  else { dvrDisplay.textContent = '-- STANDBY · ' + fmtClock() + ' --'; }
+}
+function tuneIn(){
+  const { idx, offset } = slotAt(Date.now());
+  const slot = PROGRAM[idx];
+  currentIdx = idx;
+  if (video.getAttribute('src') !== slot.src) video.src = slot.src;
+  const seek = function(){
+    try { video.currentTime = Math.min(offset, slot.dur - 0.4); } catch(e){}
+    video.play().catch(function(){});
+    video.removeEventListener('loadedmetadata', seek);
+  };
+  if (video.readyState >= 1) seek(); else video.addEventListener('loadedmetadata', seek);
+  guide();
+}
+function goLive(){
+  mode = 'live';
+  offair.style.display = 'none';
+  video.controls = false;
+  guideLive.style.display = 'block'; guideLibrary.style.display = 'none';
+  libBtn.classList.remove('active'); liveBtn.classList.add('active');
+  setLights(); tuneIn(); dvrClock();
+}
+function goDVR(){
+  mode = 'dvr';
+  offair.style.display = 'none';
+  video.controls = true;
+  guideLive.style.display = 'none'; guideLibrary.style.display = 'block';
+  libBtn.classList.add('active'); liveBtn.classList.remove('active');
+  setLights(); dvrClock();
+  nowEl.textContent = 'DVR library open — pick a classic on the right panel of the set.';
+}
+function powerOff(){
+  mode = 'standby';
+  video.pause(); video.removeAttribute('src'); video.load(); video.controls = false;
+  offair.style.display = 'flex';
+  guideLive.style.display = 'block'; guideLibrary.style.display = 'none';
+  libBtn.classList.remove('active'); liveBtn.classList.add('active');
+  currentIdx = -1; setLights(); guide(); dvrClock();
+}
+document.getElementById('powerBtn').addEventListener('click', function(){
+  if (mode === 'standby') goLive(); else powerOff();
+});
+document.getElementById('muteBtn').addEventListener('click', function(){
+  video.muted = !video.muted; setLights();
+});
+libBtn.addEventListener('click', goDVR);
+liveBtn.addEventListener('click', function(){ if (mode !== 'live') goLive(); });
+// Build the DVR library list
+const libList = document.getElementById('libList');
+LIBRARY.forEach(function(item){
+  const b = document.createElement('button');
+  b.className = 'libbtn';
+  const mins = Math.round(item.dur/60);
+  b.innerHTML = '';
+  b.textContent = '▶ ' + item.title;
+  const sm = document.createElement('small');
+  sm.textContent = mins + ' min · watch from the beginning';
+  b.appendChild(sm);
+  b.addEventListener('click', function(){
+    video.src = item.src;
+    video.currentTime = 0;
+    video.play().catch(function(){});
+    nowEl.textContent = 'Now playing from the DVR: ' + item.title;
+    dvrClock();
+  });
+  libList.appendChild(b);
+});
+video.addEventListener('ended', function(){ if (mode === 'live') tuneIn(); });
+setInterval(function(){
+  dvrClock();
+  if (mode === 'standby'){ guide(); return; }
+  if (mode === 'live'){
+    const { idx } = slotAt(Date.now());
+    if (idx !== currentIdx) tuneIn(); else guide();
+  }
+}, 5000);
+guide(); setLights(); dvrClock();
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+  navigator.serviceWorker.register('./sw.js').catch(function(){});
+}
+</script>
+</body></html>
