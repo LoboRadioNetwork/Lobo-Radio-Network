@@ -170,6 +170,11 @@
   </div>
   <p class="tvfineprint">All programs on Lobo Television are public-domain classics, streamed courtesy of the Internet Archive. The broadcast rotation runs continuously — whenever you tune in live, you're joining the program already in progress, same as everybody else. The DVR library holds the same classics, ready to watch from the beginning whenever you like.</p>
 </div>
+<div class="appbadges">
+<button class="appbadge" data-appinstall type="button"><img src="assets/mustang-medallion-clear.png" alt="Mustang Dallas medallion"><span class="appbadge-name">ANDROID APP</span><span class="appbadge-sub">Install on your phone</span></button>
+<button class="appbadge" data-appinstall type="button"><img src="assets/mustang-medallion-clear.png" alt="Mustang Dallas medallion"><span class="appbadge-name">DESKTOP APP</span><span class="appbadge-sub">Install on your computer</span></button>
+</div>
+<p id="appHint" class="apphint" style="display:none">No install prompt? Open your browser menu and choose <strong>Install app</strong> or <strong>Add to Home screen</strong> — Mustang Dallas lands right on your device.</p>
 <footer><p>© 2026 Lobo Radio Network · Lobo Broadcasting Group · Dallas, Texas</p><p id="contact">Questions &amp; requests: <a href="mailto:info@loboradio.com">info@loboradio.com</a> · Sponsors: <a href="mailto:sponsors@loboradio.com">sponsors@loboradio.com</a> · Affiliates: <a href="mailto:affiliates@loboradio.com">affiliates@loboradio.com</a></p></footer>
 <script>
 // ---- Lobo Television: a broadcast clock + a DVR library. ----
@@ -339,5 +344,15 @@ guide(); setLights(); dvrClock();
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
   navigator.serviceWorker.register('./sw.js').catch(function(){});
 }
+</script>
+<script>
+let deferredPrompt = null;
+const appBadges = document.querySelectorAll('[data-appinstall]');
+const appHint = document.getElementById('appHint');
+window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; });
+appBadges.forEach((b) => b.addEventListener('click', async () => {
+  if (deferredPrompt) { deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; }
+  else if (appHint) { appHint.style.display = 'block'; }
+}));
 </script>
 </body></html>
