@@ -4,7 +4,11 @@
 <div class="hero"><picture><source media="(max-width:640px)" srcset="assets/lobo-hero.jpg"><img src="assets/lobo-hero-trim.jpg" alt="Lobo Radio Network"></picture></div>
 <div class="wrap">
 <h1>LOBO RADIO NETWORK</h1>
-<p style="text-align:center"><button id="installAppBtn" class="btn" style="display:none;cursor:pointer">📻 Get the App — install Mustang Dallas on your device</button></p>
+<div class="appbadges">
+<button class="appbadge" data-appinstall type="button"><img src="assets/mustang-medallion-clear.png" alt="Mustang Dallas medallion"><span class="appbadge-name">ANDROID APP</span><span class="appbadge-sub">Install on your phone</span></button>
+<button class="appbadge" data-appinstall type="button"><img src="assets/mustang-medallion-clear.png" alt="Mustang Dallas medallion"><span class="appbadge-name">DESKTOP APP</span><span class="appbadge-sub">Install on your computer</span></button>
+</div>
+<p id="appHint" class="apphint" style="display:none">No install prompt? Open your browser menu and choose <strong>Install app</strong> or <strong>Add to Home screen</strong> — Mustang Dallas lands right on your device.</p>
 <p>Welcome to the Lobo Radio Network — Dallas-born internet radio, broadcasting worldwide, 24/7. Four stations, one pack:</p>
 <div class="cards">
 <div class="card"><h3>Mustang Dallas</h3><p>Your Country Star 24/7 — classic country legends and today's independent artists. <strong>ON AIR NOW.</strong></p><a href="mustang.html">Listen Live →</a></div>
@@ -24,8 +28,12 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 </script>
 <script>
 let deferredPrompt = null;
-const installBtn = document.getElementById('installAppBtn');
-window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; if (installBtn) installBtn.style.display = 'inline-block'; });
-if (installBtn) installBtn.addEventListener('click', async () => { if (!deferredPrompt) return; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; installBtn.style.display = 'none'; });
+const appBadges = document.querySelectorAll('[data-appinstall]');
+const appHint = document.getElementById('appHint');
+window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; });
+appBadges.forEach((b) => b.addEventListener('click', async () => {
+  if (deferredPrompt) { deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; }
+  else if (appHint) { appHint.style.display = 'block'; }
+}));
 </script>
 </body></html>
