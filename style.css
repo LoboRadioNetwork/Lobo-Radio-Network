@@ -76,3 +76,20 @@ canvas.game{background:#05050f;border:2px solid #d4af37;border-radius:8px;width:
 @media (max-width: 480px) {
   .patreon-tiers { display: none; }
 }
+
+/* Compact nav on small screens — tabs shrink and wrap into neat rows
+   instead of ballooning when a phone's text size is set large.
+   Desktop / large-screen nav above is untouched. */
+@media (max-width: 760px) {
+  nav { gap:4px; padding:8px; }
+  nav a.tab { font-size:13px; padding:6px 8px; }
+  .brandlogo { height:40px; }
+}
+@media (max-width: 480px) {
+  nav a.tab { font-size:12px; padding:5px 6px; }
+  nav a.tab .stlive { font-size:.66em; }
+  .brandlogo { height:34px; }
+}
+@media (max-width: 360px) {
+  nav a.tab { font-size:11px; padding:4px 5px; }
+}
