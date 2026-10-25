@@ -1,6 +1,6 @@
 // Minimal service worker for the Lobo Radio Network web player.
 // Required for the "install app" prompt. Cache name bump when updating.
-const CACHE = 'lobo-radio-v9';
+const CACHE = 'lobo-radio-v10';
 const ASSETS = ['./', './index.html', './mustang.html', './tejano.html', './manifest.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', (e) => {
@@ -15,7 +15,7 @@ self.addEventListener('activate', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
-  // Stream audio straight from the network; cache everything else first.
-  if (e.request.url.includes('live365') || e.request.destination === 'audio') return;
+  // Stream audio and video straight from the network; cache everything else first.
+  if (e.request.url.includes('live365') || e.request.destination === 'audio' || e.request.destination === 'video') return;
   e.respondWith(caches.match(e.request).then((hit) => hit || fetch(e.request)));
 });

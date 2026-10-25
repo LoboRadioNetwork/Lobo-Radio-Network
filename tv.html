@@ -248,6 +248,9 @@ function tuneIn(){
   const slot = PROGRAM[idx];
   currentIdx = idx;
   if (video.getAttribute('src') !== slot.src) video.src = slot.src;
+  // Ask for playback NOW, while the viewer's POWER click still counts —
+  // browsers refuse play requests that wait for the film to load first.
+  video.play().catch(function(){});
   const seek = function(){
     try { video.currentTime = Math.min(offset, slot.dur - 0.4); } catch(e){}
     video.play().catch(function(){});
@@ -316,8 +319,14 @@ setInterval(function(){
   if (mode === 'live'){
     const { idx } = slotAt(Date.now());
     if (idx !== currentIdx) tuneIn(); else guide();
+    // Self-heal: if the browser quietly refused a play request, ask again.
+    if (video.paused && !video.ended && video.readyState >= 2) video.play().catch(function(){});
   }
 }, 5000);
+// Any tap on the set revives a refused play request.
+document.addEventListener('pointerdown', function(){
+  if (mode === 'live' && video.paused) video.play().catch(function(){});
+});
 guide(); setLights(); dvrClock();
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
   navigator.serviceWorker.register('./sw.js').catch(function(){});
