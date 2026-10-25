@@ -45,6 +45,7 @@
 }
 .screen { position:relative; border-radius:26px; overflow:hidden; background:#000; aspect-ratio:4/3; box-shadow: inset 0 0 60px rgba(0,0,0,.8); }
 .screen video { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:#000; }
+.screen .bug { position:absolute; right:3.5%; bottom:4%; width:13%; opacity:.85; pointer-events:none; z-index:2; filter:drop-shadow(0 1px 3px rgba(0,0,0,.55)); }
 .screen::after { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(115deg, rgba(255,255,255,.13) 0%, rgba(255,255,255,0) 34%); }
 .offair {
   position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
@@ -122,6 +123,7 @@
       <div class="screenbezel">
         <div class="screen">
           <video id="tv" playsinline preload="none"></video>
+          <img class="bug" src="assets/mustang-medallion-clear.png" alt="" aria-hidden="true">
           <div class="offair" id="offair">
             <div class="big">LOBO TELEVISION</div>
             <div class="small">The channel is on the air right now.<br>Click the POWER knob to tune in — or hit LIBRARY on the DVR to pick a classic.</div>
