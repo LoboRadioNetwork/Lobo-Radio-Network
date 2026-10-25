@@ -108,7 +108,7 @@
 <div class="tvstage">
   <div class="tvintro">
     <h1>LOBO TELEVISION</h1>
-    <p>One channel, on the air around the clock — classic westerns with a word from our sponsors. Turn the set on and tune in… or pop open the DVR and pick a classic yourself.</p>
+    <p>One channel, on the air around the clock — classic westerns with a word from our sponsors. Turn the set on and tune in… or pop open the DVR and pick a classic yourself — westerns and cartoons in the library.</p>
   </div>
 
   <div class="dvr" id="dvrbox">
@@ -184,7 +184,12 @@ const POD = [
 const LIBRARY = [
   { type:'show', title:'The Lone Ranger — “Enter the Lone Ranger” (1949)', src:'https://archive.org/download/EnterTheLoneRanger/EnterTheLoneRanger_512kb.mp4', dur:4148 },
   { type:'show', title:'Angel and the Badman (1947) — John Wayne & Gail Russell', src:'https://archive.org/download/angel-and-the-badman-1947/Angel%20and%20the%20Badman%20(1947).ia.mp4', dur:6007 },
-  { type:'show', title:'Blue Steel (1934) — John Wayne & Gabby Hayes', src:'https://archive.org/download/BlueSteel/BlueSteel_512kb.mp4', dur:3256 }
+  { type:'show', title:'Blue Steel (1934) — John Wayne & Gabby Hayes', src:'https://archive.org/download/BlueSteel/BlueSteel_512kb.mp4', dur:3256 },
+  { type:'show', title:'Superman — “The Mad Scientist” (1941)', src:'https://archive.org/download/mad-scientist-superman-fleischer/The%20Mad%20Scientist%20%7C%20Superman%20Fleischer%20Studios%20Cartoon%20%7C%2016mm.mp4', dur:609 },
+  { type:'show', title:'Betty Boop — “Minnie the Moocher” (1932)', src:'https://archive.org/download/bb_minnie_the_moocher_201805/bb_minnie_the_moocher.mp4', dur:467 },
+  { type:'show', title:'Bugs Bunny — “Falling Hare” (1943)', src:'https://archive.org/download/falling-hare-1943/Falling%20Hare%20(1943).mp4', dur:512 },
+  { type:'show', title:'Popeye — “Popeye Meets Sindbad the Sailor” (1936)', src:'https://archive.org/download/popeye-the-sailor-meets-sindbad-the-sailor-1936/Popeye%20the%20Sailor%20Meets%20Sindbad%20the%20Sailor%20(1936).mp4', dur:993 },
+  { type:'show', title:'Woody Woodpecker — “Pantry Panic” (1941)', src:'https://archive.org/download/pantry-panic/Pantry%20Panic%20(1941).mp4', dur:418 }
 ];
 const PROGRAM = [ LIBRARY[0], ...POD, LIBRARY[1], ...POD, LIBRARY[2], ...POD ];
 const LOOP = PROGRAM.reduce((a,s)=>a+s.dur,0);
