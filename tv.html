@@ -82,6 +82,8 @@
 .guidebox { width:100%; background:linear-gradient(180deg,#31240f,#1d1406); border:2px solid #8a6a1f; border-radius:8px; padding:10px 11px; color:#f5e7bd; font-size:13px; line-height:1.5; box-shadow: inset 0 1px 0 rgba(255,230,160,.25); }
 .guidebox .glabel { color:#d4af37; font-size:11px; letter-spacing:.16em; }
 #libList { max-height:196px; overflow-y:auto; padding-right:2px; }
+.libgroup { color:#d4af37; font-size:11px; letter-spacing:.16em; margin:13px 0 1px; }
+.libgroup:first-child { margin-top:2px; }
 .libbtn { display:block; width:100%; text-align:left; margin-top:7px; cursor:pointer;
   background:linear-gradient(180deg,#3a2c10,#241a05); color:#f5e7bd; border:1px solid #8a6a1f; border-radius:6px;
   padding:7px 9px; font-size:13px; line-height:1.35; }
@@ -161,11 +163,11 @@
     <h2>Today's Rotation</h2>
     <table>
       <tr><td>🤠 <strong>The Lone Ranger</strong> — “Enter the Lone Ranger” (1949)</td><td class="t">1 hr 9 min</td></tr>
-      <tr><td>📺 Commercial break — a word from our sponsors</td><td class="t">~½ min</td></tr>
+      <tr><td>📺 Commercial break — a word from our sponsors</td><td class="t">~5 min</td></tr>
       <tr><td>🎬 <strong>Angel and the Badman</strong> (1947) — John Wayne &amp; Gail Russell</td><td class="t">1 hr 40 min</td></tr>
-      <tr><td>📺 Commercial break — a word from our sponsors</td><td class="t">~½ min</td></tr>
+      <tr><td>📺 Commercial break — a word from our sponsors</td><td class="t">~5 min</td></tr>
       <tr><td>🎬 <strong>Blue Steel</strong> (1934) — John Wayne &amp; Gabby Hayes</td><td class="t">54 min</td></tr>
-      <tr><td>📺 Commercial break — then the rotation starts again</td><td class="t">~½ min</td></tr>
+      <tr><td>📺 Commercial break — then the rotation starts again</td><td class="t">~5 min</td></tr>
     </table>
   </div>
   <p class="tvfineprint">All programs on Lobo Television are public-domain classics, streamed courtesy of the Internet Archive. The broadcast rotation runs continuously — whenever you tune in live, you're joining the program already in progress, same as everybody else. The DVR library holds the same classics, ready to watch from the beginning whenever you like.</p>
@@ -182,19 +184,164 @@
 // DVR mode: pick any classic from the library and watch from the start.
 const POD = [
   { type:'ad', title:'Mustang Dallas — station promo', src:'assets/spots/spot-mustang-promo.mp4', dur:8 },
+  { type:'ad', title:'Jeno’s Pizza Rolls — with The Lone Ranger (1968)', src:'https://archive.org/download/1968JenosPizzaRollsWithTheLoneRanger/1968%20Jeno%27s%20Pizza%20Rolls%20with%20The%20Lone%20Ranger.mp4', dur:61 },
   { type:'ad', title:'Cowboy Revolution — a word from our sponsor', src:'assets/spots/spot-cowboy-tumbler.mp4', dur:5 },
+  { type:'ad', title:'Roy Rogers Quick Shooter Hat — classic commercial (1961)', src:'https://archive.org/download/1961RoyRogersQuickShooterHat/1961%20Roy%20Rogers%20Quick%20Shooter%20Hat.mp4', dur:50 },
   { type:'ad', title:'Lobo Arcade — High Noon Shootout', src:'assets/spots/spot-high-noon.mp4', dur:5 },
-  { type:'ad', title:'Cowboy Revolution — a word from our sponsor', src:'assets/spots/spot-cowboy-tumbler.mp4', dur:5 }
+  { type:'ad', title:'Kellogg’s Corn Flakes — Flying Superman offer (1955)', src:'https://archive.org/download/1955FlyingSupermanFromKelloggsCornFlakes/1955%20Flying%20Superman%20from%20Kellogg%27s%20Corn%20Flakes.mp4', dur:61 },
+  { type:'ad', title:'Cowboy Revolution — a word from our sponsor', src:'assets/spots/spot-cowboy-tumbler.mp4', dur:5 },
+  { type:'ad', title:'Jeno’s Pizza Rolls — classic commercial (1972)', src:'https://archive.org/download/jenos-pizza-rolls-commercial-lone-ranger/JenosPizzaRolls-Commercial-LoneRanger.mp4', dur:65 },
+  { type:'ad', title:'Kellogg’s Sugar Frosted Flakes — classic commercial (1976)', src:'https://archive.org/download/KelloggsSugarFrostedFlakesCereal1976/Kellogg%27s%20Sugar%20Frosted%20Flakes%20Cereal%20(1976).mp4', dur:30 }
 ];
 const LIBRARY = [
-  { type:'show', title:'The Lone Ranger — “Enter the Lone Ranger” (1949)', src:'https://archive.org/download/EnterTheLoneRanger/EnterTheLoneRanger_512kb.mp4', dur:4148 },
-  { type:'show', title:'Angel and the Badman (1947) — John Wayne & Gail Russell', src:'https://archive.org/download/angel-and-the-badman-1947/Angel%20and%20the%20Badman%20(1947).ia.mp4', dur:6007 },
-  { type:'show', title:'Blue Steel (1934) — John Wayne & Gabby Hayes', src:'https://archive.org/download/BlueSteel/BlueSteel_512kb.mp4', dur:3256 },
-  { type:'show', title:'Superman — “The Mad Scientist” (1941)', src:'https://archive.org/download/mad-scientist-superman-fleischer/The%20Mad%20Scientist%20%7C%20Superman%20Fleischer%20Studios%20Cartoon%20%7C%2016mm.mp4', dur:609 },
-  { type:'show', title:'Betty Boop — “Minnie the Moocher” (1932)', src:'https://archive.org/download/bb_minnie_the_moocher_201805/bb_minnie_the_moocher.mp4', dur:467 },
-  { type:'show', title:'Bugs Bunny — “Falling Hare” (1943)', src:'https://archive.org/download/falling-hare-1943/Falling%20Hare%20(1943).mp4', dur:512 },
-  { type:'show', title:'Popeye — “Popeye Meets Sindbad the Sailor” (1936)', src:'https://archive.org/download/popeye-the-sailor-meets-sindbad-the-sailor-1936/Popeye%20the%20Sailor%20Meets%20Sindbad%20the%20Sailor%20(1936).mp4', dur:993 },
-  { type:'show', title:'Woody Woodpecker — “Pantry Panic” (1941)', src:'https://archive.org/download/pantry-panic/Pantry%20Panic%20(1941).mp4', dur:418 }
+  { type:'show', group:'THE LONE RANGER', title:'The Lone Ranger — “Enter the Lone Ranger” (1949)', src:'https://archive.org/download/EnterTheLoneRanger/EnterTheLoneRanger_512kb.mp4', dur:4148 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'Angel and the Badman (1947) — John Wayne & Gail Russell', src:'https://archive.org/download/angel-and-the-badman-1947/Angel%20and%20the%20Badman%20(1947).ia.mp4', dur:6007 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'Blue Steel (1934) — John Wayne & Gabby Hayes', src:'https://archive.org/download/BlueSteel/BlueSteel_512kb.mp4', dur:3256 },
+  { type:'show', group:'GOLDEN-AGE CARTOONS', title:'Superman — “The Mad Scientist” (1941)', src:'https://archive.org/download/mad-scientist-superman-fleischer/The%20Mad%20Scientist%20%7C%20Superman%20Fleischer%20Studios%20Cartoon%20%7C%2016mm.mp4', dur:609 },
+  { type:'show', group:'GOLDEN-AGE CARTOONS', title:'Betty Boop — “Minnie the Moocher” (1932)', src:'https://archive.org/download/bb_minnie_the_moocher_201805/bb_minnie_the_moocher.mp4', dur:467 },
+  { type:'show', group:'GOLDEN-AGE CARTOONS', title:'Bugs Bunny — “Falling Hare” (1943)', src:'https://archive.org/download/falling-hare-1943/Falling%20Hare%20(1943).mp4', dur:512 },
+  { type:'show', group:'GOLDEN-AGE CARTOONS', title:'Popeye — “Popeye Meets Sindbad the Sailor” (1936)', src:'https://archive.org/download/popeye-the-sailor-meets-sindbad-the-sailor-1936/Popeye%20the%20Sailor%20Meets%20Sindbad%20the%20Sailor%20(1936).mp4', dur:993 },
+  { type:'show', group:'GOLDEN-AGE CARTOONS', title:'Woody Woodpecker — “Pantry Panic” (1941)', src:'https://archive.org/download/pantry-panic/Pantry%20Panic%20(1941).mp4', dur:418 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E1 “A Rose for Lotta”', src:'https://archive.org/download/BONANZA-EPISODEONE/a36043401b0ce238a700820ee470bcf05a9acfcc.mp4', dur:2975 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E19 “The Gunmen”', src:'https://archive.org/download/bonanzapd/Bonanza%20s01e19%20THE%20GUNMEN.mp4', dur:2896 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E20 “The Fear Merchants”', src:'https://archive.org/download/bonanzapd/Bonanza%20s01e20%20THE%20FEAR%20MERCHANTS.mp4', dur:2894 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E21 “The Spanish Grant”', src:'https://archive.org/download/bonanzapd/Bonanza%20s01e21%20THE%20SPANISH%20GRANT.mp4', dur:2892 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E22 “Blood on the Land”', src:'https://archive.org/download/bonanzapd/Bonanza%20s01e22%20BLOOD%20ON%20THE%20LAND.mp4', dur:2884 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E23 “Desert Justice”', src:'https://archive.org/download/bonanzapd/Bonanza%20s01e23%20DESERT%20JUSTICE.mp4', dur:2897 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E24 “The Stranger”', src:'https://archive.org/download/bonanzapd/Bonanza%20s01e24%20THE%20STRANGER.mp4', dur:2893 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E25 “Escape to Ponderosa”', src:'https://archive.org/download/bonanzapd/Bonanza%20s01e25%20ESCAPE%20TO%20PONDEROSA.mp4', dur:2893 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E26 “The Avenger”', src:'https://archive.org/download/bonanzapd/Bonanza%20s01e26%20THE%20AVENGER.mp4', dur:2895 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E27 “The Last Trophy”', src:'https://archive.org/download/bonanzapd/Bonanza%20s01e27%20THE%20LAST%20TROPHY.mp4', dur:2893 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E28 “San Francisco”', src:'https://archive.org/download/bonanzapd/Bonanza%20s01e28%20SAN%20FRANCISCO.mp4', dur:2893 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E30 “Feet of Clay”', src:'https://archive.org/download/bonanzapd/Bonanza%20s01e30%20FEET%20OF%20CLAY.mp4', dur:2891 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E31 “Dark Star”', src:'https://archive.org/download/bonanzapd/Bonanza%20s01e31%20DARK%20STAR.mp4', dur:2891 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E32 “Death at Dawn”', src:'https://archive.org/download/bonanzapd/Bonanza%20s01e32%20DEATH%20AT%20DAWN.mp4', dur:2894 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S2 E1 “Showdown”', src:'https://archive.org/download/bonanzapd/Bonanza%20s02e01%20SHOWDOWN.mp4', dur:2932 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S2 E2 “The Mission”', src:'https://archive.org/download/bonanzapd/Bonanza%20s02e02%20THE%20MISSION%20%5B360p%5D.mp4', dur:2912 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S2 E3 “Badge Without Honor”', src:'https://archive.org/download/bonanzapd/Bonanza%20s02e03%20BADGE%20WITHOUT%20HONOR.mp4', dur:2893 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S2 E4 “The Mill”', src:'https://archive.org/download/bonanzapd/Bonanza%20s02e04%20THE%20MILL.mp4', dur:2888 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S2 E6 “Denver McKee”', src:'https://archive.org/download/bonanzapd/Bonanza%20s02e06%20DENVER%20MCKEE.mp4', dur:2890 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S2 E10 “The Last Viking”', src:'https://archive.org/download/bonanzapd/Bonanza%20s02e10%20THE%20LAST%20VIKING.mp4', dur:2891 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S2 E11 “The Trail Gang”', src:'https://archive.org/download/bonanzapd/Bonanza%20s02e11%20THE%20TRAIL%20GANG.mp4', dur:2889 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S2 E12 “The Savage”', src:'https://archive.org/download/bonanzapd/Bonanza%20s02e12%20THE%20SAVAGE.mp4', dur:2891 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S2 E13 “Silent Thunder”', src:'https://archive.org/download/bonanzapd/Bonanza%20s02e13%20SILENT%20THUNDER.mp4', dur:2891 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S2 E14 “The Ape”', src:'https://archive.org/download/bonanzapd/Bonanza%20s02e14%20THE%20APE.mp4', dur:2892 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S2 E15 “The Blood Line”', src:'https://archive.org/download/bonanzapd/Bonanza%20s02e15%20THE%20BLOOD%20LINE.mp4', dur:2891 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E1', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e01.mp4', dur:1463 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E3', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e03.mp4', dur:1502 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E4', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e04.mp4', dur:1490 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E5', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e05.mp4', dur:1599 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E6', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e06.mp4', dur:1487 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E7', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e07.mp4', dur:1441 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E8', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e08.mp4', dur:1472 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E9', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e09.mp4', dur:1483 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E10', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e10.mp4', dur:1583 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E12', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e12.mp4', dur:1513 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E15', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e15.mp4', dur:1500 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E16', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e16.mp4', dur:1500 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E17', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e17.mp4', dur:1482 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E18', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e18.mp4', dur:1493 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E19', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e19.mp4', dur:1469 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E20', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e20.mp4', dur:1491 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E21', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e21.mp4', dur:1481 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E22', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e22.mp4', dur:1499 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E23', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e23.mp4', dur:1479 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E24', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e24.mp4', dur:1492 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E26', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e26.mp4', dur:1492 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S2 E1', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s02e01.mp4', dur:1499 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S2 E2', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s02e02.mp4', dur:1462 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S2 E7', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s02e07.mp4', dur:1578 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S2 E11', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s02e11.mp4', dur:1585 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S2 E14', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s02e14.mp4', dur:1588 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S2 E15', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s02e15.mp4', dur:1574 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S2 E21', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s02e21.mp4', dur:1499 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S2 E22', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s02e22.mp4', dur:1501 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S2 E23', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s02e23.mp4', dur:1463 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S2 E24', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s02e24.mp4', dur:1582 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — “Spanish Dagger”', src:'https://archive.org/download/CiscoKidSpanishDagger512kb/CiscoKid%20SpanishDagger%20512kb.mp4', dur:1575 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E1 “Jailbreak”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e01%20Jailbreak.mp4', dur:1555 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E3 “The Set-Up”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e03%20The%20Set-Up.mp4', dur:1531 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E4 “The Treasure of Howling Dog Canyon”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e04%20The%20Treasure%20of%20Howling%20Dog%20Canyon.mp4', dur:1540 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E5 “The Train Robbery”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e05%20The%20Train%20Robbery.mp4', dur:1542 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E6 “Badman\'s Brother”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e06%20Badman%27s%20Brother.mp4', dur:1557 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E7 “The Outlaws Girl”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e07%20The%20Outlaws%20Girl.mp4', dur:1543 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E8 “Desert Fugitive”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e08%20Desert%20Fugitive.mp4', dur:1555 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E9 “Outlaws Town”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e09%20Outlaws%20Town.mp4', dur:1506 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E10 “Unwilling Outlaw”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e10%20Unwilling%20Outlaw.mp4', dur:1466 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E11 “Dead Mens Hills”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e11%20Dead%20Mens%20Hiills.mp4', dur:1547 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E12 “The Ministers Son”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e12%20The%20Ministers%20Son.mp4', dur:1523 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E13 “Ghost Gulch”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e13%20Ghost%20Gulch.mp4', dur:1545 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E14 “Ride in the Death Wagon”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e14%20Ride%20in%20the%20Death%20Wagon.mp4', dur:1548 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E15 “Peril from the Past”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e15%20Peril%20from%20the%20Past.mp4', dur:1538 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E18 “The Hermits Secret”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e18%20The%20Hermits%20Secret.mp4', dur:1506 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E20 “Ghost Town Gold”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e20%20Ghost%20Town%20Gold.mp4', dur:1545 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E23 “Flying Bullets”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e23%20Flying%20Bullets.mp4', dur:1551 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S2 E1 “Death Medicine”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s02e01%20Death%20Medicine.mp4', dur:1549 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S2 E5 “Go for Your Gun”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s02e05%20Go%20for%20Your%20Gun.mp4', dur:1536 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S2 E7 “Blind Justice”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s02e07%20Blind%20Justice.mp4', dur:1555 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S2 E8 “The Knockout”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s02e08%20The%20Knockout.mp4', dur:1556 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S2 E9 “Run-A-Round”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s02e09%20Run-A-Round.mp4', dur:1555 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S2 E10 “Phantom Rustlers”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s02e10%20Phantom%20Rustlers.mp4', dur:1557 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S2 E11 “Loaded Guns”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s02e11%20Loaded%20Guns.mp4', dur:1553 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S2 E15 “Money to Burn”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s02e15%20Money%20to%20Burn.mp4', dur:1544 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S3 E1 “Milliner from Medicine Creek”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s03e01%20Milliner%20from%20Medicine%20Creek.mp4', dur:1537 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S3 E3 “Outlaws of Paradise Valley”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s03e03%20Outlaws%20of%20Paradise%20Valley.mp4', dur:1546 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S3 E6 “M Stands for Murder”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s03e06%20M%20Stands%20for%20Murder.mp4', dur:1537 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S3 E11 “The Secret of Indian Gap”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s03e11%20The%20Secret%20of%20Indian%20Gap.mp4', dur:1555 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S4 E1 “The Lady Killer”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s04e01%20The%20Lady%20Killer.mp4', dur:1556 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S4 E6 “Hard Luck Story”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s04e06%20Hard%20Luck%20Story.mp4', dur:1515 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S4 E7 “Boys Day at Paradise Valley”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s04e07%20Boys%20Day%20at%20Paradise%20Valley.mp4', dur:1432 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S4 E8 “Bad Neighbors”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s04e08%20Bad%20Neighbors.mp4', dur:1738 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S4 E10 “Hidden Treasures”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s04e10%20Hidden%20Treasures.mp4', dur:1309 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S4 E12 “The Big Chance”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s04e12%20The%20Big%20Chance.mp4', dur:1558 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S4 E14 “Dead End Trail”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s04e14%20Dead%20End%20Trail.mp4', dur:1246 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S4 E15 “Born Fugitive”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s04e15%20Born%20Fugitive.mp4', dur:1240 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S4 E16 “Quick Draw”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s04e16%20Quick%20Draw.mp4', dur:1514 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S5 E1 “And Sudden Death”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s05e01%20And%20Sudden%20Death.mp4', dur:1523 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S5 E2 “Ranch War”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s05e02%20Ranch%20War.mp4', dur:1543 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S5 E8 “Ambush”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s05e08%20Ambush.mp4', dur:1302 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S5 E9 “Money is Dangerous”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s05e09%20Money%20is%20Dangerous.mp4', dur:1549 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S5 E11 “Horse Crazy”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s05e11%20Horse%20Crazy.mp4', dur:1542 },
+  { type:'show', group:'BAT MASTERSON & WILD BILL HICKOK — TV', title:'Bat Masterson — S1 E4 “Stampede at Tent City”', src:'https://archive.org/download/bat-masterson-pd/Bat%20Masterson%20-%20Stampede%20on%20Tent%20City.mp4', dur:1571 },
+  { type:'show', group:'BAT MASTERSON & WILD BILL HICKOK — TV', title:'Bat Masterson — “The Fighter”', src:'https://archive.org/download/bat-masterson-pd/Bat%20Masterson%20-%20The%20Fighter.mp4', dur:1560 },
+  { type:'show', group:'BAT MASTERSON & WILD BILL HICKOK — TV', title:'Wild Bill Hickok — “Dark Horse Candidate” (1952)', src:'https://archive.org/download/wild-bill-hickok-dark-horse-canidate-jan-10-1952/Wild%20Bill%20Hickok%20Dark%20Horse%20Canidate%20%20jan%2010%201952.mp4', dur:1520 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'Riders of Destiny (1933) — John Wayne', src:'https://archive.org/download/riders-of-destiny-1933/Riders%20of%20Destiny%20(1933).mp4', dur:3167 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'Sagebrush Trail (1933) — John Wayne', src:'https://archive.org/download/sagebrush-trail-1933/Sagebrush%20Trail%20(1933).mp4', dur:3210 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'The Lucky Texan (1934) — John Wayne', src:'https://archive.org/download/the-lucky-texan-1934_202505/The%20Lucky%20Texan%20(1934).mp4', dur:3270 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'West of the Divide (1934) — John Wayne', src:'https://archive.org/download/west-of-the-divide-1934/West%20of%20the%20Divide%20(1934).mp4', dur:3204 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'The Man from Utah (1934) — John Wayne', src:'https://archive.org/download/the-man-from-utah-1934_202505/The%20Man%20from%20Utah%20(1934).mp4', dur:3087 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'Randy Rides Alone (1934) — John Wayne', src:'https://archive.org/download/randy-rides-alone-1934_202504/Randy%20Rides%20Alone%20(1934).mp4', dur:3147 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'The Star Packer (1934) — John Wayne', src:'https://archive.org/download/the-star-packer-1934/The%20Star%20Packer%20(1934).mp4', dur:3280 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'The Lawless Frontier (1934) — John Wayne', src:'https://archive.org/download/the-lawless-frontier-1934_202505/The%20Lawless%20Frontier%20(1934).mp4', dur:2982 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'’Neath the Arizona Skies (1934) — John Wayne', src:'https://archive.org/download/neathTheArizonaSkiesVideoQualityUpgrade/neathTheArizonaSkiesVideoQualityUpgrade.mp4', dur:3150 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'Texas Terror (1935) — John Wayne', src:'https://archive.org/download/texas-terror-1935/Texas%20Terror%20(1935).mp4', dur:3090 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'The Dawn Rider (1935) — John Wayne', src:'https://archive.org/download/the-dawn-rider-1935-john-wayne/The%20Dawn%20Rider%20(1935)%20JOHN%20WAYNE.mp4', dur:3210 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'Paradise Canyon (1935) — John Wayne', src:'https://archive.org/download/paradise-canyon-1935/Paradise%20Canyon%20(1935).mp4', dur:3190 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'Winds of the Wasteland (1936) — John Wayne', src:'https://archive.org/download/WINDSOFTHEWASTELANDVideoQualityUpgrade/WINDS%20OF%20THE%20WASTELAND%20video%20quality%20upgrade.mp4', dur:3272 },
+  { type:'show', group:'RANDOLPH SCOTT — FEATURE FILMS', title:'To the Last Man (1933) — Randolph Scott', src:'https://archive.org/download/ZaneGreysToTheLastMan1933-RandolphScott/ZaneGreys-toTheLastMan-RandolphScott1933_512kb.mp4', dur:3954 },
+  { type:'show', group:'RANDOLPH SCOTT — FEATURE FILMS', title:'Wagon Wheels (1934) — Randolph Scott', src:'https://archive.org/download/WagonWheelsZaneGreyWesternWRandolphScott.mp4/Wagon%20Wheels%20(Zane%20Grey%20Western%20w%20Randolph%20Scott).mp4.mp4', dur:3553 },
+  { type:'show', group:'RANDOLPH SCOTT — FEATURE FILMS', title:'Rocky Mountain Mystery (1935) — Randolph Scott', src:'https://archive.org/download/Rocky_Mountain_Mystery_1935/Rocky_Mountain_Mystery_1935.mp4', dur:3928 },
+  { type:'show', group:'RANDOLPH SCOTT — FEATURE FILMS', title:'The Thundering Herd (1933) — Randolph Scott', src:'https://archive.org/download/the-thundering-herd/The%20Thundering%20Herd.mp4', dur:3435 },
+  { type:'show', group:'GARY COOPER — FEATURE FILM', title:'Fighting Caravans (1931) — Gary Cooper', src:'https://archive.org/download/fighting-caravans-1931/Fighting%20Caravans%20(1931).mp4', dur:4838 },
+  { type:'show', group:'ROY ROGERS — FEATURE FILMS', title:'Under Western Stars (1938) — Roy Rogers', src:'https://archive.org/download/UnderWesternStars/UnderWesternStars_512kb.mp4', dur:3882 },
+  { type:'show', group:'ROY ROGERS — FEATURE FILMS', title:'Billy the Kid Returns (1938) — Roy Rogers', src:'https://archive.org/download/billy-the-kid-returns-1938/Billy%20the%20Kid%20Returns%20(1938).mp4', dur:3203 },
+  { type:'show', group:'ROY ROGERS — FEATURE FILMS', title:'Saga of Death Valley (1939) — Roy Rogers', src:'https://archive.org/download/saga-of-death-valley-1939_202402/Saga%20of%20Death%20Valley%20(1939).mp4', dur:3190 },
+  { type:'show', group:'ROY ROGERS — FEATURE FILMS', title:'Days of Jesse James (1939) — Roy Rogers', src:'https://archive.org/download/days-of-jesse-james-1939/Days%20of%20Jesse%20James%20(1939).mp4', dur:3184 },
+  { type:'show', group:'ROY ROGERS — FEATURE FILMS', title:'The Arizona Kid (1939) — Roy Rogers', src:'https://archive.org/download/Arizona_Kid_1939/Arizona_Kid_1939.mp4', dur:3188 },
+  { type:'show', group:'GENE AUTRY — THE PHANTOM EMPIRE (1935 SERIAL)', title:'The Phantom Empire — Chapter 1 (1935)', src:'https://archive.org/download/PhantomEmpire1/Phantom%20Empire%20-%201.mp4', dur:1796 },
+  { type:'show', group:'GENE AUTRY — THE PHANTOM EMPIRE (1935 SERIAL)', title:'The Phantom Empire — Chapter 2 (1935)', src:'https://archive.org/download/PhantomEmpire1/Phantom%20Empire%20-%202.mp4', dur:1197 },
+  { type:'show', group:'GENE AUTRY — THE PHANTOM EMPIRE (1935 SERIAL)', title:'The Phantom Empire — Chapter 3 (1935)', src:'https://archive.org/download/PhantomEmpire1/Phantom%20Empire%20-%203.mp4', dur:1200 },
+  { type:'show', group:'GENE AUTRY — THE PHANTOM EMPIRE (1935 SERIAL)', title:'The Phantom Empire — Chapter 4 (1935)', src:'https://archive.org/download/PhantomEmpire1/Phantom%20Empire%20-%204.mp4', dur:1079 },
+  { type:'show', group:'GENE AUTRY — THE PHANTOM EMPIRE (1935 SERIAL)', title:'The Phantom Empire — Chapter 5 (1935)', src:'https://archive.org/download/PhantomEmpire1/Phantom%20Empire%20-%205.mp4', dur:1225 },
+  { type:'show', group:'GENE AUTRY — THE PHANTOM EMPIRE (1935 SERIAL)', title:'The Phantom Empire — Chapter 6 (1935)', src:'https://archive.org/download/PhantomEmpire1/Phantom%20Empire%20-%206.mp4', dur:1068 },
+  { type:'show', group:'GENE AUTRY — THE PHANTOM EMPIRE (1935 SERIAL)', title:'The Phantom Empire — Chapter 7 (1935)', src:'https://archive.org/download/PhantomEmpire1/Phantom%20Empire%20-%207.mp4', dur:1183 },
+  { type:'show', group:'GENE AUTRY — THE PHANTOM EMPIRE (1935 SERIAL)', title:'The Phantom Empire — Chapter 8 (1935)', src:'https://archive.org/download/PhantomEmpire1/Phantom%20Empire%20-%208.mp4', dur:1203 },
+  { type:'show', group:'GENE AUTRY — THE PHANTOM EMPIRE (1935 SERIAL)', title:'The Phantom Empire — Chapter 9 (1935)', src:'https://archive.org/download/PhantomEmpire1/Phantom%20Empire%20-%209.mp4', dur:1079 },
+  { type:'show', group:'GENE AUTRY — THE PHANTOM EMPIRE (1935 SERIAL)', title:'The Phantom Empire — Chapter 10 (1935)', src:'https://archive.org/download/PhantomEmpire1/Phantom%20Empire%20-%2010.mp4', dur:1152 },
+  { type:'show', group:'GENE AUTRY — THE PHANTOM EMPIRE (1935 SERIAL)', title:'The Phantom Empire — Chapter 11 (1935)', src:'https://archive.org/download/PhantomEmpire1/Phantom%20Empire%20-%2011.mp4', dur:1118 },
+  { type:'show', group:'GENE AUTRY — THE PHANTOM EMPIRE (1935 SERIAL)', title:'The Phantom Empire — Chapter 12 (1935)', src:'https://archive.org/download/PhantomEmpire1/Phantom%20Empire%20-%2012.mp4', dur:1119 },
+  { type:'show', group:'GENE AUTRY — FEATURE FILMS', title:'Red River Valley (1936) — Gene Autry', src:'https://archive.org/download/red-river-valley-1936/Red%20River%20Valley%20(1936).mp4', dur:3310 },
+  { type:'show', group:'GENE AUTRY — FEATURE FILMS', title:'Yodelin’ Kid from Pine Ridge (1937) — Gene Autry', src:'https://archive.org/download/YodelinKidFromPineRidge/Yodelin%27%20Kid%20from%20Pine%20Ridge.mp4', dur:3190 }
 ];
 const PROGRAM = [ LIBRARY[0], ...POD, LIBRARY[1], ...POD, LIBRARY[2], ...POD ];
 const LOOP = PROGRAM.reduce((a,s)=>a+s.dur,0);
@@ -307,23 +454,31 @@ libBtn.addEventListener('click', goDVR);
 liveBtn.addEventListener('click', function(){ if (mode !== 'live') goLive(); });
 // Build the DVR library list
 const libList = document.getElementById('libList');
-LIBRARY.forEach(function(item){
-  const b = document.createElement('button');
-  b.className = 'libbtn';
-  const mins = Math.round(item.dur/60);
-  b.innerHTML = '';
-  b.textContent = '▶ ' + item.title;
-  const sm = document.createElement('small');
-  sm.textContent = mins + ' min · watch from the beginning';
-  b.appendChild(sm);
-  b.addEventListener('click', function(){
-    video.src = item.src;
-    video.currentTime = 0;
-    video.play().catch(function(){});
-    nowEl.textContent = 'Now playing from the DVR: ' + item.title;
-    dvrClock();
+const libGroups = [];
+LIBRARY.forEach(function(item){ if (libGroups.indexOf(item.group) === -1) libGroups.push(item.group); });
+libGroups.forEach(function(g){
+  const h = document.createElement('div');
+  h.className = 'libgroup';
+  h.textContent = g;
+  libList.appendChild(h);
+  LIBRARY.filter(function(item){ return item.group === g; }).forEach(function(item){
+    const b = document.createElement('button');
+    b.className = 'libbtn';
+    const mins = Math.round(item.dur/60);
+    b.innerHTML = '';
+    b.textContent = '▶ ' + item.title;
+    const sm = document.createElement('small');
+    sm.textContent = mins + ' min · watch from the beginning';
+    b.appendChild(sm);
+    b.addEventListener('click', function(){
+      video.src = item.src;
+      video.currentTime = 0;
+      video.play().catch(function(){});
+      nowEl.textContent = 'Now playing from the DVR: ' + item.title;
+      dvrClock();
+    });
+    libList.appendChild(b);
   });
-  libList.appendChild(b);
 });
 video.addEventListener('ended', function(){ if (mode === 'live') tuneIn(); });
 setInterval(function(){
