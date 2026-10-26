@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Guest Book — Lobo Radio Network</title><meta name="description" content="Sign the Lobo Radio Network guest book — be first to hear about giveaways, station launches, live events and big announcements from Mustang Dallas, Tejano Ritmo and the pack."><meta property="og:type" content="website"><meta property="og:site_name" content="Lobo Radio Network"><meta property="og:title" content="Sign the Guest Book — Lobo Radio Network"><meta property="og:description" content="Sign the Lobo Radio Network guest book — be first to hear about giveaways, station launches, live events and big announcements from Mustang Dallas, Tejano Ritmo and the pack."><meta property="og:url" content="https://loboradio.com/guestbook.html"><meta property="og:image" content="https://loboradio.com/assets/og-card.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Sign the Guest Book — Lobo Radio Network"><meta name="twitter:description" content="Sign the Lobo Radio Network guest book — be first to hear about giveaways, station launches, live events and big announcements."><meta name="twitter:image" content="https://loboradio.com/assets/og-card.jpg"><link rel="stylesheet" href="style.css"><link rel="manifest" href="./manifest.json"><meta name="theme-color" content="#10101e"><link rel="apple-touch-icon" href="./icon-192.png">
+<style>
+.gb-form { text-align:left; max-width:520px; margin:0 auto; }
+.gb-form label { display:block; font-weight:bold; color:#e8c56a; margin:14px 0 5px; font-size:16px; }
+.gb-form input, .gb-form select { width:100%; padding:11px 12px; border-radius:8px; border:2px solid #c9a227; background:#10101e; color:#f5f0dc; font-size:16px; font-family:inherit; }
+.gb-form .opt { font-weight:normal; opacity:.75; font-size:13px; }
+.gb-herd { border:2px dashed #d4af37; border-radius:10px; padding:14px 18px; margin:18px auto; max-width:640px; background:rgba(212,175,55,.08); }
+.gb-thanks { display:none; text-align:center; padding:18px 6px; }
+</style>
+</head><body class="lobo"><header><nav><a class="brand" href="index.html"><img class="brandlogo" src="assets/mustang-medallion-clear.png" alt="Lobo Radio Network"></a><a class="tab" href="index.html"><span class="stname">Lobo Radio</span><span class="stlive">Network</span></a><a class="tab" href="mustang.html"><span class="stname">Mustang Dallas</span><span class="stlive">Listen Live 📻</span></a><a class="tab" href="tejano.html"><span class="stname">Tejano Ritmo</span><span class="stlive">Listen Live 📻</span></a><a class="tab" href="tv.html"><span class="stname">Lobo TV</span><span class="stlive">Watch 📺</span></a><a class="tab" href="choose-your-city.html">Choose Your City</a><a class="tab" href="about.html"><span class="stname">About Us</span><span class="stlive">Our Story 📖</span></a><a class="tab" href="index.html#contact">Contact</a></nav></header>
+<div class="wrap">
+<img class="medallion" src="assets/mustang-medallion-clear.png" alt="Mustang Dallas medallion">
+<h1 style="text-align:center">✍️ SIGN THE GUEST BOOK</h1>
+<p>Every great station house keeps a guest book by the door. Sign ours and you&rsquo;re family &mdash; you&rsquo;ll be <strong>first to hear</strong> about giveaways, new station launches, live events, and the big announcements, straight from the manager&rsquo;s desk.</p>
+<div class="gb-herd"><p style="margin:0"><strong>🐺 THE FOUNDING HERD:</strong> the first 100 names in this book are charter members &mdash; marked in gold, forever first in line for everything we do. The book is open <em>now</em>.</p></div>
+<div class="playerbox">
+<form class="gb-form" id="gbForm" action="https://formspree.io/f/mbgggkon" method="POST">
+<label for="gb-name">Your name</label>
+<input id="gb-name" type="text" name="name" required autocomplete="name" placeholder="e.g. Dale from Fort Worth">
+<label for="gb-email">Email address</label>
+<input id="gb-email" type="email" name="email" required autocomplete="email" placeholder="you@example.com">
+<label for="gb-from">Where are you listening from? <span class="opt">(optional)</span></label>
+<input id="gb-from" type="text" name="listening_from" placeholder="City, State — or country!">
+<label for="gb-station">Your favorite station</label>
+<select id="gb-station" name="favorite_station">
+<option>Mustang Dallas</option>
+<option>Tejano Ritmo</option>
+<option>Vibe Dallas&rsquo;s Urban Mix</option>
+<option>Club Oak Lawn</option>
+<option>All of &rsquo;em!</option>
+</select>
+<input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+<input type="hidden" name="_subject" value="New Guest Book signing at loboradio.com!">
+<p style="text-align:center;margin-top:20px"><button class="btn" type="submit" style="cursor:pointer">✍️ Sign the Book</button></p>
+<p style="font-size:14px;opacity:.8;text-align:center">We email station news, giveaways, and promotions only. No spam, and we never sell your address. Unsubscribe anytime.</p>
+</form>
+<div class="gb-thanks" id="gbThanks">
+<h2>🎉 You&rsquo;re in the book!</h2>
+<p>Welcome to the herd, friend. Watch your inbox &mdash; good things ride this way.</p>
+<p>&mdash; Perry Sanders &amp; Jett Morgan</p>
+</div>
+</div>
+<p style="text-align:center"><a class="btn" href="https://www.patreon.com/cw/MustangDallas" target="_blank" rel="noopener">💡 Help Us Keep the Lights On</a></p>
+</div>
+<footer><p>© 2026 Lobo Radio Network · Lobo Broadcasting Group · Dallas, Texas</p><p id="contact">Questions &amp; requests: <a href="mailto:info@loboradio.com">info@loboradio.com</a> · Sponsors: <a href="mailto:sponsors@loboradio.com">sponsors@loboradio.com</a> · Affiliates: <a href="mailto:affiliates@loboradio.com">affiliates@loboradio.com</a></p></footer>
+<script>
+document.getElementById('gbForm').addEventListener('submit', async function (e) {
+  e.preventDefault();
+  var form = e.target;
+  try {
+    var res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+    if (res.ok) { form.style.display = 'none'; document.getElementById('gbThanks').style.display = 'block'; }
+    else { form.submit(); }
+  } catch (err) { form.submit(); }
+});
+</script>
+</body></html>
