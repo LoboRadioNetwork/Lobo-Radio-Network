@@ -102,3 +102,21 @@ canvas.game{background:#05050f;border:2px solid #d4af37;border-radius:8px;width:
 .appbadge-name{color:#e8c766;font-family:Georgia,'Times New Roman',serif;font-weight:bold;font-size:1.05rem;letter-spacing:.12em}
 .appbadge-sub{color:#e9e4d8;font-size:.8rem}
 .apphint{text-align:center;color:#e9e4d8;max-width:520px;margin:8px auto 0;font-size:.9rem}
+
+/* Slim nav on short screens (Chromebooks with scaled displays, small
+   laptop windows): the sticky tab bar shrinks to one lean row so it
+   stops eating the page — Lobo TV especially. Width breakpoints above
+   still govern phones; desktop tall screens are untouched. */
+@media (max-width: 1100px) {
+  nav { padding:10px 12px; }
+  nav a.tab { font-size:15px; padding:8px 10px; }
+  .brandlogo { height:50px; }
+}
+@media (max-height: 700px) {
+  nav { flex-wrap:nowrap; overflow-x:auto; gap:4px; padding:6px 10px; scrollbar-width:none; }
+  nav::-webkit-scrollbar { display:none; }
+  .brandlogo { height:36px; }
+  nav a.tab { font-size:13.5px; padding:6px 9px; white-space:nowrap; }
+  nav a.tab .stname { display:inline; }
+  nav a.tab .stlive { display:none; }
+}
