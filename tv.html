@@ -162,12 +162,15 @@
   <div class="rotation">
     <h2>Today's Rotation</h2>
     <table>
-      <tr><td>🤠 <strong>The Lone Ranger</strong> — “Enter the Lone Ranger” (1949)</td><td class="t">1 hr 9 min</td></tr>
+      <tr><td>🤠 <strong>The Lone Ranger</strong> — “The Lone Ranger Fights On” (1949)</td><td class="t">24 min</td></tr>
       <tr><td>📺 Commercial break — a word from our sponsors</td><td class="t">~5 min</td></tr>
-      <tr><td>🎬 <strong>Angel and the Badman</strong> (1947) — John Wayne &amp; Gail Russell</td><td class="t">1 hr 40 min</td></tr>
+      <tr><td>🎞️ <strong>Superman</strong> — “The Mad Scientist” (1941)</td><td class="t">10 min</td></tr>
+      <tr><td>🤠 <strong>The Cisco Kid</strong> — Season 1, Episode 1</td><td class="t">24 min</td></tr>
       <tr><td>📺 Commercial break — a word from our sponsors</td><td class="t">~5 min</td></tr>
-      <tr><td>🎬 <strong>Blue Steel</strong> (1934) — John Wayne &amp; Gabby Hayes</td><td class="t">54 min</td></tr>
-      <tr><td>📺 Commercial break — then the rotation starts again</td><td class="t">~5 min</td></tr>
+      <tr><td>🎞️ <strong>Betty Boop</strong> — “Minnie the Moocher” (1932)</td><td class="t">8 min</td></tr>
+      <tr><td>🤠 <strong>Bonanza</strong> — “A Rose for Lotta”</td><td class="t">50 min</td></tr>
+      <tr><td>📺 Commercial break — a word from our sponsors</td><td class="t">~5 min</td></tr>
+      <tr><td>🎞️ <strong>Bugs Bunny</strong> — “Falling Hare” (1943) — then the rotation starts again</td><td class="t">9 min</td></tr>
     </table>
   </div>
   <p class="tvfineprint">All programs on Lobo Television are public-domain classics, streamed courtesy of the Internet Archive. The broadcast rotation runs continuously — whenever you tune in live, you're joining the program already in progress, same as everybody else. The DVR library holds the same classics, ready to watch from the beginning whenever you like.</p>
@@ -195,6 +198,7 @@ const POD = [
 ];
 const LIBRARY = [
   { type:'show', group:'THE LONE RANGER', title:'The Lone Ranger — “Enter the Lone Ranger” (1949)', src:'https://archive.org/download/EnterTheLoneRanger/EnterTheLoneRanger_512kb.mp4', dur:4148 },
+  { type:'show', group:'THE LONE RANGER', title:'The Lone Ranger — “The Lone Ranger Fights On” (1949)', src:'https://archive.org/download/the-lone-ranger-1949-s-01-e-02-the-lone-ranger-fights-on/The%20Lone%20Ranger%201949%20%28S01E02%29%20The%20Lone%20Ranger%20Fights%20on.mp4', dur:1455 },
   { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'Angel and the Badman (1947) — John Wayne & Gail Russell', src:'https://archive.org/download/angel-and-the-badman-1947/Angel%20and%20the%20Badman%20(1947).ia.mp4', dur:6007 },
   { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'Blue Steel (1934) — John Wayne & Gabby Hayes', src:'https://archive.org/download/BlueSteel/BlueSteel_512kb.mp4', dur:3256 },
   { type:'show', group:'GOLDEN-AGE CARTOONS', title:'Superman — “The Mad Scientist” (1941)', src:'https://archive.org/download/mad-scientist-superman-fleischer/The%20Mad%20Scientist%20%7C%20Superman%20Fleischer%20Studios%20Cartoon%20%7C%2016mm.mp4', dur:609 },
@@ -343,7 +347,8 @@ const LIBRARY = [
   { type:'show', group:'GENE AUTRY — FEATURE FILMS', title:'Red River Valley (1936) — Gene Autry', src:'https://archive.org/download/red-river-valley-1936/Red%20River%20Valley%20(1936).mp4', dur:3310 },
   { type:'show', group:'GENE AUTRY — FEATURE FILMS', title:'Yodelin’ Kid from Pine Ridge (1937) — Gene Autry', src:'https://archive.org/download/YodelinKidFromPineRidge/Yodelin%27%20Kid%20from%20Pine%20Ridge.mp4', dur:3190 }
 ];
-const PROGRAM = [ LIBRARY[0], ...POD, LIBRARY[1], ...POD, LIBRARY[2], ...POD ];
+const byTitle = t => LIBRARY.find(x => x.title.includes(t));
+const PROGRAM = [ byTitle('Fights On'), ...POD, byTitle('Mad Scientist'), byTitle('Cisco Kid — S1 E1'), ...POD, byTitle('Minnie the Moocher'), byTitle('Rose for Lotta'), ...POD, byTitle('Falling Hare') ];
 const LOOP = PROGRAM.reduce((a,s)=>a+s.dur,0);
 const EPOCH = Date.UTC(2026,0,1,6,0,0); // schedule anchored 2026-01-01 06:00 UTC
 const video = document.getElementById('tv');
