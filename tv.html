@@ -162,6 +162,7 @@
   <div class="rotation">
     <h2>Today's Rotation</h2>
     <table>
+      <tr><td>⛪ <strong>SUNDAYS until 10 AM</strong> — Sunday Bible Block: <strong>The Living Christ Series</strong> (1951), episode after episode — then the regular rotation below takes over</td><td class="t">Sun AM</td></tr>
       <tr><td>🤠 <strong>The Lone Ranger</strong> — “The Lone Ranger Fights On” (1949)</td><td class="t">24 min</td></tr>
       <tr><td>📺 Commercial break — a word from our sponsors</td><td class="t">~5 min</td></tr>
       <tr><td>🎞️ <strong>Superman</strong> — “The Mad Scientist” (1941)</td><td class="t">10 min</td></tr>
@@ -345,11 +346,32 @@ const LIBRARY = [
   { type:'show', group:'GENE AUTRY — THE PHANTOM EMPIRE (1935 SERIAL)', title:'The Phantom Empire — Chapter 11 (1935)', src:'https://archive.org/download/PhantomEmpire1/Phantom%20Empire%20-%2011.mp4', dur:1118 },
   { type:'show', group:'GENE AUTRY — THE PHANTOM EMPIRE (1935 SERIAL)', title:'The Phantom Empire — Chapter 12 (1935)', src:'https://archive.org/download/PhantomEmpire1/Phantom%20Empire%20-%2012.mp4', dur:1119 },
   { type:'show', group:'GENE AUTRY — FEATURE FILMS', title:'Red River Valley (1936) — Gene Autry', src:'https://archive.org/download/red-river-valley-1936/Red%20River%20Valley%20(1936).mp4', dur:3310 },
-  { type:'show', group:'GENE AUTRY — FEATURE FILMS', title:'Yodelin’ Kid from Pine Ridge (1937) — Gene Autry', src:'https://archive.org/download/YodelinKidFromPineRidge/Yodelin%27%20Kid%20from%20Pine%20Ridge.mp4', dur:3190 }
+  { type:'show', group:'GENE AUTRY — FEATURE FILMS', title:'Yodelin’ Kid from Pine Ridge (1937) — Gene Autry', src:'https://archive.org/download/YodelinKidFromPineRidge/Yodelin%27%20Kid%20from%20Pine%20Ridge.mp4', dur:3190 },
+  { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 1 “Holy Night” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/01_Holy%20Night.mp4', dur:1803 },
+  { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 2 “Escape to Egypt” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/02_Escape%20to%20Egypt.mp4', dur:1720 },
+  { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 3 “Boyhood” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/03_Boyhood.mp4', dur:1719 },
+  { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 4 “Men of the Wilderness” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/04_Men%20of%20the%20Wilderness.mp4', dur:1778 },
+  { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 5 “Challenge of Faith” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/05_Challenge%20of%20Faith.mp4', dur:1704 },
+  { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 6 “Discipleship” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/06_Discipleship.mp4', dur:1688 },
+  { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 7 “Return to Nazareth” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/07_Return%20to%20Nazareth.mp4', dur:1712 },
+  { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 8 “Conflict” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/08_Conflict.mp4', dur:1704 },
+  { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 9 “Fate of John the Baptist” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/09_Fate%20of%20John%20the%20Baptist.mp4', dur:1677 },
+  { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 10 “Retreat and Decision” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/10_Retreat%20and%20Decision.mp4', dur:1801 },
+  { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 11 “Triumph and Defeat” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/11_Triumph%20and%20Defeat.mp4', dur:1754 },
+  { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 12 “Crucifixion and Resurrection” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/12_Crucifixion%20and%20Resurrection.mp4', dur:1705 },
+  { type:'show', group:'SUNDAY BIBLE', title:'From the Manger to the Cross (1912) — silent feature', src:'https://archive.org/download/from-the-manger-to-the-cross-1912_202605/From_the_Manger_to_the_Cross_(1912).mp4', dur:4219 }
 ];
 const byTitle = t => LIBRARY.find(x => x.title.includes(t));
 const PROGRAM = [ byTitle('Fights On'), ...POD, byTitle('Mad Scientist'), byTitle('Cisco Kid — S1 E1'), ...POD, byTitle('Minnie the Moocher'), byTitle('Rose for Lotta'), ...POD, byTitle('Falling Hare') ];
 const LOOP = PROGRAM.reduce((a,s)=>a+s.dur,0);
+// ---- Sunday Bible Block: Sundays (viewer-local) midnight–10 AM, The Living
+// Christ episodes run in series order with the usual sponsor pods between them,
+// looping the series if it runs out before 10 AM. 10 AM onward the regular
+// rotation above takes over, same as every other day. ----
+const SUNDAY_SHOWS = LIBRARY.filter(function(x){ return x.group === 'SUNDAY BIBLE' && x.title.indexOf('The Living Christ') === 0; });
+const SUNDAY_PROGRAM = [];
+SUNDAY_SHOWS.forEach(function(s){ SUNDAY_PROGRAM.push(s); POD.forEach(function(a){ SUNDAY_PROGRAM.push(a); }); });
+const SUNDAY_LOOP = SUNDAY_PROGRAM.reduce((a,s)=>a+s.dur,0);
 const EPOCH = Date.UTC(2026,0,1,6,0,0); // schedule anchored 2026-01-01 06:00 UTC
 const video = document.getElementById('tv');
 const offair = document.getElementById('offair');
@@ -365,35 +387,49 @@ const libBtn = document.getElementById('dvrLibBtn');
 const liveBtn = document.getElementById('dvrLiveBtn');
 let mode = 'standby'; // standby | live | dvr
 let currentIdx = -1;
+let currentList = null;
 
 function slotAt(nowMs){
+  const d = new Date(nowMs);
+  if (d.getDay() === 0 && d.getHours() < 10 && SUNDAY_PROGRAM.length){
+    const midnight = new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+    let pos = (((nowMs - midnight)/1000) % SUNDAY_LOOP + SUNDAY_LOOP) % SUNDAY_LOOP;
+    let acc = 0;
+    for (let i=0;i<SUNDAY_PROGRAM.length;i++){
+      if (pos < acc + SUNDAY_PROGRAM[i].dur) return { idx:i, offset: pos-acc, slotStartMs: nowMs - (pos-acc)*1000, list: SUNDAY_PROGRAM };
+      acc += SUNDAY_PROGRAM[i].dur;
+    }
+    return { idx:0, offset:0, slotStartMs: nowMs, list: SUNDAY_PROGRAM };
+  }
   let pos = (((nowMs - EPOCH)/1000) % LOOP + LOOP) % LOOP;
   let acc = 0;
   for (let i=0;i<PROGRAM.length;i++){
-    if (pos < acc + PROGRAM[i].dur) return { idx:i, offset: pos-acc, slotStartMs: nowMs - (pos-acc)*1000 };
+    if (pos < acc + PROGRAM[i].dur) return { idx:i, offset: pos-acc, slotStartMs: nowMs - (pos-acc)*1000, list: PROGRAM };
     acc += PROGRAM[i].dur;
   }
-  return { idx:0, offset:0, slotStartMs: nowMs };
+  return { idx:0, offset:0, slotStartMs: nowMs, list: PROGRAM };
 }
-function nextShow(fromIdx){
-  for (let k=1;k<=PROGRAM.length;k++){ const s = PROGRAM[(fromIdx+k)%PROGRAM.length]; if (s.type==='show') return s; }
-  return PROGRAM[0];
+function nextShow(fromIdx, list){
+  list = list || PROGRAM;
+  for (let k=1;k<=list.length;k++){ const s = list[(fromIdx+k)%list.length]; if (s.type==='show') return s; }
+  return list[0];
 }
 function fmtTime(ms){ return new Date(ms).toLocaleTimeString([], {hour:'numeric', minute:'2-digit'}); }
 function fmtClock(){ const d=new Date(); let h=d.getHours()%12; if(h===0)h=12; return h + ':' + String(d.getMinutes()).padStart(2,'0'); }
 function guide(){
   const nowMs = Date.now();
-  const { idx, slotStartMs } = slotAt(nowMs);
-  const slot = PROGRAM[idx];
+  const { idx, slotStartMs, list } = slotAt(nowMs);
+  const slot = list[idx];
+  const sunday = (list === SUNDAY_PROGRAM);
   const endsMs = slotStartMs + slot.dur*1000;
   if (mode === 'dvr') return;
   if (slot.type==='show'){
-    gNow.textContent = slot.title;
-    gNext.textContent = nextShow(idx).title;
+    gNow.textContent = (sunday ? 'Sunday Bible Block — ' : '') + slot.title;
+    gNext.textContent = nextShow(idx, list).title;
     nowEl.textContent = (mode==='live') ? ('On the air: ' + slot.title + ' · ends ' + fmtTime(endsMs)) : 'Lobo Television is standing by.';
   } else {
     gNow.textContent = 'Commercial break — a word from our sponsors';
-    gNext.textContent = nextShow(idx).title;
+    gNext.textContent = nextShow(idx, list).title;
     nowEl.textContent = (mode==='live') ? 'Commercial break — back to the picture in a moment.' : 'Lobo Television is standing by.';
   }
 }
@@ -404,14 +440,15 @@ function setLights(){
   else { onairText.textContent = 'STANDBY'; }
 }
 function dvrClock(){
-  if (mode==='live'){ const { idx } = slotAt(Date.now()); dvrDisplay.textContent = 'LIVE · ' + fmtClock() + ' · ' + (PROGRAM[idx].type==='show' ? 'FEATURE' : 'COMMERCIAL'); }
+  if (mode==='live'){ const { idx, list } = slotAt(Date.now()); dvrDisplay.textContent = 'LIVE · ' + fmtClock() + ' · ' + (list[idx].type==='show' ? (list === SUNDAY_PROGRAM ? 'SUNDAY BIBLE' : 'FEATURE') : 'COMMERCIAL'); }
   else if (mode==='dvr'){ dvrDisplay.textContent = 'DVR PLAY · ' + fmtClock(); }
   else { dvrDisplay.textContent = '-- STANDBY · ' + fmtClock() + ' --'; }
 }
 function tuneIn(){
-  const { idx, offset } = slotAt(Date.now());
-  const slot = PROGRAM[idx];
+  const { idx, offset, list } = slotAt(Date.now());
+  const slot = list[idx];
   currentIdx = idx;
+  currentList = list;
   if (video.getAttribute('src') !== slot.src) video.src = slot.src;
   // Ask for playback NOW, while the viewer's POWER click still counts —
   // browsers refuse play requests that wait for the film to load first.
@@ -447,7 +484,7 @@ function powerOff(){
   offair.style.display = 'flex';
   guideLive.style.display = 'block'; guideLibrary.style.display = 'none';
   libBtn.classList.remove('active'); liveBtn.classList.add('active');
-  currentIdx = -1; setLights(); guide(); dvrClock();
+  currentIdx = -1; currentList = null; setLights(); guide(); dvrClock();
 }
 document.getElementById('powerBtn').addEventListener('click', function(){
   if (mode === 'standby') goLive(); else powerOff();
@@ -490,8 +527,8 @@ setInterval(function(){
   dvrClock();
   if (mode === 'standby'){ guide(); return; }
   if (mode === 'live'){
-    const { idx } = slotAt(Date.now());
-    if (idx !== currentIdx) tuneIn(); else guide();
+    const sNow = slotAt(Date.now());
+    if (sNow.idx !== currentIdx || sNow.list !== currentList) tuneIn(); else guide();
     // Self-heal: if the browser quietly refused a play request, ask again.
     if (video.paused && !video.ended && video.readyState >= 2) video.play().catch(function(){});
   }
