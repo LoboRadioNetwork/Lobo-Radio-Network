@@ -163,6 +163,7 @@
     <h2>Today's Rotation</h2>
     <table>
       <tr><td>⛪ <strong>SUNDAYS until 10 AM</strong> — Sunday Bible Block: <strong>The Living Christ Series</strong> (1951), episode after episode — then the regular rotation below takes over</td><td class="t">Sun AM</td></tr>
+      <tr><td>⛪ <strong>SUNDAYS at 11 AM</strong> — Sunday Sermon: <strong>Dust or Destiny</strong> (1949) — Rev. Irwin A. Moon preaches a “Sermon from Science”</td><td class="t">Sun 11 AM</td></tr>
       <tr><td>🤠 <strong>The Lone Ranger</strong> — “The Lone Ranger Fights On” (1949)</td><td class="t">24 min</td></tr>
       <tr><td>📺 Commercial break — a word from our sponsors</td><td class="t">~5 min</td></tr>
       <tr><td>🎞️ <strong>Superman</strong> — “The Mad Scientist” (1941)</td><td class="t">10 min</td></tr>
@@ -359,7 +360,10 @@ const LIBRARY = [
   { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 10 “Retreat and Decision” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/10_Retreat%20and%20Decision.mp4', dur:1801 },
   { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 11 “Triumph and Defeat” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/11_Triumph%20and%20Defeat.mp4', dur:1754 },
   { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 12 “Crucifixion and Resurrection” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/12_Crucifixion%20and%20Resurrection.mp4', dur:1705 },
-  { type:'show', group:'SUNDAY BIBLE', title:'From the Manger to the Cross (1912) — silent feature', src:'https://archive.org/download/from-the-manger-to-the-cross-1912_202605/From_the_Manger_to_the_Cross_(1912).mp4', dur:4219 }
+  { type:'show', group:'SUNDAY BIBLE', title:'From the Manger to the Cross (1912) — silent feature', src:'https://archive.org/download/from-the-manger-to-the-cross-1912_202605/From_the_Manger_to_the_Cross_(1912).mp4', dur:4219 },
+  { type:'show', group:'SUNDAY SERMON', title:'Dust or Destiny — A Sermon from Science (1949)', src:'https://archive.org/download/DustOrDestiny/DustOrDestiny.mp4', dur:2466 },
+  { type:'show', group:'SUNDAY SERMON', title:'God of Creation — Sermons from Science (1945)', src:'https://archive.org/download/GodOfCreation/GodOfCreation.mp4', dur:1657 },
+  { type:'show', group:'SUNDAY SERMON', title:'Hidden Treasures — Sermons from Science (1951)', src:'https://archive.org/download/HiddenTreasures/HiddenTreasures.mp4', dur:2601 }
 ];
 const byTitle = t => LIBRARY.find(x => x.title.includes(t));
 const PROGRAM = [ byTitle('Fights On'), ...POD, byTitle('Mad Scientist'), byTitle('Cisco Kid — S1 E1'), ...POD, byTitle('Minnie the Moocher'), byTitle('Rose for Lotta'), ...POD, byTitle('Falling Hare') ];
@@ -372,6 +376,14 @@ const SUNDAY_SHOWS = LIBRARY.filter(function(x){ return x.group === 'SUNDAY BIBL
 const SUNDAY_PROGRAM = [];
 SUNDAY_SHOWS.forEach(function(s){ SUNDAY_PROGRAM.push(s); POD.forEach(function(a){ SUNDAY_PROGRAM.push(a); }); });
 const SUNDAY_LOOP = SUNDAY_PROGRAM.reduce((a,s)=>a+s.dur,0);
+// ---- Sunday Sermon: Sundays (viewer-local) 11 AM–12 PM. "Dust or Destiny"
+// (1949) — Rev. Irwin A. Moon preaching a Sermon from Science (Moody
+// Institute of Science) — followed by the usual sponsor pod, looping inside
+// the hour. The other two Sermons from Science films sit in the DVR library
+// under SUNDAY SERMON for on-demand viewing. ----
+const SERMON_SHOW = LIBRARY.find(function(x){ return x.group === 'SUNDAY SERMON' && x.title.indexOf('Dust or Destiny') === 0; });
+const SERMON_PROGRAM = SERMON_SHOW ? [SERMON_SHOW].concat(POD) : [];
+const SERMON_LOOP = SERMON_PROGRAM.reduce((a,s)=>a+s.dur,0);
 const EPOCH = Date.UTC(2026,0,1,6,0,0); // schedule anchored 2026-01-01 06:00 UTC
 const video = document.getElementById('tv');
 const offair = document.getElementById('offair');
@@ -401,6 +413,16 @@ function slotAt(nowMs){
     }
     return { idx:0, offset:0, slotStartMs: nowMs, list: SUNDAY_PROGRAM };
   }
+  if (d.getDay() === 0 && d.getHours() === 11 && SERMON_PROGRAM.length){
+    const eleven = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 11).getTime();
+    let pos = (((nowMs - eleven)/1000) % SERMON_LOOP + SERMON_LOOP) % SERMON_LOOP;
+    let acc = 0;
+    for (let i=0;i<SERMON_PROGRAM.length;i++){
+      if (pos < acc + SERMON_PROGRAM[i].dur) return { idx:i, offset: pos-acc, slotStartMs: nowMs - (pos-acc)*1000, list: SERMON_PROGRAM };
+      acc += SERMON_PROGRAM[i].dur;
+    }
+    return { idx:0, offset:0, slotStartMs: nowMs, list: SERMON_PROGRAM };
+  }
   let pos = (((nowMs - EPOCH)/1000) % LOOP + LOOP) % LOOP;
   let acc = 0;
   for (let i=0;i<PROGRAM.length;i++){
@@ -421,10 +443,11 @@ function guide(){
   const { idx, slotStartMs, list } = slotAt(nowMs);
   const slot = list[idx];
   const sunday = (list === SUNDAY_PROGRAM);
+  const sermon = (list === SERMON_PROGRAM);
   const endsMs = slotStartMs + slot.dur*1000;
   if (mode === 'dvr') return;
   if (slot.type==='show'){
-    gNow.textContent = (sunday ? 'Sunday Bible Block — ' : '') + slot.title;
+    gNow.textContent = (sunday ? 'Sunday Bible Block — ' : (sermon ? 'Sunday Sermon — ' : '')) + slot.title;
     gNext.textContent = nextShow(idx, list).title;
     nowEl.textContent = (mode==='live') ? ('On the air: ' + slot.title + ' · ends ' + fmtTime(endsMs)) : 'Lobo Television is standing by.';
   } else {
@@ -440,7 +463,7 @@ function setLights(){
   else { onairText.textContent = 'STANDBY'; }
 }
 function dvrClock(){
-  if (mode==='live'){ const { idx, list } = slotAt(Date.now()); dvrDisplay.textContent = 'LIVE · ' + fmtClock() + ' · ' + (list[idx].type==='show' ? (list === SUNDAY_PROGRAM ? 'SUNDAY BIBLE' : 'FEATURE') : 'COMMERCIAL'); }
+  if (mode==='live'){ const { idx, list } = slotAt(Date.now()); dvrDisplay.textContent = 'LIVE · ' + fmtClock() + ' · ' + (list[idx].type==='show' ? (list === SUNDAY_PROGRAM ? 'SUNDAY BIBLE' : (list === SERMON_PROGRAM ? 'SUNDAY SERMON' : 'FEATURE')) : 'COMMERCIAL'); }
   else if (mode==='dvr'){ dvrDisplay.textContent = 'DVR PLAY · ' + fmtClock(); }
   else { dvrDisplay.textContent = '-- STANDBY · ' + fmtClock() + ' --'; }
 }
