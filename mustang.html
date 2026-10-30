@@ -10,7 +10,13 @@
 <div class="playerbox"><h2 style="margin-top:0">🎧 Listen Live</h2><iframe title="Mustang Dallas Live365 player" width="300" height="640" frameborder="0" loading="lazy" style="max-width:100%;border:0" src="https://live365.com/embeds/v1/player/a87622?s=sm&m=dark&c=mp3"></iframe><br><a class="btn" href="https://live365.com/station/Mustang-Dallas-a87622">Open on Live365</a></div>
 <div class="playerbox"><h2 style="margin-top:0">Recently Played</h2><iframe title="Recently played songs on Mustang Dallas" width="300" height="640" frameborder="0" loading="lazy" style="max-width:100%;border:0" src="https://live365.com/embeds/v1/played/a87622?s=sm&m=dark"></iframe></div>
 </div>
-<p style="text-align:center"><button id="installAppBtn" class="btn" style="display:none;cursor:pointer">📻 Get the App — install Mustang Dallas on your device</button></p>
+<div class="appblock" style="border:2px solid #d4af37;border-radius:12px;padding:18px;margin:18px auto;max-width:640px;text-align:center;background:rgba(212,175,55,.07)">
+<img src="assets/lobo-app-icon.jpg" alt="Lobo Radio app — medallion wolf logo" style="width:120px;height:120px;border-radius:24px">
+<h2 style="margin:8px 0 6px">📱 GET THE NEW LOBO RADIO APP!</h2>
+<p style="margin:6px 0"><strong>Mustang Dallas AND Tejano Ritmo in one app</strong> — switch stations with one tap, and it remembers where you left off.</p>
+<p style="margin:12px 0"><a class="btn" href="loboradio.apk" download>⬇️ Download the App — Free for Android</a></p>
+<p style="margin:6px 0;font-size:.92em">Tap the download, then open the file to install — your phone will offer a safety scan first (it passed Google Play Protect).</p>
+</div>
 
 <div class="playerbox">
 <h2 style="margin-top:0">🎮 Play While You Listen</h2>
@@ -43,12 +49,6 @@
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
   navigator.serviceWorker.register('./sw.js').catch(function(){});
 }
-</script>
-<script>
-let deferredPrompt = null;
-const installBtn = document.getElementById('installAppBtn');
-window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; if (installBtn) installBtn.style.display = 'inline-block'; });
-if (installBtn) installBtn.addEventListener('click', async () => { if (!deferredPrompt) return; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; installBtn.style.display = 'none'; });
 </script>
 
 <script>

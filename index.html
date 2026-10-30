@@ -4,16 +4,18 @@
 <div class="hero"><picture><source media="(max-width:640px)" srcset="assets/lobo-hero.jpg"><img src="assets/lobo-hero-trim.jpg" alt="Lobo Radio Network"></picture></div>
 <div class="wrap">
 <h1>LOBO RADIO NETWORK</h1>
-<div class="appbadges">
-<button class="appbadge" data-appinstall type="button"><img src="assets/mustang-medallion-clear.png" alt="Mustang Dallas medallion"><span class="appbadge-name">ANDROID APP</span><span class="appbadge-sub">Install on your phone</span></button>
-<button class="appbadge" data-appinstall type="button"><img src="assets/mustang-medallion-clear.png" alt="Mustang Dallas medallion"><span class="appbadge-name">DESKTOP APP</span><span class="appbadge-sub">Install on your computer</span></button>
+<div class="appblock" style="border:2px solid #d4af37;border-radius:12px;padding:20px;margin:18px auto;max-width:640px;text-align:center;background:rgba(212,175,55,.07)">
+<img src="assets/lobo-app-icon.jpg" alt="Lobo Radio app — medallion wolf logo" style="width:150px;height:150px;border-radius:28px">
+<h2 style="margin:10px 0 6px">📱 THE NEW LOBO RADIO APP IS HERE!</h2>
+<p style="margin:6px 0"><strong>Both of our stations in one app</strong> — Mustang Dallas country and Tejano Ritmo, switchable with one tap. It even remembers the station you were listening to.</p>
+<p style="margin:12px 0"><a class="btn" href="loboradio.apk" download>⬇️ Download the App — Free for Android</a></p>
+<p style="margin:6px 0;font-size:.92em">Tap the download, then open the file to install. Your phone will offer to scan it first — it passed Google Play Protect with flying colors. Android only for now.</p>
 </div>
-<p id="appHint" class="apphint" style="display:none">No install prompt? Open your browser menu and choose <strong>Install app</strong> or <strong>Add to Home screen</strong> — Mustang Dallas lands right on your device.</p>
 <div class="gb-herd" style="border:2px dashed #d4af37;border-radius:10px;padding:14px 18px;margin:18px auto;max-width:640px;background:rgba(212,175,55,.08)"><p style="margin:0">📖 <strong>SIGN OUR GUEST BOOK!</strong> Join the Founding Herd — the first 100 names are charter members, first to hear about giveaways, launches, and live events — and every signer gets an on-air mention! <a href="guestbook.html"><strong>Sign the book →</strong></a></p></div>
 <p>Welcome to the Lobo Radio Network — Dallas-born internet radio, broadcasting worldwide, 24/7. Four stations, one pack:</p>
 <div class="cards">
 <div class="card"><h3>Mustang Dallas</h3><p>Your Country Star 24/7 — classic country legends and today's independent artists. <strong>ON AIR NOW.</strong></p><a href="mustang.html">Listen Live →</a></div>
-<div class="card"><h3>Tejano Ritmo</h3><p>All Tejano, all the time — conjunto, orquesta, and cumbia, 24 hours a day. <strong>Debuts November 1, 2026.</strong></p><a href="tejano.html">Sneak a look →</a></div>
+<div class="card"><h3>Tejano Ritmo</h3><p>All Tejano, all the time — conjunto, orquesta, and cumbia, 24 hours a day. <strong>ON AIR NOW.</strong></p><a href="tejano.html">Listen Live →</a></div>
 <div class="card"><h3>Vibe Dallas's Urban Mix</h3><p>The city's urban soundtrack. <strong>Coming soon.</strong></p></div>
 <div class="card"><h3>Club Oak Lawn</h3><p>Your neon soundtrack 24/7 — EDM and dance. <strong>Debuts December 1, 2026.</strong></p></div>
 </div>
@@ -26,16 +28,6 @@
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
   navigator.serviceWorker.register('./sw.js').catch(function(){});
 }
-</script>
-<script>
-let deferredPrompt = null;
-const appBadges = document.querySelectorAll('[data-appinstall]');
-const appHint = document.getElementById('appHint');
-window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; });
-appBadges.forEach((b) => b.addEventListener('click', async () => {
-  if (deferredPrompt) { deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; }
-  else if (appHint) { appHint.style.display = 'block'; }
-}));
 </script>
 <script data-goatcounter="https://loboradio.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body></html>
