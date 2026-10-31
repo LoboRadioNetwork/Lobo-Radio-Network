@@ -162,7 +162,8 @@
   <div class="rotation">
     <h2>Today's Rotation</h2>
     <table>
-      <tr><td>⛪ <strong>SUNDAYS until 10 AM</strong> — Sunday Bible Block: <strong>The Living Christ Series</strong> (1951), episode after episode — then the regular rotation below takes over</td><td class="t">Sun AM</td></tr>
+      <tr><td>⛪ <strong>SUNDAYS until 10 AM</strong> — Sunday Bible Block: <strong>The Living Christ Series</strong> (1951), episode after episode — then the Hymn Sing at 10</td><td class="t">Sun AM</td></tr>
+      <tr><td>🎶 <strong>SUNDAYS at 10 AM</strong> — Sunday Hymn Sing: <strong>16 classic hymns</strong>, choir and congregation recordings — then the sermon at 11</td><td class="t">Sun 10 AM</td></tr>
       <tr><td>⛪ <strong>SUNDAYS at 11 AM</strong> — Sunday Sermon: <strong>Dust or Destiny</strong> (1949) — Rev. Irwin A. Moon preaches a “Sermon from Science”</td><td class="t">Sun 11 AM</td></tr>
       <tr><td>🤠 <strong>The Lone Ranger</strong> — “The Lone Ranger Fights On” (1949)</td><td class="t">24 min</td></tr>
       <tr><td>📺 Commercial break — a word from our sponsors</td><td class="t">~5 min</td></tr>
@@ -363,7 +364,23 @@ const LIBRARY = [
   { type:'show', group:'SUNDAY BIBLE', title:'From the Manger to the Cross (1912) — silent feature', src:'https://archive.org/download/from-the-manger-to-the-cross-1912_202605/From_the_Manger_to_the_Cross_(1912).mp4', dur:4219 },
   { type:'show', group:'SUNDAY SERMON', title:'Dust or Destiny — A Sermon from Science (1949)', src:'https://archive.org/download/DustOrDestiny/DustOrDestiny.mp4', dur:2466 },
   { type:'show', group:'SUNDAY SERMON', title:'God of Creation — Sermons from Science (1945)', src:'https://archive.org/download/GodOfCreation/GodOfCreation.mp4', dur:1657 },
-  { type:'show', group:'SUNDAY SERMON', title:'Hidden Treasures — Sermons from Science (1951)', src:'https://archive.org/download/HiddenTreasures/HiddenTreasures.mp4', dur:2601 }
+  { type:'show', group:'SUNDAY SERMON', title:'Hidden Treasures — Sermons from Science (1951)', src:'https://archive.org/download/HiddenTreasures/HiddenTreasures.mp4', dur:2601 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — All Hail the Power (bells opener)', src:'hymns/hymn-00-all-hail-the-power.mp4', dur:159 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Holy, Holy, Holy · Trinity Choir (1904)', src:'hymns/hymn-01-holy-holy-holy.mp4', dur:148 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Rock of Ages', src:'hymns/hymn-02-rock-of-ages.mp4', dur:157 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Sweet Hour of Prayer', src:'hymns/hymn-03-sweet-hour-of-prayer.mp4', dur:169 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — The Precious Name', src:'hymns/hymn-04-the-precious-name.mp4', dur:171 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Night Hymn at Sea', src:'hymns/hymn-05-night-hymn-at-sea.mp4', dur:179 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Abide with Me', src:'hymns/hymn-06-abide-with-me.mp4', dur:194 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — What a Friend We Have in Jesus', src:'hymns/hymn-07-what-a-friend-we-have-in-jesus.mp4', dur:193 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Jesus, Lover of My Soul', src:'hymns/hymn-08-jesus-lover-of-my-soul.mp4', dur:202 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — In the Garden', src:'hymns/hymn-09-in-the-garden.mp4', dur:196 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — When the Roll Is Called Up Yonder', src:'hymns/hymn-10-when-the-roll-is-called-up-yonder.mp4', dur:144 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Nearer, My God, to Thee', src:'hymns/hymn-11-nearer-my-god-to-thee.mp4', dur:183 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Pass Me Not, O Gentle Saviour', src:'hymns/hymn-12-pass-me-not-o-gentle-saviour.mp4', dur:167 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Day Is Dying in the West', src:'hymns/hymn-13-day-is-dying-in-the-west.mp4', dur:166 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Shall We Gather at the River', src:'hymns/hymn-14-shall-we-gather-at-the-river.mp4', dur:179 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Aberystwyth · Welsh Choir (bonus)', src:'hymns/hymn-15-aberystwyth-welsh-choir.mp4', dur:204 }
 ];
 const byTitle = t => LIBRARY.find(x => x.title.includes(t));
 const PROGRAM = [ byTitle('Fights On'), ...POD, byTitle('Mad Scientist'), byTitle('Cisco Kid — S1 E1'), ...POD, byTitle('Minnie the Moocher'), byTitle('Rose for Lotta'), ...POD, byTitle('Falling Hare') ];
@@ -384,6 +401,17 @@ const SUNDAY_LOOP = SUNDAY_PROGRAM.reduce((a,s)=>a+s.dur,0);
 const SERMON_SHOW = LIBRARY.find(function(x){ return x.group === 'SUNDAY SERMON' && x.title.indexOf('Dust or Destiny') === 0; });
 const SERMON_PROGRAM = SERMON_SHOW ? [SERMON_SHOW].concat(POD) : [];
 const SERMON_LOOP = SERMON_PROGRAM.reduce((a,s)=>a+s.dur,0);
+// ---- Sunday Hymn Sing: Sundays (viewer-local) 10–11 AM. The 16 hymn
+// videos Perry had built, in play order (46:51 of hymns), one sponsor pod
+// after hymn 9 and one at the end — the hour fills cleanly, then the
+// sequence loops inside the hour until the 11 AM sermon, same as the
+// other Sunday blocks. The hymns stream from this site's own hymns/
+// folder — Lobo owns the files outright. ----
+const HYMN_SHOWS = LIBRARY.filter(function(x){ return x.group === 'SUNDAY HYMNS'; });
+const HYMN_PROGRAM = [];
+HYMN_SHOWS.forEach(function(s,i){ HYMN_PROGRAM.push(s); if (i === 8) POD.forEach(function(a){ HYMN_PROGRAM.push(a); }); });
+POD.forEach(function(a){ HYMN_PROGRAM.push(a); });
+const HYMN_LOOP = HYMN_PROGRAM.reduce((a,s)=>a+s.dur,0);
 const EPOCH = Date.UTC(2026,0,1,6,0,0); // schedule anchored 2026-01-01 06:00 UTC
 const video = document.getElementById('tv');
 const offair = document.getElementById('offair');
@@ -412,6 +440,16 @@ function slotAt(nowMs){
       acc += SUNDAY_PROGRAM[i].dur;
     }
     return { idx:0, offset:0, slotStartMs: nowMs, list: SUNDAY_PROGRAM };
+  }
+  if (d.getDay() === 0 && d.getHours() === 10 && HYMN_PROGRAM.length){
+    const ten = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 10).getTime();
+    let pos = (((nowMs - ten)/1000) % HYMN_LOOP + HYMN_LOOP) % HYMN_LOOP;
+    let acc = 0;
+    for (let i=0;i<HYMN_PROGRAM.length;i++){
+      if (pos < acc + HYMN_PROGRAM[i].dur) return { idx:i, offset: pos-acc, slotStartMs: nowMs - (pos-acc)*1000, list: HYMN_PROGRAM };
+      acc += HYMN_PROGRAM[i].dur;
+    }
+    return { idx:0, offset:0, slotStartMs: nowMs, list: HYMN_PROGRAM };
   }
   if (d.getDay() === 0 && d.getHours() === 11 && SERMON_PROGRAM.length){
     const eleven = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 11).getTime();
@@ -444,10 +482,11 @@ function guide(){
   const slot = list[idx];
   const sunday = (list === SUNDAY_PROGRAM);
   const sermon = (list === SERMON_PROGRAM);
+  const hymn = (list === HYMN_PROGRAM);
   const endsMs = slotStartMs + slot.dur*1000;
   if (mode === 'dvr') return;
   if (slot.type==='show'){
-    gNow.textContent = (sunday ? 'Sunday Bible Block — ' : (sermon ? 'Sunday Sermon — ' : '')) + slot.title;
+    gNow.textContent = (sunday ? 'Sunday Bible Block — ' : (sermon ? 'Sunday Sermon — ' : (hymn ? 'Sunday Hymn Sing — ' : ''))) + slot.title;
     gNext.textContent = nextShow(idx, list).title;
     nowEl.textContent = (mode==='live') ? ('On the air: ' + slot.title + ' · ends ' + fmtTime(endsMs)) : 'Lobo Television is standing by.';
   } else {
@@ -463,7 +502,7 @@ function setLights(){
   else { onairText.textContent = 'STANDBY'; }
 }
 function dvrClock(){
-  if (mode==='live'){ const { idx, list } = slotAt(Date.now()); dvrDisplay.textContent = 'LIVE · ' + fmtClock() + ' · ' + (list[idx].type==='show' ? (list === SUNDAY_PROGRAM ? 'SUNDAY BIBLE' : (list === SERMON_PROGRAM ? 'SUNDAY SERMON' : 'FEATURE')) : 'COMMERCIAL'); }
+  if (mode==='live'){ const { idx, list } = slotAt(Date.now()); dvrDisplay.textContent = 'LIVE · ' + fmtClock() + ' · ' + (list[idx].type==='show' ? (list === SUNDAY_PROGRAM ? 'SUNDAY BIBLE' : (list === SERMON_PROGRAM ? 'SUNDAY SERMON' : (list === HYMN_PROGRAM ? 'SUNDAY HYMNS' : 'FEATURE'))) : 'COMMERCIAL'); }
   else if (mode==='dvr'){ dvrDisplay.textContent = 'DVR PLAY · ' + fmtClock(); }
   else { dvrDisplay.textContent = '-- STANDBY · ' + fmtClock() + ' --'; }
 }
