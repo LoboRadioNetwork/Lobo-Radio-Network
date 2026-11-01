@@ -104,13 +104,82 @@
   .grille { height:52px; }
   .dvr .brand { display:none; }
 }
+/* ---- the tuner: LED channel readout + channel buttons (side panel) ---- */
+.tuner { width:100%; display:flex; flex-direction:column; align-items:center; gap:8px; }
+.tuner .tlabel { color:#d4af37; font-size:11px; letter-spacing:.22em; }
+.ledbox {
+  width:100%; background:#0a0500; border:2px solid #000; border-radius:7px; text-align:center;
+  padding:5px 4px 7px; box-shadow: inset 0 0 16px rgba(0,0,0,.95), inset 0 0 4px rgba(255,150,20,.25);
+  background-image:repeating-linear-gradient(0deg, rgba(255,170,60,.05) 0 2px, rgba(0,0,0,.22) 2px 4px);
+}
+.ledrow { position:relative; display:inline-block; line-height:1; }
+.ledghost, .leddigit {
+  font-family:"Courier New", monospace; font-weight:bold; font-size:37px; letter-spacing:.06em;
+}
+.ledghost { position:absolute; inset:0; color:rgba(255,166,0,.14); }
+.leddigit { position:relative; color:#ffb02e; text-shadow:0 0 7px rgba(255,160,30,.85), 0 0 20px rgba(255,120,0,.5); }
+.ledch { font-family:"Courier New", monospace; font-size:12px; letter-spacing:.3em; color:rgba(255,176,46,.75); }
+.chname { color:#f5e7bd; font-size:12px; letter-spacing:.18em; text-align:center; min-height:15px; }
+.chbtns { display:flex; gap:7px; }
+.chbtn {
+  cursor:pointer; background:linear-gradient(180deg,#3d3d44,#1b1b1f); color:#f5f0dc;
+  border:1px solid #55555e; border-radius:6px; padding:7px 11px; font-size:13px; letter-spacing:.05em;
+  box-shadow:0 2px 5px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.15);
+}
+.chbtn:hover { border-color:#d4af37; color:#f0d489; }
+.chbtn.active { background:linear-gradient(180deg,#e9c766,#c49a26); color:#241703; border-color:#6d4d08; font-weight:bold; }
+.chstep {
+  cursor:pointer; background:linear-gradient(180deg,#3d3d44,#1b1b1f); color:#f5f0dc;
+  border:1px solid #55555e; border-radius:6px; padding:5px 12px; font-size:12px; letter-spacing:.06em;
+  box-shadow:0 2px 5px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.15);
+}
+.chstep:hover { border-color:#d4af37; color:#f0d489; }
+/* ---- the channel-change test pattern (our own Indian-head style card) ---- */
+.testpattern {
+  position:absolute; inset:0; z-index:5; display:none; background:#101010;
+  align-items:center; justify-content:center;
+}
+.testpattern svg { position:absolute; inset:0; width:100%; height:100%; }
+.testpattern .tpch {
+  position:absolute; left:50%; bottom:5.5%; transform:translateX(-50%);
+  font-family:"Courier New", monospace; font-weight:bold; font-size:30px; letter-spacing:.12em;
+  color:#ffb02e; text-shadow:0 0 8px rgba(255,160,30,.9), 0 0 22px rgba(255,120,0,.55);
+  background:rgba(5,3,0,.72); border:1px solid rgba(255,176,46,.5); border-radius:6px; padding:2px 14px;
+}
+/* ---- Channel 2: the PRÓXIMAMENTE slate ---- */
+.ch2slate {
+  position:absolute; inset:0; z-index:3; display:none; flex-direction:column; align-items:center; justify-content:center;
+  gap:9px; text-align:center; padding:22px; overflow:hidden; color:#fdf4ff;
+  background:
+    linear-gradient(160deg, rgba(43,6,66,.88) 0%, rgba(88,14,120,.82) 48%, rgba(31,3,48,.92) 100%),
+    url('assets/tejano-panoramic.jpg') center/cover no-repeat, #2b0642;
+}
+.ch2slate::before {
+  content:""; position:absolute; top:-30%; bottom:-30%; width:34%; left:-45%;
+  background:linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,120,230,.16) 50%, rgba(255,255,255,0) 100%);
+  animation:slatesweep 6.5s ease-in-out infinite;
+}
+@keyframes slatesweep { 0% { left:-45%; } 55% { left:115%; } 100% { left:115%; } }
+.ch2slate .c2kicker { font-size:13px; letter-spacing:.34em; color:#ffb3ec; }
+.ch2slate .c2big {
+  font-size:44px; font-weight:bold; letter-spacing:.1em; color:#fff; line-height:1.05;
+  text-shadow:0 0 18px rgba(255,46,200,.85), 0 2px 0 #6d0f57, 0 0 42px rgba(190,60,255,.6);
+  animation:slateglow 3.2s ease-in-out infinite;
+}
+@keyframes slateglow { 0%,100% { text-shadow:0 0 14px rgba(255,46,200,.65), 0 2px 0 #6d0f57, 0 0 34px rgba(190,60,255,.45); } 50% { text-shadow:0 0 24px rgba(255,46,200,1), 0 2px 0 #6d0f57, 0 0 58px rgba(190,60,255,.8); } }
+.ch2slate .c2brand { font-size:19px; letter-spacing:.22em; color:#ffd7f6; }
+.ch2slate .c2sub { font-size:15px; color:#f3d9ff; opacity:.92; max-width:420px; line-height:1.45; }
+.ch2slate .c2url {
+  font-family:"Courier New", monospace; font-size:15px; letter-spacing:.08em; color:#ffe89a;
+  border:1px solid rgba(255,232,154,.55); border-radius:6px; padding:4px 12px; background:rgba(20,0,30,.45);
+}
 </style></head>
 <body class="lobo"><header><nav><a class="brand" href="index.html"><img class="brandlogo" src="assets/mustang-medallion-clear.png" alt="Lobo Radio Network"></a><a class="tab" href="index.html"><span class="stname">Lobo Radio</span><span class="stlive">Network</span></a><a class="tab" href="mustang.html"><span class="stname">Mustang Dallas</span><span class="stlive">Listen Live 📻</span></a><a class="tab" href="tejano.html"><span class="stname">Tejano Ritmo</span><span class="stlive">Listen Live 📻</span></a><a class="tab active" href="tv.html"><span class="stname">Lobo TV</span><span class="stlive">Watch 📺</span></a><a class="tab" href="choose-your-city.html">Choose Your City</a><a class="tab" href="about.html"><span class="stname">About Us</span><span class="stlive">Our Story 📖</span></a><a class="tab" href="index.html#contact">Contact</a></nav>
 </header>
 <div class="tvstage">
   <div class="tvintro">
     <h1>LOBO TELEVISION</h1>
-    <p>One channel, on the air around the clock — classic westerns with a word from our sponsors. Turn the set on and tune in… or pop open the DVR and pick a classic yourself — westerns and cartoons in the library.</p>
+    <p>Three channels, on the air around the clock. <strong>Channel 1</strong> is the classic Lobo TV — westerns and cartoons with a word from our sponsors. <strong>Channel 2</strong> is our Spanish channel — muy pronto. <strong>Channel 3</strong> is all Bible, all day — The Living Christ, the Sermons from Science, and the Hymn Sing. Turn the set on and work the TUNER on the side of the set… or pop open the DVR and pick a classic yourself.</p>
   </div>
 
   <div class="dvr" id="dvrbox">
@@ -131,6 +200,91 @@
             <div class="big">LOBO TELEVISION</div>
             <div class="small">The channel is on the air right now.<br>Click the POWER knob to tune in — or hit LIBRARY on the DVR to pick a classic.</div>
           </div>
+          <div class="ch2slate" id="ch2slate">
+            <div class="c2kicker">CANAL 2 · LOBO TELEVISION</div>
+            <div class="c2big">MUY PRONTO</div>
+            <div class="c2brand">🪗 TEJANO RITMO TV 🪗</div>
+            <div class="c2sub">Nuestro canal en español está en construcción. Mientras tanto, la música no para — escucha Tejano Ritmo en vivo, las 24 horas:</div>
+            <div class="c2url">loboradio.com/tejano.html</div>
+          </div>
+          <div class="testpattern" id="testpattern" aria-hidden="true">
+            <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <defs>
+                <pattern id="xhp" width="9" height="9" patternUnits="userSpaceOnUse">
+                  <rect width="9" height="9" fill="#1b1b1b"></rect>
+                  <path d="M0,0 L9,9 M9,0 L0,9" stroke="#5c5c5c" stroke-width="1"></path>
+                </pattern>
+                <clipPath id="bigring"><circle cx="200" cy="150" r="86"></circle></clipPath>
+              </defs>
+              <rect x="0" y="0" width="400" height="300" fill="#121212"></rect>
+              <rect x="5" y="5" width="390" height="290" fill="none" stroke="#9a9a9a" stroke-width="2"></rect>
+              <rect x="13" y="13" width="374" height="274" fill="none" stroke="#4c4c4c" stroke-width="1"></rect>
+              <rect x="17" y="17" width="62" height="42" fill="url(#xhp)" stroke="#777"></rect>
+              <rect x="321" y="17" width="62" height="42" fill="url(#xhp)" stroke="#777"></rect>
+              <rect x="17" y="241" width="62" height="42" fill="url(#xhp)" stroke="#777"></rect>
+              <rect x="321" y="241" width="62" height="42" fill="url(#xhp)" stroke="#777"></rect>
+              <g stroke="#888" stroke-width="1">
+                <path d="M48,74 v14 M41,81 h14"></path>
+                <path d="M352,74 v14 M345,81 h14"></path>
+                <path d="M48,212 v14 M41,219 h14"></path>
+                <path d="M352,212 v14 M345,219 h14"></path>
+              </g>
+              <g>
+                <rect x="152" y="17" width="16" height="17" fill="#f2f2f2"></rect>
+                <rect x="168" y="17" width="16" height="17" fill="#c8c8c8"></rect>
+                <rect x="184" y="17" width="16" height="17" fill="#9e9e9e"></rect>
+                <rect x="200" y="17" width="16" height="17" fill="#747474"></rect>
+                <rect x="216" y="17" width="16" height="17" fill="#4a4a4a"></rect>
+                <rect x="232" y="17" width="16" height="17" fill="#262626"></rect>
+                <rect x="152" y="266" width="16" height="17" fill="#262626"></rect>
+                <rect x="168" y="266" width="16" height="17" fill="#4a4a4a"></rect>
+                <rect x="184" y="266" width="16" height="17" fill="#747474"></rect>
+                <rect x="200" y="266" width="16" height="17" fill="#9e9e9e"></rect>
+                <rect x="216" y="266" width="16" height="17" fill="#c8c8c8"></rect>
+                <rect x="232" y="266" width="16" height="17" fill="#f2f2f2"></rect>
+              </g>
+              <line x1="96" y1="150" x2="304" y2="150" stroke="#6a6a6a" stroke-width="1" stroke-dasharray="3 4"></line>
+              <line x1="200" y1="46" x2="200" y2="254" stroke="#6a6a6a" stroke-width="1" stroke-dasharray="3 4"></line>
+              <circle cx="200" cy="150" r="104" fill="#1e1e1e" stroke="#e8e8e8" stroke-width="2"></circle>
+              <g clip-path="url(#bigring)" stroke="#bdbdbd" stroke-width="1.4">
+                <path d="M168,64 v34 M176,64 v34 M184,64 v34 M192,64 v34 M200,64 v34 M208,64 v34 M216,64 v34 M224,64 v34 M232,64 v34"></path>
+                <path d="M168,202 v34 M176,202 v34 M184,202 v34 M192,202 v34 M200,202 v34 M208,202 v34 M216,202 v34 M224,202 v34 M232,202 v34"></path>
+                <path d="M114,118 h34 M114,126 h34 M114,134 h34 M114,142 h34 M114,158 h34 M114,166 h34 M114,174 h34 M114,182 h34"></path>
+                <path d="M252,118 h34 M252,126 h34 M252,134 h34 M252,142 h34 M252,158 h34 M252,166 h34 M252,174 h34 M252,182 h34"></path>
+              </g>
+              <circle cx="200" cy="150" r="96" fill="none" stroke="#dedede" stroke-width="9" stroke-dasharray="5 4" opacity="0.5"></circle>
+              <circle cx="200" cy="150" r="86" fill="none" stroke="#8a8a8a" stroke-width="1"></circle>
+              <g fill="none" stroke="#e8e8e8" stroke-width="1.4">
+                <circle cx="200" cy="64" r="6"></circle>
+                <circle cx="200" cy="236" r="6"></circle>
+                <circle cx="114" cy="150" r="6"></circle>
+                <circle cx="286" cy="150" r="6"></circle>
+              </g>
+              <g font-family="Courier New, monospace" font-size="11" fill="#c9c9c9">
+                <text x="191" y="52">300</text>
+                <text x="296" y="154">400</text>
+                <text x="191" y="262">200</text>
+                <text x="82" y="154">400</text>
+              </g>
+              <circle cx="200" cy="150" r="37" fill="#e9e9e9" stroke="#111" stroke-width="2"></circle>
+              <g transform="translate(200,150)">
+                <g fill="#141414">
+                  <path d="M0,-50 C4.5,-38 4.5,-27 0,-17 C-4.5,-27 -4.5,-38 0,-50 Z" transform="rotate(-58 0 -6)"></path>
+                  <path d="M0,-50 C4.5,-38 4.5,-27 0,-17 C-4.5,-27 -4.5,-38 0,-50 Z" transform="rotate(-36 0 -6)"></path>
+                  <path d="M0,-50 C4.5,-38 4.5,-27 0,-17 C-4.5,-27 -4.5,-38 0,-50 Z" transform="rotate(-14 0 -6)"></path>
+                  <path d="M0,-50 C4.5,-38 4.5,-27 0,-17 C-4.5,-27 -4.5,-38 0,-50 Z" transform="rotate(8 0 -6)"></path>
+                  <path d="M0,-50 C4.5,-38 4.5,-27 0,-17 C-4.5,-27 -4.5,-38 0,-50 Z" transform="rotate(30 0 -6)"></path>
+                  <path d="M0,-50 C4.5,-38 4.5,-27 0,-17 C-4.5,-27 -4.5,-38 0,-50 Z" transform="rotate(52 0 -6)"></path>
+                </g>
+                <path fill="#141414" d="M3,-20 C-6,-20 -12,-14 -12,-6 L-13,-1 L-18,4 L-12,6 L-13,9 L-11,13 C-8,17 -4,19 0,19 L1,26 L10,26 C12,14 12,4 11,-4 C10,-13 8,-20 3,-20 Z"></path>
+                <rect x="-13.5" y="-13" width="26" height="5" rx="2" transform="rotate(-8)" fill="#e9e9e9"></rect>
+                <circle cx="-8" cy="-10.5" r="2.3" fill="#e9e9e9"></circle>
+                <circle cx="-6.5" cy="-3.5" r="1.3" fill="#e9e9e9"></circle>
+              </g>
+              <text x="200" y="290" text-anchor="middle" font-family="Courier New, monospace" font-size="11" letter-spacing="4" fill="#8f8f8f">LOBO TELEVISION</text>
+            </svg>
+            <div class="tpch" id="tpch">CH 1</div>
+          </div>
         </div>
       </div>
       <div class="sidepanel">
@@ -142,6 +296,23 @@
           <button class="knob" id="muteBtn" aria-label="Volume"></button>
         </div>
         <div class="knoblabel"><span>POWER</span><span>VOLUME</span></div>
+        <div class="tuner">
+          <div class="tlabel">TUNER</div>
+          <div class="ledbox">
+            <div class="ledch">CHANNEL</div>
+            <div class="ledrow"><span class="ledghost" aria-hidden="true">8</span><span class="leddigit" id="leddigit">1</span></div>
+          </div>
+          <div class="chname" id="chname">LOBO TV</div>
+          <div class="chbtns">
+            <button class="chbtn active" id="chBtn1" aria-label="Channel 1">1</button>
+            <button class="chbtn" id="chBtn2" aria-label="Channel 2">2</button>
+            <button class="chbtn" id="chBtn3" aria-label="Channel 3">3</button>
+          </div>
+          <div class="chbtns">
+            <button class="chstep" id="chDown" aria-label="Channel down">CH −</button>
+            <button class="chstep" id="chUp" aria-label="Channel up">CH +</button>
+          </div>
+        </div>
         <div class="guidebox" id="guideLive">
           <div class="glabel">ON NOW</div>
           <div id="guideNow">—</div>
@@ -175,6 +346,17 @@
       <tr><td>📺 Commercial break — a word from our sponsors</td><td class="t">~5 min</td></tr>
       <tr><td>🎞️ <strong>Bugs Bunny</strong> — “Falling Hare” (1943) — then the rotation starts again</td><td class="t">9 min</td></tr>
     </table>
+    <h2 style="margin-top:24px">Channel 3 — Biblical, All Day Every Day</h2>
+    <table>
+      <tr><td>⛪ <strong>The Living Christ Series</strong> (1951) — all 12 episodes, in series order, from “Holy Night” to “Crucifixion and Resurrection”</td><td class="t">5 hrs 46 min</td></tr>
+      <tr><td>📺 Commercial break — a word from our sponsors</td><td class="t">~5 min</td></tr>
+      <tr><td>🎞️ <strong>From the Manger to the Cross</strong> (1912) — the silent feature life of Christ</td><td class="t">1 hr 10 min</td></tr>
+      <tr><td>📺 Commercial break — a word from our sponsors</td><td class="t">~5 min</td></tr>
+      <tr><td>🔬 <strong>Sermons from Science</strong> — Rev. Irwin A. Moon: “Dust or Destiny” (1949), “God of Creation” (1945), “Hidden Treasures” (1951)</td><td class="t">1 hr 52 min</td></tr>
+      <tr><td>📺 Commercial break — a word from our sponsors</td><td class="t">~5 min</td></tr>
+      <tr><td>🎶 <strong>The Hymn Sing</strong> — 16 classic hymns, choir and congregation recordings — then the Channel 3 rotation starts again</td><td class="t">47 min</td></tr>
+    </table>
+    <p class="tvfineprint"><strong>Channel 2</strong> is our Spanish channel — it is in the tuner now and marked <strong>MUY PRONTO</strong> while its programming is being gathered. Mientras tanto, escucha <a href="tejano.html" style="color:#f0d489">Tejano Ritmo</a> en vivo.</p>
   </div>
   <p class="tvfineprint">All programs on Lobo Television are public-domain classics, streamed courtesy of the Internet Archive. The broadcast rotation runs continuously — whenever you tune in live, you're joining the program already in progress, same as everybody else. The DVR library holds the same classics, ready to watch from the beginning whenever you like.</p>
 </div>
@@ -426,6 +608,7 @@ const dvrDisplay = document.getElementById('dvrdisplay');
 const libBtn = document.getElementById('dvrLibBtn');
 const liveBtn = document.getElementById('dvrLiveBtn');
 let mode = 'standby'; // standby | live | dvr
+let channel = 1; // tuner channel: 1 = Lobo TV · 2 = Canal 2 (muy pronto) · 3 = Biblical
 let currentIdx = -1;
 let currentList = null;
 
@@ -469,6 +652,12 @@ function slotAt(nowMs){
   }
   return { idx:0, offset:0, slotStartMs: nowMs, list: PROGRAM };
 }
+// Tuner dispatch: Channel 3 runs its own clock (slotAtCh3, defined by the
+// tuner script below); every other channel uses the Channel 1 clock above,
+// byte-for-byte the original behavior.
+function slotNow(){
+  return (channel === 3 && typeof slotAtCh3 === 'function') ? slotAtCh3(Date.now()) : slotAt(Date.now());
+}
 function nextShow(fromIdx, list){
   list = list || PROGRAM;
   for (let k=1;k<=list.length;k++){ const s = list[(fromIdx+k)%list.length]; if (s.type==='show') return s; }
@@ -477,8 +666,9 @@ function nextShow(fromIdx, list){
 function fmtTime(ms){ return new Date(ms).toLocaleTimeString([], {hour:'numeric', minute:'2-digit'}); }
 function fmtClock(){ const d=new Date(); let h=d.getHours()%12; if(h===0)h=12; return h + ':' + String(d.getMinutes()).padStart(2,'0'); }
 function guide(){
+  if (channel === 2 && typeof guideCh2 === 'function'){ guideCh2(); return; }
   const nowMs = Date.now();
-  const { idx, slotStartMs, list } = slotAt(nowMs);
+  const { idx, slotStartMs, list } = (channel === 3 && typeof slotAtCh3 === 'function') ? slotAtCh3(nowMs) : slotAt(nowMs);
   const slot = list[idx];
   const sunday = (list === SUNDAY_PROGRAM);
   const sermon = (list === SERMON_PROGRAM);
@@ -486,7 +676,7 @@ function guide(){
   const endsMs = slotStartMs + slot.dur*1000;
   if (mode === 'dvr') return;
   if (slot.type==='show'){
-    gNow.textContent = (sunday ? 'Sunday Bible Block — ' : (sermon ? 'Sunday Sermon — ' : (hymn ? 'Sunday Hymn Sing — ' : ''))) + slot.title;
+    gNow.textContent = (channel === 3 ? 'Channel 3 · Biblical — ' : (sunday ? 'Sunday Bible Block — ' : (sermon ? 'Sunday Sermon — ' : (hymn ? 'Sunday Hymn Sing — ' : '')))) + slot.title;
     gNext.textContent = nextShow(idx, list).title;
     nowEl.textContent = (mode==='live') ? ('On the air: ' + slot.title + ' · ends ' + fmtTime(endsMs)) : 'Lobo Television is standing by.';
   } else {
@@ -502,12 +692,14 @@ function setLights(){
   else { onairText.textContent = 'STANDBY'; }
 }
 function dvrClock(){
-  if (mode==='live'){ const { idx, list } = slotAt(Date.now()); dvrDisplay.textContent = 'LIVE · ' + fmtClock() + ' · ' + (list[idx].type==='show' ? (list === SUNDAY_PROGRAM ? 'SUNDAY BIBLE' : (list === SERMON_PROGRAM ? 'SUNDAY SERMON' : (list === HYMN_PROGRAM ? 'SUNDAY HYMNS' : 'FEATURE'))) : 'COMMERCIAL'); }
+  if (channel === 2 && mode === 'live' && typeof dvrClockCh2 === 'function'){ dvrClockCh2(); return; }
+  if (mode==='live'){ const { idx, list } = slotNow(); dvrDisplay.textContent = (channel === 3 ? 'CH 3 LIVE · ' : 'LIVE · ') + fmtClock() + ' · ' + (list[idx].type==='show' ? (channel === 3 ? 'CHANNEL 3' : (list === SUNDAY_PROGRAM ? 'SUNDAY BIBLE' : (list === SERMON_PROGRAM ? 'SUNDAY SERMON' : (list === HYMN_PROGRAM ? 'SUNDAY HYMNS' : 'FEATURE')))) : 'COMMERCIAL'); }
   else if (mode==='dvr'){ dvrDisplay.textContent = 'DVR PLAY · ' + fmtClock(); }
   else { dvrDisplay.textContent = '-- STANDBY · ' + fmtClock() + ' --'; }
 }
 function tuneIn(){
-  const { idx, offset, list } = slotAt(Date.now());
+  if (channel === 2) return; // Canal 2 is a slate, not a broadcast — nothing to tune.
+  const { idx, offset, list } = slotNow();
   const slot = list[idx];
   currentIdx = idx;
   currentList = list;
@@ -529,7 +721,9 @@ function goLive(){
   video.controls = false;
   guideLive.style.display = 'block'; guideLibrary.style.display = 'none';
   libBtn.classList.remove('active'); liveBtn.classList.add('active');
-  setLights(); tuneIn(); dvrClock();
+  setLights();
+  if (channel === 2){ if (typeof showSlate2 === 'function') showSlate2(); dvrClock(); guide(); return; }
+  tuneIn(); dvrClock();
 }
 function goDVR(){
   mode = 'dvr';
@@ -542,6 +736,7 @@ function goDVR(){
 }
 function powerOff(){
   mode = 'standby';
+  if (typeof onChannelUIReset === 'function') onChannelUIReset();
   video.pause(); video.removeAttribute('src'); video.load(); video.controls = false;
   offair.style.display = 'flex';
   guideLive.style.display = 'block'; guideLibrary.style.display = 'none';
@@ -589,7 +784,7 @@ setInterval(function(){
   dvrClock();
   if (mode === 'standby'){ guide(); return; }
   if (mode === 'live'){
-    const sNow = slotAt(Date.now());
+    const sNow = slotNow();
     if (sNow.idx !== currentIdx || sNow.list !== currentList) tuneIn(); else guide();
     // Self-heal: if the browser quietly refused a play request, ask again.
     if (video.paused && !video.ended && video.readyState >= 2) video.play().catch(function(){});
@@ -603,6 +798,105 @@ guide(); setLights(); dvrClock();
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
   navigator.serviceWorker.register('./sw.js').catch(function(){});
 }
+</script>
+<script>
+// ---- The Tuner: three channels on the Lobo Television set. ----
+// Channel 1 runs the original broadcast engine above, untouched.
+// Channel 2 is a designed PRÓXIMAMENTE slate — the Spanish channel's
+// programming is still being gathered (verified public-domain Spanish
+// film is scarce), so nothing is embedded or promised beyond the slate.
+// Channel 3 is a second broadcast clock over the verified Bible assets
+// already in the DVR library: The Living Christ (12 episodes, series
+// order), From the Manger to the Cross (1912), the three Sermons from
+// Science films, and the 16 Hymn Sing videos in play order, with the
+// house sponsor pods between blocks. Same epoch anchor as Channel 1,
+// so every viewer lands mid-broadcast, not at a menu.
+// Changing channels flashes the house test-pattern card — drawn for
+// Lobo in the old Indian-head style — with the new channel number on it.
+const CH3_LC = LIBRARY.filter(function(x){ return x.group === 'SUNDAY BIBLE' && x.title.indexOf('The Living Christ') === 0; });
+const CH3_MANGER = LIBRARY.find(function(x){ return x.title.indexOf('From the Manger to the Cross') === 0; });
+const CH3_SERMONS = LIBRARY.filter(function(x){ return x.group === 'SUNDAY SERMON'; });
+const CH3_HYMNS = LIBRARY.filter(function(x){ return x.group === 'SUNDAY HYMNS'; });
+const CH3_PROGRAM = [];
+CH3_LC.forEach(function(s){ CH3_PROGRAM.push(s); });
+POD.forEach(function(a){ CH3_PROGRAM.push(a); });
+if (CH3_MANGER) CH3_PROGRAM.push(CH3_MANGER);
+POD.forEach(function(a){ CH3_PROGRAM.push(a); });
+CH3_SERMONS.forEach(function(s){ CH3_PROGRAM.push(s); });
+POD.forEach(function(a){ CH3_PROGRAM.push(a); });
+CH3_HYMNS.forEach(function(s){ CH3_PROGRAM.push(s); });
+POD.forEach(function(a){ CH3_PROGRAM.push(a); });
+const CH3_LOOP = CH3_PROGRAM.reduce((a,s)=>a+s.dur,0);
+function slotAtCh3(nowMs){
+  let pos = (((nowMs - EPOCH)/1000) % CH3_LOOP + CH3_LOOP) % CH3_LOOP;
+  let acc = 0;
+  for (let i=0;i<CH3_PROGRAM.length;i++){
+    if (pos < acc + CH3_PROGRAM[i].dur) return { idx:i, offset: pos-acc, slotStartMs: nowMs - (pos-acc)*1000, list: CH3_PROGRAM };
+    acc += CH3_PROGRAM[i].dur;
+  }
+  return { idx:0, offset:0, slotStartMs: nowMs, list: CH3_PROGRAM };
+}
+const CH_NAMES = { 1:'LOBO TV', 2:'CANAL 2 · MUY PRONTO', 3:'CHANNEL 3 · BIBLICAL' };
+const ledDigit = document.getElementById('leddigit');
+const chNameEl = document.getElementById('chname');
+const tpEl = document.getElementById('testpattern');
+const tpCh = document.getElementById('tpch');
+const slate2 = document.getElementById('ch2slate');
+const chBtns = { 1: document.getElementById('chBtn1'), 2: document.getElementById('chBtn2'), 3: document.getElementById('chBtn3') };
+let tpTimer = null;
+function updateTunerUI(){
+  ledDigit.textContent = String(channel);
+  chNameEl.textContent = CH_NAMES[channel];
+  [1,2,3].forEach(function(n){ chBtns[n].classList.toggle('active', n === channel); });
+}
+function showTestPattern(){
+  tpCh.textContent = 'CH ' + channel;
+  tpEl.style.display = 'flex';
+  if (tpTimer) clearTimeout(tpTimer);
+  tpTimer = setTimeout(function(){ tpEl.style.display = 'none'; tpTimer = null; }, 1050);
+}
+function showSlate2(){
+  video.pause(); video.removeAttribute('src'); video.load(); video.controls = false;
+  slate2.style.display = 'flex';
+}
+function hideSlate2(){ slate2.style.display = 'none'; }
+function guideCh2(){
+  if (mode === 'dvr') return;
+  gNow.textContent = 'CANAL 2 — MUY PRONTO';
+  gNext.textContent = 'Tejano Ritmo TV — en construcción';
+  nowEl.textContent = (mode === 'live') ? 'Canal 2 — muy pronto. Mientras tanto: loboradio.com/tejano.html' : 'Lobo Television is standing by.';
+}
+function dvrClockCh2(){
+  dvrDisplay.textContent = 'CH 2 · MUY PRONTO · ' + fmtClock();
+}
+function onChannelUIReset(){
+  hideSlate2();
+  tpEl.style.display = 'none';
+  if (tpTimer){ clearTimeout(tpTimer); tpTimer = null; }
+}
+function setChannel(n){
+  if (n < 1) n = 3;
+  if (n > 3) n = 1;
+  channel = n;
+  updateTunerUI();
+  showTestPattern();
+  if (mode === 'standby'){ guide(); dvrClock(); return; }
+  currentIdx = -1; currentList = null;
+  hideSlate2();
+  goLive();
+}
+document.getElementById('chBtn1').addEventListener('click', function(){ setChannel(1); });
+document.getElementById('chBtn2').addEventListener('click', function(){ setChannel(2); });
+document.getElementById('chBtn3').addEventListener('click', function(){ setChannel(3); });
+document.getElementById('chUp').addEventListener('click', function(){ setChannel(channel + 1); });
+document.getElementById('chDown').addEventListener('click', function(){ setChannel(channel - 1); });
+document.addEventListener('keydown', function(e){
+  if (e.key === '1' || e.key === '2' || e.key === '3') setChannel(Number(e.key));
+});
+// Leaving Channel 2 for the DVR: the library plays on the same screen,
+// so the slate steps aside (LIVE TV restores it via goLive).
+libBtn.addEventListener('click', function(){ hideSlate2(); });
+updateTunerUI();
 </script>
 <script>
 let deferredPrompt = null;
