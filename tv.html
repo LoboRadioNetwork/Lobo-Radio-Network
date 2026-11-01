@@ -113,11 +113,12 @@
   background-image:repeating-linear-gradient(0deg, rgba(255,170,60,.05) 0 2px, rgba(0,0,0,.22) 2px 4px);
 }
 .ledrow { position:relative; display:inline-block; line-height:1; }
-.ledghost, .leddigit {
-  font-family:"Courier New", monospace; font-weight:bold; font-size:37px; letter-spacing:.06em;
-}
-.ledghost { position:absolute; inset:0; color:rgba(255,166,0,.14); }
-.leddigit { position:relative; color:#ffb02e; text-shadow:0 0 7px rgba(255,160,30,.85), 0 0 20px rgba(255,120,0,.5); }
+/* true seven-segment digit: inline SVG segments driven by JS. Lit segments
+   glow amber; unlit segments stay faintly visible, like a real clock face
+   where the dark segment outlines still show. Slight skew = clock slant. */
+.segsvg { height:46px; width:auto; display:block; overflow:visible; transform:skewX(-6deg); }
+.segsvg .seg { fill:rgba(255,150,20,.10); }
+.segsvg .seg.on { fill:#ffb02e; filter:drop-shadow(0 0 3px rgba(255,160,30,.9)) drop-shadow(0 0 9px rgba(255,120,0,.45)); }
 .ledch { font-family:"Courier New", monospace; font-size:12px; letter-spacing:.3em; color:rgba(255,176,46,.75); }
 .chname { color:#f5e7bd; font-size:12px; letter-spacing:.18em; text-align:center; min-height:15px; }
 .chbtns { display:flex; gap:7px; }
@@ -142,10 +143,12 @@
 .testpattern svg { position:absolute; inset:0; width:100%; height:100%; }
 .testpattern .tpch {
   position:absolute; left:50%; bottom:5.5%; transform:translateX(-50%);
+  display:flex; align-items:center; gap:9px;
   font-family:"Courier New", monospace; font-weight:bold; font-size:30px; letter-spacing:.12em;
   color:#ffb02e; text-shadow:0 0 8px rgba(255,160,30,.9), 0 0 22px rgba(255,120,0,.55);
   background:rgba(5,3,0,.72); border:1px solid rgba(255,176,46,.5); border-radius:6px; padding:2px 14px;
 }
+.testpattern .tpch .segsvg { height:30px; }
 /* ---- Channel 2: the PRÓXIMAMENTE slate ---- */
 .ch2slate {
   position:absolute; inset:0; z-index:3; display:none; flex-direction:column; align-items:center; justify-content:center;
@@ -283,7 +286,7 @@
               </g>
               <text x="200" y="290" text-anchor="middle" font-family="Courier New, monospace" font-size="11" letter-spacing="4" fill="#8f8f8f">LOBO TELEVISION</text>
             </svg>
-            <div class="tpch" id="tpch">CH 1</div>
+            <div class="tpch" id="tpch"><span>CH</span><svg class="segsvg" id="tpdigit" viewBox="0 0 60 102" aria-hidden="true"><polygon class="seg" data-seg="a" points="9,1 51,1 58,7 51,13 9,13 2,7"/><polygon class="seg on" data-seg="b" points="53,11 59,17 59,43 53,49 47,43 47,17"/><polygon class="seg on" data-seg="c" points="53,55 59,61 59,87 53,93 47,87 47,61"/><polygon class="seg" data-seg="d" points="9,89 51,89 58,95 51,101 9,101 2,95"/><polygon class="seg" data-seg="e" points="7,55 13,61 13,87 7,93 1,87 1,61"/><polygon class="seg" data-seg="f" points="7,11 13,17 13,43 7,49 1,43 1,17"/><polygon class="seg" data-seg="g" points="9,45 51,45 58,51 51,57 9,57 2,51"/></svg></div>
           </div>
         </div>
       </div>
@@ -300,7 +303,7 @@
           <div class="tlabel">TUNER</div>
           <div class="ledbox">
             <div class="ledch">CHANNEL</div>
-            <div class="ledrow"><span class="ledghost" aria-hidden="true">8</span><span class="leddigit" id="leddigit">1</span></div>
+            <div class="ledrow"><svg class="segsvg" id="leddigit" viewBox="0 0 60 102" role="img" aria-label="Channel 1"><polygon class="seg" data-seg="a" points="9,1 51,1 58,7 51,13 9,13 2,7"/><polygon class="seg on" data-seg="b" points="53,11 59,17 59,43 53,49 47,43 47,17"/><polygon class="seg on" data-seg="c" points="53,55 59,61 59,87 53,93 47,87 47,61"/><polygon class="seg" data-seg="d" points="9,89 51,89 58,95 51,101 9,101 2,95"/><polygon class="seg" data-seg="e" points="7,55 13,61 13,87 7,93 1,87 1,61"/><polygon class="seg" data-seg="f" points="7,11 13,17 13,43 7,49 1,43 1,17"/><polygon class="seg" data-seg="g" points="9,45 51,45 58,51 51,57 9,57 2,51"/></svg></div>
           </div>
           <div class="chname" id="chname">LOBO TV</div>
           <div class="chbtns">
@@ -840,17 +843,26 @@ const CH_NAMES = { 1:'LOBO TV', 2:'CANAL 2 · MUY PRONTO', 3:'CHANNEL 3 · BIBLI
 const ledDigit = document.getElementById('leddigit');
 const chNameEl = document.getElementById('chname');
 const tpEl = document.getElementById('testpattern');
-const tpCh = document.getElementById('tpch');
+const tpDigit = document.getElementById('tpdigit');
 const slate2 = document.getElementById('ch2slate');
 const chBtns = { 1: document.getElementById('chBtn1'), 2: document.getElementById('chBtn2'), 3: document.getElementById('chBtn3') };
 let tpTimer = null;
+// Seven-segment map: which segments light for each digit (a=top, b=upper
+// right, c=lower right, d=bottom, e=lower left, f=upper left, g=middle).
+const SEGMAP = { 0:'abcdef', 1:'bc', 2:'abdeg', 3:'abcdg', 4:'bcfg', 5:'acdfg', 6:'acdefg', 7:'abc', 8:'abcdefg', 9:'abcdfg' };
+function setSegDigit(svgEl, n){
+  const on = SEGMAP[n] || '';
+  const segs = svgEl.querySelectorAll('.seg');
+  for (let i=0;i<segs.length;i++) segs[i].classList.toggle('on', on.indexOf(segs[i].getAttribute('data-seg')) >= 0);
+}
 function updateTunerUI(){
-  ledDigit.textContent = String(channel);
+  setSegDigit(ledDigit, channel);
+  ledDigit.setAttribute('aria-label', 'Channel ' + channel);
   chNameEl.textContent = CH_NAMES[channel];
   [1,2,3].forEach(function(n){ chBtns[n].classList.toggle('active', n === channel); });
 }
 function showTestPattern(){
-  tpCh.textContent = 'CH ' + channel;
+  setSegDigit(tpDigit, channel);
   tpEl.style.display = 'flex';
   if (tpTimer) clearTimeout(tpTimer);
   tpTimer = setTimeout(function(){ tpEl.style.display = 'none'; tpTimer = null; }, 1050);
