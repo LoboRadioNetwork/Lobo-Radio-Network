@@ -31,14 +31,26 @@
 <img src="lobo-app-development-banner-es.png" alt="Lobo App Development — dos insignias, una aplicación" style="width:100%;border-radius:8px">
 <h2 style="margin:8px 0 6px">🏆 ¡LA APP INSIGNIA DE LOBO — RADIO + TRANSPORTE EN UNA!</h2>
 <p style="margin:6px 0"><strong>Nuestras dos apps insignia en una sola:</strong> la radio de Tejano Ritmo + Mustang Dallas <strong>y</strong> los horarios de autobús y tren de Dallas Transit. Escucha tu estación mientras esperas tu autobús — la radio sigue tocando durante el viaje. Gratis, sin anuncios y sin cuenta. En español e inglés.</p>
-<p style="margin:12px 0"><a class="btn" href="lobo-flagship.apk" download>⬇️ Descargar la app insignia — Gratis para Android</a></p>
+<form class="dlgate" data-app="App Insignia Lobo" data-apk="lobo-flagship.apk" data-thanks="thanks-flagship" style="margin:12px 0">
+<label style="display:block;margin-bottom:8px"><strong>📧 Recibe la descarga — únete a la lista de novedades:</strong></label>
+<input type="email" name="email" required placeholder="you@email.com" style="padding:10px;border-radius:8px;border:1px solid #999;width:70%;max-width:280px">
+<button class="btn" type="submit">Envíame la descarga</button>
+<p style="margin:6px 0;font-size:.88em">Solo te escribiremos sobre actualizaciones de la app y noticias de la estación. Nada de spam, nunca.</p>
+</form>
+<p id="thanks-flagship" style="display:none;margin:12px 0">✅ <strong>¡Ya estás en la lista!</strong> Tu descarga debería empezar — si no: <a class="btn" href="lobo-flagship.apk" download>⬇️ Descargar la app insignia — Gratis para Android</a></p>
 <p style="margin:6px 0;font-size:.92em">Nueva de <strong>Lobo App Development</strong>, 4 de noviembre de 2026. Toca la descarga y abre el archivo para instalar — Play Protect la escanea automáticamente. Solo para Android por ahora.</p>
 </div>
 <div class="appblock" style="border:2px solid #d4af37;border-radius:12px;padding:18px;margin:18px auto;max-width:640px;text-align:center;background:rgba(212,175,55,.07)">
 <img src="assets/lobo-app-icon.jpg" alt="App de Lobo Radio — logo del lobo medallón" style="width:120px;height:120px;border-radius:24px">
 <h2 style="margin:8px 0 6px">📱 ¡YA LLEGÓ LA APP DE LOBO RADIO!</h2>
 <p style="margin:6px 0"><strong>Las dos estaciones en una sola app</strong> — Tejano Ritmo y Mustang Dallas, cambia de estación con un solo toque. Y recuerda la estación que estabas escuchando.</p>
-<p style="margin:12px 0"><a class="btn" href="loboradio.apk" download>⬇️ Descargar la app — Gratis para Android</a></p>
+<form class="dlgate" data-app="App Lobo Radio" data-apk="loboradio.apk" data-thanks="thanks-radio" style="margin:12px 0">
+<label style="display:block;margin-bottom:8px"><strong>📧 Recibe la descarga — únete a la lista de novedades:</strong></label>
+<input type="email" name="email" required placeholder="you@email.com" style="padding:10px;border-radius:8px;border:1px solid #999;width:70%;max-width:280px">
+<button class="btn" type="submit">Envíame la descarga</button>
+<p style="margin:6px 0;font-size:.88em">Solo te escribiremos sobre actualizaciones de la app y noticias de la estación. Nada de spam, nunca.</p>
+</form>
+<p id="thanks-radio" style="display:none;margin:12px 0">✅ <strong>¡Ya estás en la lista!</strong> Tu descarga debería empezar — si no: <a class="btn" href="loboradio.apk" download>⬇️ Descargar la app — Gratis para Android</a></p>
 <p style="margin:6px 0;font-size:.92em">Toca la descarga y abre el archivo para instalar. Tu teléfono ofrecerá escanearla primero — pasó la revisión de Google Play Protect. Solo para Android por ahora.</p>
 </div>
 <footer><p>© 2026 Lobo Radio Network · Lobo Broadcasting Group · Dallas, Texas</p><p id="contact">Preguntas y peticiones: <a href="mailto:info@loboradio.com">info@loboradio.com</a> · Patrocinadores: <a href="mailto:sponsors@loboradio.com">sponsors@loboradio.com</a> · Afiliados: <a href="mailto:affiliates@loboradio.com">affiliates@loboradio.com</a></p><p><a href="guestbook.html">✍️ Sign the Guest Book</a> — join the Founding Herd, first to hear about giveaways and launches.</p></footer><script>
@@ -137,4 +149,26 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 </script>
 
 <script data-goatcounter="https://loboradio.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+<script>
+document.querySelectorAll('form.dlgate').forEach(function(f){
+  f.addEventListener('submit', function(e){
+    e.preventDefault();
+    var email = f.querySelector('input[type=email]').value;
+    var apk = f.getAttribute('data-apk');
+    var thanks = document.getElementById(f.getAttribute('data-thanks'));
+    function show(){
+      f.style.display = 'none';
+      if (thanks) {
+        thanks.style.display = 'block';
+        var a = thanks.querySelector('a');
+        if (a) { a.setAttribute('href', apk); a.click(); }
+      }
+    }
+    fetch('https://formspree.io/f/mqppnlyv', {method:'POST', headers:{'Accept':'application/json','Content-Type':'application/json'},
+      body: JSON.stringify({email: email, app: f.getAttribute('data-app')})})
+      .then(function(){ show(); }).catch(function(){ show(); });
+  });
+});
+</script>
 </body></html>
