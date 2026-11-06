@@ -182,7 +182,7 @@
 <div class="tvstage">
   <div class="tvintro">
     <h1>LOBO TELEVISION</h1>
-    <p>Three channels, on the air around the clock. <strong>Channel 1</strong> is the classic Lobo TV — westerns and cartoons with a word from our sponsors. <strong>Channel 2</strong> is our Spanish channel — muy pronto. <strong>Channel 3</strong> is all Bible, all day — The Living Christ, the Sermons from Science, and the Hymn Sing. Turn the set on and work the TUNER on the side of the set… or pop open the DVR and pick a classic yourself.</p>
+    <p>Three channels, on the air around the clock. <strong>Channel 1</strong> is the classic Lobo TV — westerns and cartoons with a word from our sponsors. <strong>Channel 2</strong> is our Spanish channel — classic films in Spanish, all day. <strong>Channel 3</strong> is all Bible, all day — The Living Christ, the Sermons from Science, and the Hymn Sing. Turn the set on and work the TUNER on the side of the set… or pop open the DVR and pick a classic yourself.</p>
   </div>
 
   <div class="dvr" id="dvrbox">
@@ -359,7 +359,15 @@
       <tr><td>📺 Commercial break — a word from our sponsors</td><td class="t">~5 min</td></tr>
       <tr><td>🎶 <strong>The Hymn Sing</strong> — 16 classic hymns, choir and congregation recordings — then the Channel 3 rotation starts again</td><td class="t">47 min</td></tr>
     </table>
-    <p class="tvfineprint"><strong>Channel 2</strong> is our Spanish channel — it is in the tuner now and marked <strong>MUY PRONTO</strong> while its programming is being gathered. Mientras tanto, escucha <a href="tejano.html" style="color:#f0d489">Tejano Ritmo</a> en vivo.</p>
+    <h2 style="margin-top:24px">Channel 2 — Cine Clásico en Español, Todo el Día</h2>
+    <table>
+      <tr><td>🎬 <strong>Cine de Oro</strong> — la época dorada: <strong>La vida de Carlos Gardel</strong> (1939), <strong>La guerra gaucha</strong> (1942), <strong>Carmen</strong> (1943), <strong>Los tallos amargos</strong> (1956) y más, de Argentina</td><td class="t">9 hrs</td></tr>
+      <tr><td>📺 Pausa comercial — un mensaje de nuestros patrocinadores</td><td class="t">~5 min</td></tr>
+      <tr><td>🎞️ <strong>Cine Mudo</strong> — los pioneros: <strong>El automóvil gris</strong> (México, 1919), <strong>Alma provinciana</strong> (Colombia, 1925), <strong>La virgen de la Caridad</strong> (Cuba, 1930)</td><td class="t">4 hrs</td></tr>
+      <tr><td>🧒 <strong>Dibujos Animados</strong> — <strong>Caperucita Roja</strong></td><td class="t">18 min</td></tr>
+      <tr><td>🌙 <strong>Cine de Medianoche</strong> — <strong>La noche de los muertos vivientes</strong> (1968), doblada al español</td><td class="t">1 hr 36 min</td></tr>
+      <tr><td>🇪🇸 <strong>La joya de 1896</strong> — <strong>Puerta del Sol</strong>, Madrid — y la rotación empieza otra vez</td><td class="t">1 min</td></tr>
+    </table>
   </div>
   <p class="tvfineprint">All programs on Lobo Television are public-domain classics, streamed courtesy of the Internet Archive. The broadcast rotation runs continuously — whenever you tune in live, you're joining the program already in progress, same as everybody else. The DVR library holds the same classics, ready to watch from the beginning whenever you like.</p>
 </div>
@@ -565,7 +573,20 @@ const LIBRARY = [
   { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Pass Me Not, O Gentle Saviour', src:'hymns/hymn-12-pass-me-not-o-gentle-saviour.mp4', dur:167 },
   { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Day Is Dying in the West', src:'hymns/hymn-13-day-is-dying-in-the-west.mp4', dur:166 },
   { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Shall We Gather at the River', src:'hymns/hymn-14-shall-we-gather-at-the-river.mp4', dur:179 },
-  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Aberystwyth · Welsh Choir (bonus)', src:'hymns/hymn-15-aberystwyth-welsh-choir.mp4', dur:204 }
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Aberystwyth · Welsh Choir (bonus)', src:'hymns/hymn-15-aberystwyth-welsh-choir.mp4', dur:204 },
+  { type:'show', group:'CANAL 2 — CINE DE ORO', title:'La vida de Carlos Gardel (1939) — Argentina', src:'https://archive.org/download/la-vida-de-carlos-gardel-1939/La%20vida%20de%20Carlos%20Gardel%20%281939%29.mp4', dur:6004 },
+  { type:'show', group:'CANAL 2 — CINE MUDO', title:'El automóvil gris (1919) — México', src:'https://archive.org/download/ElAutomvilGris/El_autom%C3%B3vil_gris.mp4', dur:6672 },
+  { type:'show', group:'CANAL 2 — CINE DE ORO', title:'Loco lindo (1936) — Argentina', src:'https://archive.org/download/loco-lindo-1936/Loco%20lindo%20%281936%29.mp4', dur:4481 },
+  { type:'show', group:'CANAL 2 — CINE MUDO', title:'Alma provinciana (1925) — Colombia', src:'https://archive.org/download/silent-alma-provinciana/Alma%20provinciana.mp4', dur:3814 },
+  { type:'show', group:'CANAL 2 — CINE DE ORO', title:'La guerra gaucha (1942) — Argentina', src:'https://archive.org/download/la-guerra-gaucha-1942/La%20guerra%20gaucha%281942%29.mp4', dur:5164 },
+  { type:'show', group:'CANAL 2 — DIBUJOS ANIMADOS', title:'Caperucita Roja — dibujos animados', src:'https://archive.org/download/CaperucitaRoja_201903/Caperucita%20Roja.mp4', dur:1105 },
+  { type:'show', group:'CANAL 2 — CINE DE ORO', title:'Carmen (1943) — Argentina', src:'https://archive.org/download/carmen-1943/Carmen%281943%29.mp4', dur:5689 },
+  { type:'show', group:'CANAL 2 — CINE MUDO', title:'La virgen de la Caridad (1930) — Cuba', src:'https://archive.org/download/la-virgen-de-la-caridad_1930/la-virgen-de-la-caridad_1930.mp4', dur:4377 },
+  { type:'show', group:'CANAL 2 — CINE DE ORO', title:'Chingolo (1940) — Argentina', src:'https://archive.org/download/chingolo-1940/Chingolo%281940%29.mp4', dur:4647 },
+  { type:'show', group:'CANAL 2 — CINE DE MEDIANOCHE', title:'La noche de los muertos vivientes (1968) — doblada al español', src:'https://archive.org/download/night-of-the-living-dead-1968-doblada-al-espanol/Night%20of%20the%20Living%20Dead%20%281968%29%20Doblada%20al%20espa%C3%B1ol.mp4', dur:5753 },
+  { type:'show', group:'CANAL 2 — CINE DE ORO', title:'Tres hombres del río (1943) — Argentina', src:'https://archive.org/download/tres-hombres-del-rio-1943/Tres%20hombres%20del%20rio%20%281943%29.mp4', dur:5257 },
+  { type:'show', group:'CANAL 2 — CINE DE ORO', title:'Los tallos amargos (1956) — Argentina', src:'https://archive.org/download/los-tallos-amargos-1956/Los%20tallos%20amargos%281956%29.mp4', dur:5269 },
+  { type:'show', group:'CANAL 2 — JOYA DE 1896', title:'Puerta del Sol (1896) — España, la primera joya', src:'https://archive.org/download/puertadelsol1896/lv_0_20250108203803.mp4', dur:36 }
 ];
 const byTitle = t => LIBRARY.find(x => x.title.includes(t));
 const PROGRAM = [ byTitle('Fights On'), ...POD, byTitle('Mad Scientist'), byTitle('Cisco Kid — S1 E1'), ...POD, byTitle('Minnie the Moocher'), byTitle('Rose for Lotta'), ...POD, byTitle('Falling Hare') ];
@@ -659,7 +680,9 @@ function slotAt(nowMs){
 // tuner script below); every other channel uses the Channel 1 clock above,
 // byte-for-byte the original behavior.
 function slotNow(){
-  return (channel === 3 && typeof slotAtCh3 === 'function') ? slotAtCh3(Date.now()) : slotAt(Date.now());
+  if (channel === 3 && typeof slotAtCh3 === 'function') return slotAtCh3(Date.now());
+  if (channel === 2 && typeof slotAtCh2 === 'function') return slotAtCh2(Date.now());
+  return slotAt(Date.now());
 }
 function nextShow(fromIdx, list){
   list = list || PROGRAM;
@@ -669,9 +692,8 @@ function nextShow(fromIdx, list){
 function fmtTime(ms){ return new Date(ms).toLocaleTimeString([], {hour:'numeric', minute:'2-digit'}); }
 function fmtClock(){ const d=new Date(); let h=d.getHours()%12; if(h===0)h=12; return h + ':' + String(d.getMinutes()).padStart(2,'0'); }
 function guide(){
-  if (channel === 2 && typeof guideCh2 === 'function'){ guideCh2(); return; }
   const nowMs = Date.now();
-  const { idx, slotStartMs, list } = (channel === 3 && typeof slotAtCh3 === 'function') ? slotAtCh3(nowMs) : slotAt(nowMs);
+  const { idx, slotStartMs, list } = (channel === 3 && typeof slotAtCh3 === 'function') ? slotAtCh3(nowMs) : ((channel === 2 && typeof slotAtCh2 === 'function') ? slotAtCh2(nowMs) : slotAt(nowMs));
   const slot = list[idx];
   const sunday = (list === SUNDAY_PROGRAM);
   const sermon = (list === SERMON_PROGRAM);
@@ -679,13 +701,13 @@ function guide(){
   const endsMs = slotStartMs + slot.dur*1000;
   if (mode === 'dvr') return;
   if (slot.type==='show'){
-    gNow.textContent = (channel === 3 ? 'Channel 3 · Biblical — ' : (sunday ? 'Sunday Bible Block — ' : (sermon ? 'Sunday Sermon — ' : (hymn ? 'Sunday Hymn Sing — ' : '')))) + slot.title;
+    gNow.textContent = (channel === 3 ? 'Channel 3 · Biblical — ' : (channel === 2 ? 'Canal 2 · Cine Clásico — ' : (sunday ? 'Sunday Bible Block — ' : (sermon ? 'Sunday Sermon — ' : (hymn ? 'Sunday Hymn Sing — ' : ''))))) + slot.title;
     gNext.textContent = nextShow(idx, list).title;
-    nowEl.textContent = (mode==='live') ? ('On the air: ' + slot.title + ' · ends ' + fmtTime(endsMs)) : 'Lobo Television is standing by.';
+    nowEl.textContent = (mode==='live') ? (((channel === 2) ? 'En el aire: ' : 'On the air: ') + slot.title + ' · ' + ((channel === 2) ? 'termina ' : 'ends ') + fmtTime(endsMs)) : 'Lobo Television is standing by.';
   } else {
-    gNow.textContent = 'Commercial break — a word from our sponsors';
+    gNow.textContent = (channel === 2) ? 'Pausa comercial — un mensaje de nuestros patrocinadores' : 'Commercial break — a word from our sponsors';
     gNext.textContent = nextShow(idx, list).title;
-    nowEl.textContent = (mode==='live') ? 'Commercial break — back to the picture in a moment.' : 'Lobo Television is standing by.';
+    nowEl.textContent = (mode==='live') ? ((channel === 2) ? 'Pausa comercial — volvemos a la película en un momento.' : 'Commercial break — back to the picture in a moment.') : 'Lobo Television is standing by.';
   }
 }
 function setLights(){
@@ -701,7 +723,6 @@ function dvrClock(){
   else { dvrDisplay.textContent = '-- STANDBY · ' + fmtClock() + ' --'; }
 }
 function tuneIn(){
-  if (channel === 2) return; // Canal 2 is a slate, not a broadcast — nothing to tune.
   const { idx, offset, list } = slotNow();
   const slot = list[idx];
   currentIdx = idx;
@@ -725,7 +746,7 @@ function goLive(){
   guideLive.style.display = 'block'; guideLibrary.style.display = 'none';
   libBtn.classList.remove('active'); liveBtn.classList.add('active');
   setLights();
-  if (channel === 2){ if (typeof showSlate2 === 'function') showSlate2(); dvrClock(); guide(); return; }
+  hideSlate2();
   tuneIn(); dvrClock();
 }
 function goDVR(){
@@ -839,7 +860,25 @@ function slotAtCh3(nowMs){
   }
   return { idx:0, offset:0, slotStartMs: nowMs, list: CH3_PROGRAM };
 }
-const CH_NAMES = { 1:'LOBO TV', 2:'CANAL 2 · MUY PRONTO', 3:'CHANNEL 3 · BIBLICAL' };
+// ---- Canal 2: cine clásico en español, todo el día. Golden-age features
+// from México, Colombia, Cuba, Argentina and España, streamed from the
+// Internet Archive (public-domain / feature-films collections), with the
+// house sponsor pods between pictures. Same epoch anchor as Channels 1
+// and 3, so every viewer lands mid-broadcast.
+const CH2_TITLES = ['Puerta del Sol','La vida de Carlos Gardel','El automóvil gris','Loco lindo','Alma provinciana','La guerra gaucha','Caperucita Roja','Carmen','La virgen de la Caridad','Chingolo','La noche de los muertos vivientes','Tres hombres del río','Los tallos amargos'];
+const CH2_PROGRAM = [];
+CH2_TITLES.forEach(function(t){ const it = LIBRARY.find(function(x){ return x.title.indexOf(t) === 0; }); if (it){ CH2_PROGRAM.push(it); POD.forEach(function(a){ CH2_PROGRAM.push(a); }); } });
+const CH2_LOOP = CH2_PROGRAM.reduce((a,s)=>a+s.dur,0);
+function slotAtCh2(nowMs){
+  let pos = (((nowMs - EPOCH)/1000) % CH2_LOOP + CH2_LOOP) % CH2_LOOP;
+  let acc = 0;
+  for (let i=0;i<CH2_PROGRAM.length;i++){
+    if (pos < acc + CH2_PROGRAM[i].dur) return { idx:i, offset: pos-acc, slotStartMs: nowMs - (pos-acc)*1000, list: CH2_PROGRAM };
+    acc += CH2_PROGRAM[i].dur;
+  }
+  return { idx:0, offset:0, slotStartMs: nowMs, list: CH2_PROGRAM };
+}
+const CH_NAMES = { 1:'LOBO TV', 2:'CANAL 2 · CINE CLÁSICO', 3:'CHANNEL 3 · BIBLICAL' };
 const ledDigit = document.getElementById('leddigit');
 const chNameEl = document.getElementById('chname');
 const tpEl = document.getElementById('testpattern');
@@ -872,14 +911,9 @@ function showSlate2(){
   slate2.style.display = 'flex';
 }
 function hideSlate2(){ slate2.style.display = 'none'; }
-function guideCh2(){
-  if (mode === 'dvr') return;
-  gNow.textContent = 'CANAL 2 — MUY PRONTO';
-  gNext.textContent = 'Tejano Ritmo TV — en construcción';
-  nowEl.textContent = (mode === 'live') ? 'Canal 2 — muy pronto. Mientras tanto: loboradio.com/tejano.html' : 'Lobo Television is standing by.';
-}
+function guideCh2(){ guide(); }
 function dvrClockCh2(){
-  dvrDisplay.textContent = 'CH 2 · MUY PRONTO · ' + fmtClock();
+  dvrDisplay.textContent = 'CH 2 EN VIVO · ' + fmtClock();
 }
 function onChannelUIReset(){
   hideSlate2();
