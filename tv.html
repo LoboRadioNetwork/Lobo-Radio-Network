@@ -183,7 +183,7 @@
 <div class="tvstage">
   <div class="tvintro">
     <h1>LOBO TELEVISION</h1>
-    <p>Three channels, on the air around the clock. <strong>Channel 1</strong> is the classic Lobo TV — westerns and cartoons with a word from our sponsors. <strong>Channel 2</strong> is our Spanish channel — classic films in Spanish, all day. <strong>Channel 3</strong> is all Bible, all day — The Living Christ, the Sermons from Science, and the Hymn Sing. Turn the set on and work the TUNER on the side of the set… or pop open the DVR and pick a classic yourself.</p>
+    <p>Four channels, on the air around the clock. <strong>Channel 1</strong> is the classic Lobo TV — westerns and cartoons with a word from our sponsors. <strong>Channel 2</strong> is our Spanish channel — classic films in Spanish, all day. <strong>Channel 3</strong> is all Bible, all day — The Living Christ, the Sermons from Science, and the Hymn Sing. <strong>Channel 4</strong> is the Lobo Sci-Fi Network — forgotten science-fiction classics and drive-in double features, all day. Turn the set on and work the TUNER on the side of the set… or pop open the DVR and pick a classic yourself.</p>
   </div>
 
   <div class="dvr" id="dvrbox">
@@ -311,6 +311,7 @@
             <button class="chbtn active" id="chBtn1" aria-label="Channel 1">1</button>
             <button class="chbtn" id="chBtn2" aria-label="Channel 2">2</button>
             <button class="chbtn" id="chBtn3" aria-label="Channel 3">3</button>
+            <button class="chbtn" id="chBtn4" aria-label="Channel 4">4</button>
           </div>
           <div class="chbtns">
             <button class="chstep" id="chDown" aria-label="Channel down">CH −</button>
@@ -368,6 +369,16 @@
       <tr><td>🧒 <strong>Dibujos Animados</strong> — <strong>Caperucita Roja</strong></td><td class="t">18 min</td></tr>
       <tr><td>🌙 <strong>Cine de Medianoche</strong> — <strong>La noche de los muertos vivientes</strong> (1968), doblada al español</td><td class="t">1 hr 36 min</td></tr>
       <tr><td>🇪🇸 <strong>La joya de 1896</strong> — <strong>Puerta del Sol</strong>, Madrid — y la rotación empieza otra vez</td><td class="t">1 min</td></tr>
+    </table>
+    <h2 style="margin-top:24px">Channel 4 — Lobo Sci-Fi Network, All Day</h2>
+    <table>
+      <tr><td>🚀 <strong>DRIVE-IN DOUBLE FEATURE</strong> — the flagship bill: <strong>Cat-Women of the Moon</strong> (1953) + its own remake <strong>Missile to the Moon</strong> (1958), with “Let’s All Go to the Lobby” at the intermission</td><td class="t">2 hrs 22 min</td></tr>
+      <tr><td>📺 Commercial break — a word from our sponsors</td><td class="t">~5 min</td></tr>
+      <tr><td>🤠🚀 <strong>The Phantom Empire</strong> (1935) — Gene Autry’s complete 12-chapter serial: robots and ray guns under the ranch</td><td class="t">3 hrs 45 min</td></tr>
+      <tr><td>🕷️ <strong>Mesa of Lost Women</strong> (1953) — the signature forgotten gem: giant spiders and spider-women in the Mexican desert</td><td class="t">69 min</td></tr>
+      <tr><td>🛸 <strong>Zombies of the Stratosphere</strong> (1952) — the complete serial, with a young Leonard Nimoy as a Martian</td><td class="t">2 hrs 47 min</td></tr>
+      <tr><td>🎬 <strong>Double features all day</strong> — Gorilla Suit Sunday, Ulmer After Dark, Swamp Night, Brain Damage Matinee, Silent Space Matinee — plus the anchor classics <strong>Plan 9 from Outer Space</strong>, <strong>Robot Monster</strong> and <strong>The Last Man on Earth</strong></td><td class="t">All day</td></tr>
+      <tr><td>📼 <strong>TV Time Machine &amp; the Serial Strip</strong> — Captain Video, Tom Corbett, Space Patrol, Radar Men from the Moon and the Rocket Men — then the rotation starts again</td><td class="t">All day</td></tr>
     </table>
   </div>
   <p class="tvfineprint">All programs on Lobo Television are public-domain classics, streamed courtesy of the Internet Archive. The broadcast rotation runs continuously — whenever you tune in live, you're joining the program already in progress, same as everybody else. The DVR library holds the same classics, ready to watch from the beginning whenever you like.</p>
@@ -587,7 +598,46 @@ const LIBRARY = [
   { type:'show', group:'CANAL 2 — CINE DE MEDIANOCHE', title:'La noche de los muertos vivientes (1968) — doblada al español', src:'https://archive.org/download/night-of-the-living-dead-1968-doblada-al-espanol/Night%20of%20the%20Living%20Dead%20%281968%29%20Doblada%20al%20espa%C3%B1ol.mp4', dur:5753 },
   { type:'show', group:'CANAL 2 — CINE DE ORO', title:'Tres hombres del río (1943) — Argentina', src:'https://archive.org/download/tres-hombres-del-rio-1943/Tres%20hombres%20del%20rio%20%281943%29.mp4', dur:5257 },
   { type:'show', group:'CANAL 2 — CINE DE ORO', title:'Los tallos amargos (1956) — Argentina', src:'https://archive.org/download/los-tallos-amargos-1956/Los%20tallos%20amargos%281956%29.mp4', dur:5269 },
-  { type:'show', group:'CANAL 2 — JOYA DE 1896', title:'Puerta del Sol (1896) — España, la primera joya', src:'https://archive.org/download/puertadelsol1896/lv_0_20250108203803.mp4', dur:36 }
+  { type:'show', group:'CANAL 2 — JOYA DE 1896', title:'Puerta del Sol (1896) — España, la primera joya', src:'https://archive.org/download/puertadelsol1896/lv_0_20250108203803.mp4', dur:36 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Cat-Women of the Moon (1953)', src:'https://archive.org/download/CatWomenOfTheMoon/CatWomenOfTheMoon.mp4', dur:3818 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Missile to the Moon (1958)', src:'https://archive.org/download/MissileToTheMoon/Missile%20to%20the%20Moon.mp4', dur:4640 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Mesa of Lost Women (1953)', src:'https://archive.org/download/MesaOfLostWomen/MesaOfLostWomen_512kb.mp4', dur:4137 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Plan 9 from Outer Space (1959)', src:'https://archive.org/download/plan-9-from-outer-space/plan-9-from-outer-space.mp4', dur:4700 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Robot Monster (1953)', src:'https://archive.org/download/robot-monster-1953/Robot%20Monster%20%281953%29.mp4', dur:3756 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Eegah (1962)', src:'https://archive.org/download/Eegah/Eegah_512kb.mp4', dur:5426 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'The Last Man on Earth (1964)', src:'https://archive.org/download/TheLastManOnEarth1964_201808/The%20Last%20Man%20on%20Earth%20%281964%29.mp4', dur:5204 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Teenagers from Outer Space (1959)', src:'https://archive.org/download/teenagers_from_outerspace/Teenagers_from_Outer_Space_512kb.mp4', dur:5129 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Santa Claus Conquers the Martians (1964)', src:'https://archive.org/download/SantaClausConquerstheMartians1964/SantaClausConquerstheMartians1964.mp4', dur:4857 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'The Snow Creature (1954)', src:'https://archive.org/download/TheSnowCreature/TheSnowCreature_512kb.mp4', dur:4246 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Assignment: Outer Space (1960)', src:'https://archive.org/download/Assignment_Outer_Space/Assignment_Outer_Space_512kb.mp4', dur:4354 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'The Phantom Planet (1961)', src:'https://archive.org/download/Phantom_Planet/The_Phantom_Planet_512kb.mp4', dur:4925 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Beyond the Time Barrier (1960)', src:'https://archive.org/download/beyond.the.-time.-barrier.-1960/Beyond%20the%20Time%20Barrier%20%281960%29%2Fmp4%2FBeyond.the.Time.Barrier.1960.ia.mp4', dur:4454 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'The Amazing Transparent Man (1960)', src:'https://archive.org/download/TheAmazingTransparentMan1960/the-amazing-transparent-man_512kb.mp4', dur:3438 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Attack of the Giant Leeches (1959)', src:'https://archive.org/download/cco_attackofthegiantleeches/ccoPublicDomainAttack_of_the_Giant_Leeches_512kb.mp4', dur:3739 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'The Incredible Petrified World (1957)', src:'https://archive.org/download/TheIncrediblePetrifiedWorld/TheIncrediblePetrifiedWorld_512kb.mp4', dur:3797 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'The Brain That Wouldn\'t Die (1962)', src:'https://archive.org/download/brain_that_wouldnt_die/brain_that_wouldnt_die_512kb.mp4', dur:4255 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Monstrosity — “The Atomic Brain” (1963)', src:'https://archive.org/download/monstrosity-1963/Monstrosity%20%281963%29.mp4', dur:3892 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Project Moonbase (1953)', src:'https://archive.org/download/ProjectMoonBase1953_201809/Project%20MoonBase%20%281953%29.mp4', dur:3785 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Unknown World (1951)', src:'https://archive.org/download/UnknownWorld/UnknownWorld_512kb.mp4', dur:4437 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Battle of the Worlds (1961) — Claude Rains', src:'https://archive.org/download/BattleOfTheWorldsWidesceen/Battle%20of%20the%20Worlds%20NTSC_1.mp4', dur:5007 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'First Spaceship on Venus (1960)', src:'https://archive.org/download/FirstSpaceshipOnVenusMPEG/First_Spaceship_On_Venus_512kb.mp4', dur:4712 },
+  { type:'show', group:'SCI-FI NETWORK — SILENT SPACE', title:'A Trip to the Moon (1902)', src:'https://archive.org/download/Levoyagedanslalune/Le_voyage_dans_la_lune_A_trip_to_the_moon__Georges_Mlis_1902_512kb.mp4', dur:709 },
+  { type:'show', group:'SCI-FI NETWORK — SILENT SPACE', title:'The Lost World (1925)', src:'https://archive.org/download/lost_world/lost_world_512kb.mp4', dur:4085 },
+  { type:'show', group:'SCI-FI NETWORK — SILENT SPACE', title:'Woman in the Moon (1929)', src:'https://archive.org/download/WomanInTheMoon/zzWomanMoon.mp4', dur:10189 },
+  { type:'show', group:'SCI-FI NETWORK — EARLY TV', title:'Tales of Tomorrow — “The Crystal Egg” (1951)', src:'https://archive.org/download/tales_of_tomorrow_09_the_crystal_egg/tales_of_tomorrow_9_the_crystal_egg_512kb.mp4', dur:1427 },
+  { type:'show', group:'SCI-FI NETWORK — EARLY TV', title:'Captain Video and His Video Rangers (1949)', src:'https://archive.org/download/captainvideo/captainvideo.ia.mp4', dur:1722 },
+  { type:'show', group:'SCI-FI NETWORK — EARLY TV', title:'Tom Corbett, Space Cadet — “Runaway Rocket” (1954)', src:'https://archive.org/download/tomCorbettSpaceCadet-RunawayRocket1954/Tom_Corbett_Runaway_Rocket_05_22_54.ia.mp4', dur:1732 },
+  { type:'show', group:'SCI-FI NETWORK — EARLY TV', title:'Space Patrol — “The Wandering Asteroid”', src:'https://archive.org/download/SpacePatrolEpisode2TheWanderingAsteroid/1963-SpacePatrol-02TheWanderingAsteroid.mp4', dur:1491 },
+  { type:'show', group:'SCI-FI NETWORK — EARLY TV', title:'Flash Gordon (1954 TV) — episode of Nov. 5, 1954', src:'https://archive.org/download/TheSpaceAdventuresOfFlashGordon_981/TheSpaceAdventuresOfFlashGordon11-5-1954_512kb.mp4', dur:1573 },
+  { type:'show', group:'SCI-FI NETWORK — EARLY TV', title:'Rocky Jones, Space Ranger — Crash of the Moons (1954)', src:'https://archive.org/download/CrashoftheMoons/CrashoftheMoons_512kb.mp4', dur:4322 },
+  { type:'show', group:'SCI-FI NETWORK — SERIALS', title:'The Phantom Empire (1935) — complete 12-chapter serial', src:'https://archive.org/download/PhotosbyHaroldThePhantomEmpireAll12Chapters/Phantom_Empire_512kb.mp4', dur:13480 },
+  { type:'show', group:'SCI-FI NETWORK — SERIALS', title:'Zombies of the Stratosphere (1952) — complete 12-chapter serial', src:'https://archive.org/download/ZombiesOfTheStratosphere/Zombies%20of%20the%20Stratosphere.mp4', dur:10022 },
+  { type:'show', group:'SCI-FI NETWORK — SERIALS', title:'Radar Men from the Moon (1952) — Chapter 1', src:'https://archive.org/download/radarmen1/radarmen_chapter1_512kb.mp4', dur:1204 },
+  { type:'show', group:'SCI-FI NETWORK — SERIALS', title:'King of the Rocket Men (1949) — Chapter 1', src:'https://archive.org/download/king-of-the-rocket-men/01%20Dr.%20Vulcan%20-%20Traitor.mp4', dur:1202 },
+  { type:'show', group:'SCI-FI NETWORK — SERIALS', title:'Flying Disc Man from Mars (1950) — Chapter 1', src:'https://archive.org/download/flying-disc-man/01%20Menace%20from%20Mars.mp4', dur:1202 },
+  { type:'show', group:'SCI-FI NETWORK — SERIALS', title:'The Purple Monster Strikes (1945) — Chapter 1 (B&W)', src:'https://archive.org/download/chapter-01-the-man-in-the-meteor/Chapter%2001%20-%20The%20Man%20in%20the%20Meteor.ia.mp4', dur:1342 },
+  { type:'show', group:'SCI-FI NETWORK — SERIALS', title:'Undersea Kingdom (1936) — Chapter 1', src:'https://archive.org/download/undersea_kingdom1/uk1_512kb.mp4', dur:1849 },
+  { type:'show', group:'SCI-FI NETWORK — SERIALS', title:'Flash Gordon (1936) — complete 13-chapter serial', src:'https://archive.org/download/flash-gordon-1936/Flash%20Gordon%201936.ia.mp4', dur:14727 }
 ];
 const byTitle = t => LIBRARY.find(x => x.title.includes(t));
 const PROGRAM = [ byTitle('Fights On'), ...POD, byTitle('Mad Scientist'), byTitle('Cisco Kid — S1 E1'), ...POD, byTitle('Minnie the Moocher'), byTitle('Rose for Lotta'), ...POD, byTitle('Falling Hare') ];
@@ -633,7 +683,7 @@ const dvrDisplay = document.getElementById('dvrdisplay');
 const libBtn = document.getElementById('dvrLibBtn');
 const liveBtn = document.getElementById('dvrLiveBtn');
 let mode = 'standby'; // standby | live | dvr
-let channel = 1; // tuner channel: 1 = Lobo TV · 2 = Canal 2 (muy pronto) · 3 = Biblical
+let channel = 1; // tuner channel: 1 = Lobo TV · 2 = Canal 2 (muy pronto) · 3 = Biblical · 4 = Lobo Sci-Fi Network
 let currentIdx = -1;
 let currentList = null;
 
@@ -681,6 +731,7 @@ function slotAt(nowMs){
 // tuner script below); every other channel uses the Channel 1 clock above,
 // byte-for-byte the original behavior.
 function slotNow(){
+  if (channel === 4 && typeof slotAtCh4 === 'function') return slotAtCh4(Date.now());
   if (channel === 3 && typeof slotAtCh3 === 'function') return slotAtCh3(Date.now());
   if (channel === 2 && typeof slotAtCh2 === 'function') return slotAtCh2(Date.now());
   return slotAt(Date.now());
@@ -694,7 +745,7 @@ function fmtTime(ms){ return new Date(ms).toLocaleTimeString([], {hour:'numeric'
 function fmtClock(){ const d=new Date(); let h=d.getHours()%12; if(h===0)h=12; return h + ':' + String(d.getMinutes()).padStart(2,'0'); }
 function guide(){
   const nowMs = Date.now();
-  const { idx, slotStartMs, list } = (channel === 3 && typeof slotAtCh3 === 'function') ? slotAtCh3(nowMs) : ((channel === 2 && typeof slotAtCh2 === 'function') ? slotAtCh2(nowMs) : slotAt(nowMs));
+  const { idx, slotStartMs, list } = (channel === 4 && typeof slotAtCh4 === 'function') ? slotAtCh4(nowMs) : ((channel === 3 && typeof slotAtCh3 === 'function') ? slotAtCh3(nowMs) : ((channel === 2 && typeof slotAtCh2 === 'function') ? slotAtCh2(nowMs) : slotAt(nowMs)));
   const slot = list[idx];
   const sunday = (list === SUNDAY_PROGRAM);
   const sermon = (list === SERMON_PROGRAM);
@@ -702,7 +753,7 @@ function guide(){
   const endsMs = slotStartMs + slot.dur*1000;
   if (mode === 'dvr') return;
   if (slot.type==='show'){
-    gNow.textContent = (channel === 3 ? 'Channel 3 · Biblical — ' : (channel === 2 ? 'Canal 2 · Cine Clásico — ' : (sunday ? 'Sunday Bible Block — ' : (sermon ? 'Sunday Sermon — ' : (hymn ? 'Sunday Hymn Sing — ' : ''))))) + slot.title;
+    gNow.textContent = (channel === 4 ? 'Channel 4 · Sci-Fi Network — ' : (channel === 3 ? 'Channel 3 · Biblical — ' : (channel === 2 ? 'Canal 2 · Cine Clásico — ' : (sunday ? 'Sunday Bible Block — ' : (sermon ? 'Sunday Sermon — ' : (hymn ? 'Sunday Hymn Sing — ' : '')))))) + slot.title;
     gNext.textContent = nextShow(idx, list).title;
     nowEl.textContent = (mode==='live') ? (((channel === 2) ? 'En el aire: ' : 'On the air: ') + slot.title + ' · ' + ((channel === 2) ? 'termina ' : 'ends ') + fmtTime(endsMs)) : 'Lobo Television is standing by.';
   } else {
@@ -719,7 +770,7 @@ function setLights(){
 }
 function dvrClock(){
   if (channel === 2 && mode === 'live' && typeof dvrClockCh2 === 'function'){ dvrClockCh2(); return; }
-  if (mode==='live'){ const { idx, list } = slotNow(); dvrDisplay.textContent = (channel === 3 ? 'CH 3 LIVE · ' : 'LIVE · ') + fmtClock() + ' · ' + (list[idx].type==='show' ? (channel === 3 ? 'CHANNEL 3' : (list === SUNDAY_PROGRAM ? 'SUNDAY BIBLE' : (list === SERMON_PROGRAM ? 'SUNDAY SERMON' : (list === HYMN_PROGRAM ? 'SUNDAY HYMNS' : 'FEATURE')))) : 'COMMERCIAL'); }
+  if (mode==='live'){ const { idx, list } = slotNow(); dvrDisplay.textContent = (channel === 4 ? 'CH 4 LIVE · ' : (channel === 3 ? 'CH 3 LIVE · ' : 'LIVE · ')) + fmtClock() + ' · ' + (list[idx].type==='show' ? (channel === 4 ? 'SCI-FI NETWORK' : (channel === 3 ? 'CHANNEL 3' : (list === SUNDAY_PROGRAM ? 'SUNDAY BIBLE' : (list === SERMON_PROGRAM ? 'SUNDAY SERMON' : (list === HYMN_PROGRAM ? 'SUNDAY HYMNS' : 'FEATURE'))))) : 'COMMERCIAL'); }
   else if (mode==='dvr'){ dvrDisplay.textContent = 'DVR PLAY · ' + fmtClock(); }
   else { dvrDisplay.textContent = '-- STANDBY · ' + fmtClock() + ' --'; }
 }
@@ -836,6 +887,10 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 // Science films, and the 16 Hymn Sing videos in play order, with the
 // house sponsor pods between blocks. Same epoch anchor as Channel 1,
 // so every viewer lands mid-broadcast, not at a menu.
+// Channel 4 is the LOBO SCI-FI NETWORK — a third broadcast clock over
+// the verified public-domain sci-fi shelf in the DVR library (see the
+// CH4 builder below): drive-in double features with PD intermission
+// reels between the pictures and the house pods between the bills.
 // Changing channels flashes the house test-pattern card — drawn for
 // Lobo in the old Indian-head style — with the new channel number on it.
 const CH3_LC = LIBRARY.filter(function(x){ return x.group === 'SUNDAY BIBLE' && x.title.indexOf('The Living Christ') === 0; });
@@ -879,13 +934,82 @@ function slotAtCh2(nowMs){
   }
   return { idx:0, offset:0, slotStartMs: nowMs, list: CH2_PROGRAM };
 }
-const CH_NAMES = { 1:'LOBO TV', 2:'CANAL 2 · CINE CLÁSICO', 3:'CHANNEL 3 · BIBLICAL' };
+// ---- Channel 4: LOBO SCI-FI NETWORK. Forgotten public-domain science
+// fiction streamed from the Internet Archive, stacked the way the scout
+// brief laid it out: the DRIVE-IN DOUBLE FEATURE bills lead (DF-1 MOON
+// MADNESS — a film and its own remake, back to back), the double
+// features sit adjacent, a PD drive-in intermission reel runs between
+// the two pictures of every bill ("Let's All Go to the Lobby" leads the
+// rotation — the signature piece), and the house sponsor pods separate
+// the bills, same as Channels 2 and 3. The intermission reels are from
+// the Archive's Drive-In Movie Ads collection, each carrying the
+// Creative Commons Public Domain Mark in its item metadata; "Let's All
+// Go to the Lobby" (Filmack, 1957) is wired from the Archive item whose
+// metadata carries the same Public Domain Mark. Same epoch anchor as
+// the other channels, so every viewer lands mid-broadcast.
+const CH4_INTERMISSIONS = [
+  { type:'ad', title:'Let’s All Go to the Lobby (1957) — drive-in intermission', src:'https://archive.org/download/lets-all-go-to-the-lobby-intermission-bumper-4k-update/lets-all-go-to-the-lobby-intermission-bumper-4k-update.ia.mp4', dur:40 },
+  { type:'ad', title:'Drive-In Intermission', src:'https://archive.org/download/Intermission1/intermission1.mp4', dur:38 },
+  { type:'ad', title:'Drive-In Intermission — Coke Painter', src:'https://archive.org/download/Intermission3CokePainter/intermission3_coke_painter.mp4', dur:56 },
+  { type:'ad', title:'Drive-In Intermission', src:'https://archive.org/download/Intermission2b/intermission2b.mp4', dur:35 },
+  { type:'ad', title:'Drive-In Intermission — Circus', src:'https://archive.org/download/Intermission4bCircus/intermission4_circus_b.mp4', dur:53 }
+];
+// The broadcast sequence: show titles resolve against the DVR library
+// by prefix; 'INT' drops the next intermission reel in, 'POD' the house
+// sponsor pod. Double-feature partners stay adjacent, in brief order.
+const CH4_SEQ = [
+  'Cat-Women of the Moon','INT','Missile to the Moon','POD',
+  'The Phantom Empire','POD',
+  'Mesa of Lost Women','POD',
+  'Zombies of the Stratosphere','POD',
+  'Robot Monster','INT','Eegah','POD',
+  'Plan 9 from Outer Space','POD',
+  'Assignment: Outer Space','INT','The Phantom Planet','POD',
+  'Beyond the Time Barrier','INT','The Amazing Transparent Man','POD',
+  'The Last Man on Earth','INT','Teenagers from Outer Space','POD',
+  'Attack of the Giant Leeches','INT','The Incredible Petrified World','POD',
+  "The Brain That Wouldn't Die",'INT','Monstrosity','POD',
+  'Santa Claus Conquers the Martians','INT','The Snow Creature','POD',
+  'A Trip to the Moon','INT','The Lost World','POD',
+  'Project Moonbase','POD',
+  'Unknown World','POD',
+  'Battle of the Worlds','POD',
+  'First Spaceship on Venus','POD',
+  'Woman in the Moon','POD',
+  'Tales of Tomorrow','POD',
+  'Captain Video','Tom Corbett, Space Cadet','POD',
+  'Space Patrol','Flash Gordon (1954 TV)','POD',
+  'Rocky Jones, Space Ranger','POD',
+  'Radar Men from the Moon','King of the Rocket Men','POD',
+  'Flying Disc Man from Mars','The Purple Monster Strikes','POD',
+  'Undersea Kingdom','POD',
+  'Flash Gordon (1936)','POD'
+];
+const CH4_PROGRAM = [];
+let ch4IntIdx = 0;
+CH4_SEQ.forEach(function(t){
+  if (t === 'POD'){ POD.forEach(function(a){ CH4_PROGRAM.push(a); }); return; }
+  if (t === 'INT'){ CH4_PROGRAM.push(CH4_INTERMISSIONS[ch4IntIdx % CH4_INTERMISSIONS.length]); ch4IntIdx++; return; }
+  const it = LIBRARY.find(function(x){ return x.title.indexOf(t) === 0; });
+  if (it) CH4_PROGRAM.push(it);
+});
+const CH4_LOOP = CH4_PROGRAM.reduce((a,s)=>a+s.dur,0);
+function slotAtCh4(nowMs){
+  let pos = (((nowMs - EPOCH)/1000) % CH4_LOOP + CH4_LOOP) % CH4_LOOP;
+  let acc = 0;
+  for (let i=0;i<CH4_PROGRAM.length;i++){
+    if (pos < acc + CH4_PROGRAM[i].dur) return { idx:i, offset: pos-acc, slotStartMs: nowMs - (pos-acc)*1000, list: CH4_PROGRAM };
+    acc += CH4_PROGRAM[i].dur;
+  }
+  return { idx:0, offset:0, slotStartMs: nowMs, list: CH4_PROGRAM };
+}
+const CH_NAMES = { 1:'LOBO TV', 2:'CANAL 2 · CINE CLÁSICO', 3:'CHANNEL 3 · BIBLICAL', 4:'CHANNEL 4 · SCI-FI NETWORK' };
 const ledDigit = document.getElementById('leddigit');
 const chNameEl = document.getElementById('chname');
 const tpEl = document.getElementById('testpattern');
 const tpDigit = document.getElementById('tpdigit');
 const slate2 = document.getElementById('ch2slate');
-const chBtns = { 1: document.getElementById('chBtn1'), 2: document.getElementById('chBtn2'), 3: document.getElementById('chBtn3') };
+const chBtns = { 1: document.getElementById('chBtn1'), 2: document.getElementById('chBtn2'), 3: document.getElementById('chBtn3'), 4: document.getElementById('chBtn4') };
 let tpTimer = null;
 // Seven-segment map: which segments light for each digit (a=top, b=upper
 // right, c=lower right, d=bottom, e=lower left, f=upper left, g=middle).
@@ -899,7 +1023,7 @@ function updateTunerUI(){
   setSegDigit(ledDigit, channel);
   ledDigit.setAttribute('aria-label', 'Channel ' + channel);
   chNameEl.textContent = CH_NAMES[channel];
-  [1,2,3].forEach(function(n){ chBtns[n].classList.toggle('active', n === channel); });
+  [1,2,3,4].forEach(function(n){ chBtns[n].classList.toggle('active', n === channel); });
 }
 function showTestPattern(){
   setSegDigit(tpDigit, channel);
@@ -922,8 +1046,8 @@ function onChannelUIReset(){
   if (tpTimer){ clearTimeout(tpTimer); tpTimer = null; }
 }
 function setChannel(n){
-  if (n < 1) n = 3;
-  if (n > 3) n = 1;
+  if (n < 1) n = 4;
+  if (n > 4) n = 1;
   channel = n;
   updateTunerUI();
   showTestPattern();
@@ -935,10 +1059,11 @@ function setChannel(n){
 document.getElementById('chBtn1').addEventListener('click', function(){ setChannel(1); });
 document.getElementById('chBtn2').addEventListener('click', function(){ setChannel(2); });
 document.getElementById('chBtn3').addEventListener('click', function(){ setChannel(3); });
+document.getElementById('chBtn4').addEventListener('click', function(){ setChannel(4); });
 document.getElementById('chUp').addEventListener('click', function(){ setChannel(channel + 1); });
 document.getElementById('chDown').addEventListener('click', function(){ setChannel(channel - 1); });
 document.addEventListener('keydown', function(e){
-  if (e.key === '1' || e.key === '2' || e.key === '3') setChannel(Number(e.key));
+  if (e.key === '1' || e.key === '2' || e.key === '3' || e.key === '4') setChannel(Number(e.key));
 });
 // Leaving Channel 2 for the DVR: the library plays on the same screen,
 // so the slate steps aside (LIVE TV restores it via goLive).
