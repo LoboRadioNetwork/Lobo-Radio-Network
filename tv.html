@@ -167,6 +167,14 @@
   box-shadow:0 2px 5px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.15);
 }
 .chstep:hover { border-color:#d4af37; color:#f0d489; }
+.chstack { display:flex; flex-direction:column; gap:7px; }
+.chguide {
+  display:block; text-align:center; text-decoration:none; cursor:pointer;
+  background:linear-gradient(180deg,#3d3d44,#1b1b1f); color:#f5f0dc;
+  border:1px solid #55555e; border-radius:6px; padding:5px 12px; font-size:12px; letter-spacing:.06em;
+  box-shadow:0 2px 5px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.15);
+}
+.chguide:hover { border-color:#d4af37; color:#f0d489; }
 /* ---- the channel-change test pattern (our own Indian-head style card) ---- */
 .testpattern {
   position:absolute; inset:0; z-index:5; display:none; background:#101010;
@@ -345,9 +353,12 @@
             <button class="chbtn" id="chBtn3" aria-label="Channel 3">3</button>
             <button class="chbtn" id="chBtn4" aria-label="Channel 4">4</button>
           </div>
-          <div class="chbtns">
-            <button class="chstep" id="chDown" aria-label="Channel down">CH −</button>
-            <button class="chstep" id="chUp" aria-label="Channel up">CH +</button>
+          <div class="chstack">
+            <div class="chbtns">
+              <button class="chstep" id="chDown" aria-label="Channel down">CH −</button>
+              <button class="chstep" id="chUp" aria-label="Channel up">CH +</button>
+            </div>
+            <a class="chguide" href="guide.html">CHANNEL GUIDE</a>
           </div>
         </div>
         <div class="guidebox" id="guideLive">
