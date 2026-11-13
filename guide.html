@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lobo Television — Program Guide · loboradio.com</title>
+<meta name="description" content="The Lobo Television program guide: what is on Channels 1–4 right now and for the next eight hours — classic movies, cine clásico, Bible films and the Lobo Sci-Fi Network. All times Central.">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<style>
+  * { box-sizing: border-box; }
+  body { margin:0; background:#202226; font-family: Georgia, 'Times New Roman', Times, serif; color:#1c1a17; }
+  .sheet { max-width:1180px; margin:22px auto 34px; background:#f8f3e6; padding:30px 34px 30px;
+           box-shadow:0 10px 44px rgba(0,0,0,.55); border:1px solid #d8cfb4; }
+  .kicker { display:flex; justify-content:space-between; gap:12px; font-size:12px; letter-spacing:.14em;
+            text-transform:uppercase; border-top:3px solid #1c1a17; border-bottom:1px solid #1c1a17;
+            padding:6px 2px 5px; }
+  .masthead { text-align:center; padding:16px 0 4px; }
+  .masthead .brand { font-size:19px; letter-spacing:.42em; text-transform:uppercase; }
+  .masthead h1 { margin:2px 0 0; font-size:58px; line-height:1.02; font-weight:900; letter-spacing:.015em;
+                 text-transform:uppercase; }
+  .masthead .sub { margin-top:7px; font-style:italic; font-size:16px; color:#4a4232; }
+  .dateline { display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-top:14px;
+              border-top:4px double #1c1a17; border-bottom:2px solid #1c1a17; padding:7px 2px;
+              font-size:14.5px; }
+  .dateline .date { font-weight:bold; }
+  .backrow { margin:14px 0 4px; display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; align-items:center; }
+  .backbtn { display:inline-block; background:#1c1a17; color:#f8f3e6; text-decoration:none; padding:9px 16px;
+             font-size:14px; letter-spacing:.06em; border:2px solid #1c1a17; }
+  .backbtn:hover { background:#b3001b; border-color:#b3001b; }
+  .legend { font-size:12.5px; font-style:italic; color:#4a4232; }
+  .gridwrap { margin-top:10px; overflow-x:auto; border:2px solid #1c1a17; background:#fbf7ec; }
+  .gridin { min-width:880px; }
+  .timerow { display:flex; border-bottom:2px solid #1c1a17; background:#efe7d0; }
+  .corner { flex:0 0 218px; padding:6px 10px; font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+            border-right:2px solid #1c1a17; display:flex; align-items:center; }
+  .timehead { position:relative; flex:1; height:30px; }
+  .timehead .tick { position:absolute; top:6px; transform:translateX(3px); font-size:11px; color:#5a5142; white-space:nowrap; }
+  .timehead .tick.hour { font-size:12.5px; font-weight:bold; color:#1c1a17; }
+  .row { display:flex; border-bottom:1px solid #8d8474; }
+  .row:last-child { border-bottom:none; }
+  .chlabel { flex:0 0 218px; padding:10px 11px 9px; border-right:2px solid #1c1a17; background:#f3ecd9; }
+  .chname { font-size:17px; font-weight:900; letter-spacing:.03em; }
+  .chsub { font-size:13px; font-style:italic; color:#4a4232; margin-top:1px; }
+  .chtag { font-size:11px; color:#6b6250; margin-top:3px; line-height:1.35; }
+  .nn { margin-top:8px; font-size:12px; line-height:1.45; border-top:1px solid #b9ae8f; padding-top:6px; }
+  .nnlab { font-weight:900; color:#b3001b; font-size:10.5px; letter-spacing:.1em; }
+  .nnend { color:#6b6250; }
+  .track { position:relative; flex:1; height:86px;
+           background-image:linear-gradient(to right, rgba(28,26,23,.16) 1px, transparent 1px);
+           background-size:6.25% 100%; }
+  .blk { position:absolute; top:7px; bottom:7px; border:1px solid rgba(28,26,23,.55); border-radius:3px;
+         padding:4px 6px; overflow:hidden; }
+  .blk .btitle { font-size:12px; font-weight:bold; line-height:1.25; display:-webkit-box; -webkit-line-clamp:3;
+                 -webkit-box-orient:vertical; overflow:hidden; }
+  .blk .btime { font-size:10.5px; color:rgba(28,26,23,.72); margin-top:2px; }
+  .blk.brk { background:repeating-linear-gradient(45deg,#e9dfc6 0 7px,#ddd0ac 7px 14px); color:#4a4232; }
+  .blk.brk .btitle { font-weight:normal; font-style:italic; font-size:11px; }
+  .blk.onair { outline:3px solid #b3001b; outline-offset:-1px; box-shadow:0 0 0 1px #f8f3e6 inset; }
+  .nowline { position:absolute; top:0; bottom:0; width:2px; background:#b3001b; z-index:6; pointer-events:none; }
+  .nowline.headflag { background:#b3001b; width:2px; }
+  .nowline.headflag span { position:absolute; top:-1px; left:50%; transform:translateX(-50%); background:#b3001b;
+                           color:#fff; font-size:9.5px; font-weight:bold; letter-spacing:.08em; padding:1px 5px; border-radius:2px; }
+  .colophon { margin-top:16px; border-top:1px solid #1c1a17; padding-top:10px; font-size:12.5px; color:#4a4232;
+              line-height:1.55; display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; }
+  @media (max-width:640px){
+    .sheet { padding:18px 14px 22px; margin:10px; }
+    .masthead h1 { font-size:36px; }
+    .masthead .brand { letter-spacing:.24em; font-size:15px; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="kicker"><span>Lobo Broadcasting Group</span><span>Four Channels · Around the Clock</span><span>Dallas, Texas</span></div>
+  <div class="masthead">
+    <div class="brand">Lobo Television</div>
+    <h1>Program Guide</h1>
+    <div class="sub">What&rsquo;s on the Lobo air &mdash; this hour, and the hours ahead</div>
+  </div>
+  <div class="dateline"><span class="date" id="dateline">&mdash;</span><span>Listings for the next eight hours</span><span><strong>All times Central</strong></span></div>
+  <div class="backrow">
+    <a class="backbtn" href="tv.html">&#128250; WATCH LIVE &mdash; BACK TO THE TELEVISION</a>
+    <span class="legend">The red line marks the present moment. Striped blocks are commercial breaks &amp; intermissions.</span>
+  </div>
+  <div class="gridwrap"><div class="gridin">
+    <div class="timerow"><div class="corner">Channel &middot; On Now &middot; Up Next</div><div class="timehead" id="timehead"></div></div>
+    <div class="row">
+      <div class="chlabel"><div class="chname">CHANNEL 1</div><div class="chsub">Classic Movies</div><div class="chtag">Westerns &amp; golden-age cartoons</div><div class="nn" id="now1"></div><div class="nn" id="next1" style="border-top:none;margin-top:2px;padding-top:0"></div></div>
+      <div class="track" id="track1"></div>
+    </div>
+    <div class="row">
+      <div class="chlabel"><div class="chname">CANAL 2</div><div class="chsub">Cine Cl&aacute;sico</div><div class="chtag">Cine cl&aacute;sico en espa&ntilde;ol, todo el d&iacute;a</div><div class="nn" id="now2"></div><div class="nn" id="next2" style="border-top:none;margin-top:2px;padding-top:0"></div></div>
+      <div class="track" id="track2"></div>
+    </div>
+    <div class="row">
+      <div class="chlabel"><div class="chname">CHANNEL 3</div><div class="chsub">Bible Films</div><div class="chtag">The Living Christ &middot; Sermons from Science &middot; Hymn Sing</div><div class="nn" id="now3"></div><div class="nn" id="next3" style="border-top:none;margin-top:2px;padding-top:0"></div></div>
+      <div class="track" id="track3"></div>
+    </div>
+    <div class="row">
+      <div class="chlabel"><div class="chname">CHANNEL 4</div><div class="chsub">Lobo Sci-Fi Network</div><div class="chtag">Forgotten sci-fi &middot; Drive-in double features</div><div class="nn" id="now4"></div><div class="nn" id="next4" style="border-top:none;margin-top:2px;padding-top:0"></div></div>
+      <div class="track" id="track4"></div>
+    </div>
+  </div></div>
+  <div class="colophon">
+    <span>These listings are read live off the same broadcast clock that runs the Lobo Television tuner &mdash; the guide and the television cannot tell different stories. Programs run back-to-back, around the clock.</span>
+    <span>&copy; 2026 Lobo Radio Network &middot; Lobo Broadcasting Group</span>
+  </div>
+</div>
+<script>
+const POD = [
+  { type:'ad', title:'Mustang Dallas — station promo', src:'assets/spots/spot-mustang-promo.mp4', dur:8 },
+  { type:'ad', title:'Jeno’s Pizza Rolls — with The Lone Ranger (1968)', src:'https://archive.org/download/1968JenosPizzaRollsWithTheLoneRanger/1968%20Jeno%27s%20Pizza%20Rolls%20with%20The%20Lone%20Ranger.mp4', dur:61 },
+  { type:'ad', title:'Cowboy Revolution — a word from our sponsor', src:'assets/spots/spot-cowboy-tumbler.mp4', dur:5 },
+  { type:'ad', title:'Roy Rogers Quick Shooter Hat — classic commercial (1961)', src:'https://archive.org/download/1961RoyRogersQuickShooterHat/1961%20Roy%20Rogers%20Quick%20Shooter%20Hat.mp4', dur:50 },
+  { type:'ad', title:'Lobo Arcade — High Noon Shootout', src:'assets/spots/spot-high-noon.mp4', dur:5 },
+  { type:'ad', title:'Kellogg’s Corn Flakes — Flying Superman offer (1955)', src:'https://archive.org/download/1955FlyingSupermanFromKelloggsCornFlakes/1955%20Flying%20Superman%20from%20Kellogg%27s%20Corn%20Flakes.mp4', dur:61 },
+  { type:'ad', title:'Cowboy Revolution — a word from our sponsor', src:'assets/spots/spot-cowboy-tumbler.mp4', dur:5 },
+  { type:'ad', title:'Jeno’s Pizza Rolls — classic commercial (1972)', src:'https://archive.org/download/jenos-pizza-rolls-commercial-lone-ranger/JenosPizzaRolls-Commercial-LoneRanger.mp4', dur:65 },
+  { type:'ad', title:'Kellogg’s Sugar Frosted Flakes — classic commercial (1976)', src:'https://archive.org/download/KelloggsSugarFrostedFlakesCereal1976/Kellogg%27s%20Sugar%20Frosted%20Flakes%20Cereal%20(1976).mp4', dur:30 }
+];
+const LIBRARY = [
+  { type:'show', group:'THE LONE RANGER', title:'The Lone Ranger — “Enter the Lone Ranger” (1949)', src:'https://archive.org/download/EnterTheLoneRanger/EnterTheLoneRanger_512kb.mp4', dur:4148 },
+  { type:'show', group:'THE LONE RANGER', title:'The Lone Ranger — “The Lone Ranger Fights On” (1949)', src:'https://archive.org/download/the-lone-ranger-1949-s-01-e-02-the-lone-ranger-fights-on/The%20Lone%20Ranger%201949%20%28S01E02%29%20The%20Lone%20Ranger%20Fights%20on.mp4', dur:1455 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'Angel and the Badman (1947) — John Wayne & Gail Russell', src:'https://archive.org/download/angel-and-the-badman-1947/Angel%20and%20the%20Badman%20(1947).ia.mp4', dur:6007 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'Blue Steel (1934) — John Wayne & Gabby Hayes', src:'https://archive.org/download/BlueSteel/BlueSteel_512kb.mp4', dur:3256 },
+  { type:'show', group:'GOLDEN-AGE CARTOONS', title:'Superman — “The Mad Scientist” (1941)', src:'https://archive.org/download/mad-scientist-superman-fleischer/The%20Mad%20Scientist%20%7C%20Superman%20Fleischer%20Studios%20Cartoon%20%7C%2016mm.mp4', dur:609 },
+  { type:'show', group:'GOLDEN-AGE CARTOONS', title:'Betty Boop — “Minnie the Moocher” (1932)', src:'https://archive.org/download/bb_minnie_the_moocher_201805/bb_minnie_the_moocher.mp4', dur:467 },
+  { type:'show', group:'GOLDEN-AGE CARTOONS', title:'Bugs Bunny — “Falling Hare” (1943)', src:'https://archive.org/download/falling-hare-1943/Falling%20Hare%20(1943).mp4', dur:512 },
+  { type:'show', group:'GOLDEN-AGE CARTOONS', title:'Popeye — “Popeye Meets Sindbad the Sailor” (1936)', src:'https://archive.org/download/popeye-the-sailor-meets-sindbad-the-sailor-1936/Popeye%20the%20Sailor%20Meets%20Sindbad%20the%20Sailor%20(1936).mp4', dur:993 },
+  { type:'show', group:'GOLDEN-AGE CARTOONS', title:'Woody Woodpecker — “Pantry Panic” (1941)', src:'https://archive.org/download/pantry-panic/Pantry%20Panic%20(1941).mp4', dur:418 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E1 “A Rose for Lotta”', src:'https://archive.org/download/BONANZA-EPISODEONE/a36043401b0ce238a700820ee470bcf05a9acfcc.mp4', dur:2975 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E19 “The Gunmen”', src:'https://archive.org/download/bonanzapd/Bonanza%20s01e19%20THE%20GUNMEN.mp4', dur:2896 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E20 “The Fear Merchants”', src:'https://archive.org/download/bonanzapd/Bonanza%20s01e20%20THE%20FEAR%20MERCHANTS.mp4', dur:2894 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E21 “The Spanish Grant”', src:'https://archive.org/download/bonanzapd/Bonanza%20s01e21%20THE%20SPANISH%20GRANT.mp4', dur:2892 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E22 “Blood on the Land”', src:'https://archive.org/download/bonanzapd/Bonanza%20s01e22%20BLOOD%20ON%20THE%20LAND.mp4', dur:2884 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E23 “Desert Justice”', src:'https://archive.org/download/bonanzapd/Bonanza%20s01e23%20DESERT%20JUSTICE.mp4', dur:2897 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E24 “The Stranger”', src:'https://archive.org/download/bonanzapd/Bonanza%20s01e24%20THE%20STRANGER.mp4', dur:2893 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E25 “Escape to Ponderosa”', src:'https://archive.org/download/bonanzapd/Bonanza%20s01e25%20ESCAPE%20TO%20PONDEROSA.mp4', dur:2893 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E26 “The Avenger”', src:'https://archive.org/download/bonanzapd/Bonanza%20s01e26%20THE%20AVENGER.mp4', dur:2895 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E27 “The Last Trophy”', src:'https://archive.org/download/bonanzapd/Bonanza%20s01e27%20THE%20LAST%20TROPHY.mp4', dur:2893 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E28 “San Francisco”', src:'https://archive.org/download/bonanzapd/Bonanza%20s01e28%20SAN%20FRANCISCO.mp4', dur:2893 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E30 “Feet of Clay”', src:'https://archive.org/download/bonanzapd/Bonanza%20s01e30%20FEET%20OF%20CLAY.mp4', dur:2891 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E31 “Dark Star”', src:'https://archive.org/download/bonanzapd/Bonanza%20s01e31%20DARK%20STAR.mp4', dur:2891 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S1 E32 “Death at Dawn”', src:'https://archive.org/download/bonanzapd/Bonanza%20s01e32%20DEATH%20AT%20DAWN.mp4', dur:2894 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S2 E1 “Showdown”', src:'https://archive.org/download/bonanzapd/Bonanza%20s02e01%20SHOWDOWN.mp4', dur:2932 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S2 E2 “The Mission”', src:'https://archive.org/download/bonanzapd/Bonanza%20s02e02%20THE%20MISSION%20%5B360p%5D.mp4', dur:2912 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S2 E3 “Badge Without Honor”', src:'https://archive.org/download/bonanzapd/Bonanza%20s02e03%20BADGE%20WITHOUT%20HONOR.mp4', dur:2893 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S2 E4 “The Mill”', src:'https://archive.org/download/bonanzapd/Bonanza%20s02e04%20THE%20MILL.mp4', dur:2888 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S2 E6 “Denver McKee”', src:'https://archive.org/download/bonanzapd/Bonanza%20s02e06%20DENVER%20MCKEE.mp4', dur:2890 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S2 E10 “The Last Viking”', src:'https://archive.org/download/bonanzapd/Bonanza%20s02e10%20THE%20LAST%20VIKING.mp4', dur:2891 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S2 E11 “The Trail Gang”', src:'https://archive.org/download/bonanzapd/Bonanza%20s02e11%20THE%20TRAIL%20GANG.mp4', dur:2889 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S2 E12 “The Savage”', src:'https://archive.org/download/bonanzapd/Bonanza%20s02e12%20THE%20SAVAGE.mp4', dur:2891 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S2 E13 “Silent Thunder”', src:'https://archive.org/download/bonanzapd/Bonanza%20s02e13%20SILENT%20THUNDER.mp4', dur:2891 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S2 E14 “The Ape”', src:'https://archive.org/download/bonanzapd/Bonanza%20s02e14%20THE%20APE.mp4', dur:2892 },
+  { type:'show', group:'BONANZA — TV SERIES', title:'Bonanza — S2 E15 “The Blood Line”', src:'https://archive.org/download/bonanzapd/Bonanza%20s02e15%20THE%20BLOOD%20LINE.mp4', dur:2891 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E1', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e01.mp4', dur:1463 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E3', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e03.mp4', dur:1502 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E4', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e04.mp4', dur:1490 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E5', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e05.mp4', dur:1599 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E6', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e06.mp4', dur:1487 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E7', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e07.mp4', dur:1441 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E8', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e08.mp4', dur:1472 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E9', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e09.mp4', dur:1483 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E10', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e10.mp4', dur:1583 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E12', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e12.mp4', dur:1513 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E15', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e15.mp4', dur:1500 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E16', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e16.mp4', dur:1500 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E17', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e17.mp4', dur:1482 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E18', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e18.mp4', dur:1493 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E19', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e19.mp4', dur:1469 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E20', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e20.mp4', dur:1491 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E21', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e21.mp4', dur:1481 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E22', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e22.mp4', dur:1499 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E23', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e23.mp4', dur:1479 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E24', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e24.mp4', dur:1492 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S1 E26', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s01e26.mp4', dur:1492 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S2 E1', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s02e01.mp4', dur:1499 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S2 E2', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s02e02.mp4', dur:1462 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S2 E7', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s02e07.mp4', dur:1578 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S2 E11', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s02e11.mp4', dur:1585 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S2 E14', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s02e14.mp4', dur:1588 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S2 E15', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s02e15.mp4', dur:1574 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S2 E21', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s02e21.mp4', dur:1499 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S2 E22', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s02e22.mp4', dur:1501 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S2 E23', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s02e23.mp4', dur:1463 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — S2 E24', src:'https://archive.org/download/TheCiscoKidpublicdomain/The_Cisco_Kid_s02e24.mp4', dur:1582 },
+  { type:'show', group:'THE CISCO KID — TV SERIES', title:'The Cisco Kid — “Spanish Dagger”', src:'https://archive.org/download/CiscoKidSpanishDagger512kb/CiscoKid%20SpanishDagger%20512kb.mp4', dur:1575 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E1 “Jailbreak”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e01%20Jailbreak.mp4', dur:1555 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E3 “The Set-Up”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e03%20The%20Set-Up.mp4', dur:1531 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E4 “The Treasure of Howling Dog Canyon”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e04%20The%20Treasure%20of%20Howling%20Dog%20Canyon.mp4', dur:1540 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E5 “The Train Robbery”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e05%20The%20Train%20Robbery.mp4', dur:1542 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E6 “Badman\'s Brother”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e06%20Badman%27s%20Brother.mp4', dur:1557 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E7 “The Outlaws Girl”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e07%20The%20Outlaws%20Girl.mp4', dur:1543 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E8 “Desert Fugitive”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e08%20Desert%20Fugitive.mp4', dur:1555 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E9 “Outlaws Town”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e09%20Outlaws%20Town.mp4', dur:1506 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E10 “Unwilling Outlaw”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e10%20Unwilling%20Outlaw.mp4', dur:1466 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E11 “Dead Mens Hills”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e11%20Dead%20Mens%20Hiills.mp4', dur:1547 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E12 “The Ministers Son”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e12%20The%20Ministers%20Son.mp4', dur:1523 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E13 “Ghost Gulch”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e13%20Ghost%20Gulch.mp4', dur:1545 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E14 “Ride in the Death Wagon”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e14%20Ride%20in%20the%20Death%20Wagon.mp4', dur:1548 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E15 “Peril from the Past”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e15%20Peril%20from%20the%20Past.mp4', dur:1538 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E18 “The Hermits Secret”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e18%20The%20Hermits%20Secret.mp4', dur:1506 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E20 “Ghost Town Gold”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e20%20Ghost%20Town%20Gold.mp4', dur:1545 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S1 E23 “Flying Bullets”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s01e23%20Flying%20Bullets.mp4', dur:1551 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S2 E1 “Death Medicine”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s02e01%20Death%20Medicine.mp4', dur:1549 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S2 E5 “Go for Your Gun”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s02e05%20Go%20for%20Your%20Gun.mp4', dur:1536 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S2 E7 “Blind Justice”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s02e07%20Blind%20Justice.mp4', dur:1555 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S2 E8 “The Knockout”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s02e08%20The%20Knockout.mp4', dur:1556 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S2 E9 “Run-A-Round”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s02e09%20Run-A-Round.mp4', dur:1555 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S2 E10 “Phantom Rustlers”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s02e10%20Phantom%20Rustlers.mp4', dur:1557 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S2 E11 “Loaded Guns”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s02e11%20Loaded%20Guns.mp4', dur:1553 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S2 E15 “Money to Burn”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s02e15%20Money%20to%20Burn.mp4', dur:1544 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S3 E1 “Milliner from Medicine Creek”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s03e01%20Milliner%20from%20Medicine%20Creek.mp4', dur:1537 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S3 E3 “Outlaws of Paradise Valley”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s03e03%20Outlaws%20of%20Paradise%20Valley.mp4', dur:1546 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S3 E6 “M Stands for Murder”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s03e06%20M%20Stands%20for%20Murder.mp4', dur:1537 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S3 E11 “The Secret of Indian Gap”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s03e11%20The%20Secret%20of%20Indian%20Gap.mp4', dur:1555 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S4 E1 “The Lady Killer”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s04e01%20The%20Lady%20Killer.mp4', dur:1556 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S4 E6 “Hard Luck Story”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s04e06%20Hard%20Luck%20Story.mp4', dur:1515 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S4 E7 “Boys Day at Paradise Valley”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s04e07%20Boys%20Day%20at%20Paradise%20Valley.mp4', dur:1432 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S4 E8 “Bad Neighbors”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s04e08%20Bad%20Neighbors.mp4', dur:1738 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S4 E10 “Hidden Treasures”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s04e10%20Hidden%20Treasures.mp4', dur:1309 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S4 E12 “The Big Chance”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s04e12%20The%20Big%20Chance.mp4', dur:1558 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S4 E14 “Dead End Trail”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s04e14%20Dead%20End%20Trail.mp4', dur:1246 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S4 E15 “Born Fugitive”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s04e15%20Born%20Fugitive.mp4', dur:1240 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S4 E16 “Quick Draw”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s04e16%20Quick%20Draw.mp4', dur:1514 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S5 E1 “And Sudden Death”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s05e01%20And%20Sudden%20Death.mp4', dur:1523 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S5 E2 “Ranch War”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s05e02%20Ranch%20War.mp4', dur:1543 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S5 E8 “Ambush”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s05e08%20Ambush.mp4', dur:1302 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S5 E9 “Money is Dangerous”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s05e09%20Money%20is%20Dangerous.mp4', dur:1549 },
+  { type:'show', group:'THE ROY ROGERS SHOW — TV SERIES', title:'The Roy Rogers Show — S5 E11 “Horse Crazy”', src:'https://archive.org/download/theroyrogersshow/The%20Roy%20Rogers%20Show%20s05e11%20Horse%20Crazy.mp4', dur:1542 },
+  { type:'show', group:'BAT MASTERSON & WILD BILL HICKOK — TV', title:'Bat Masterson — S1 E4 “Stampede at Tent City”', src:'https://archive.org/download/bat-masterson-pd/Bat%20Masterson%20-%20Stampede%20on%20Tent%20City.mp4', dur:1571 },
+  { type:'show', group:'BAT MASTERSON & WILD BILL HICKOK — TV', title:'Bat Masterson — “The Fighter”', src:'https://archive.org/download/bat-masterson-pd/Bat%20Masterson%20-%20The%20Fighter.mp4', dur:1560 },
+  { type:'show', group:'BAT MASTERSON & WILD BILL HICKOK — TV', title:'Wild Bill Hickok — “Dark Horse Candidate” (1952)', src:'https://archive.org/download/wild-bill-hickok-dark-horse-canidate-jan-10-1952/Wild%20Bill%20Hickok%20Dark%20Horse%20Canidate%20%20jan%2010%201952.mp4', dur:1520 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'Riders of Destiny (1933) — John Wayne', src:'https://archive.org/download/riders-of-destiny-1933/Riders%20of%20Destiny%20(1933).mp4', dur:3167 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'Sagebrush Trail (1933) — John Wayne', src:'https://archive.org/download/sagebrush-trail-1933/Sagebrush%20Trail%20(1933).mp4', dur:3210 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'The Lucky Texan (1934) — John Wayne', src:'https://archive.org/download/the-lucky-texan-1934_202505/The%20Lucky%20Texan%20(1934).mp4', dur:3270 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'West of the Divide (1934) — John Wayne', src:'https://archive.org/download/west-of-the-divide-1934/West%20of%20the%20Divide%20(1934).mp4', dur:3204 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'The Man from Utah (1934) — John Wayne', src:'https://archive.org/download/the-man-from-utah-1934_202505/The%20Man%20from%20Utah%20(1934).mp4', dur:3087 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'Randy Rides Alone (1934) — John Wayne', src:'https://archive.org/download/randy-rides-alone-1934_202504/Randy%20Rides%20Alone%20(1934).mp4', dur:3147 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'The Star Packer (1934) — John Wayne', src:'https://archive.org/download/the-star-packer-1934/The%20Star%20Packer%20(1934).mp4', dur:3280 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'The Lawless Frontier (1934) — John Wayne', src:'https://archive.org/download/the-lawless-frontier-1934_202505/The%20Lawless%20Frontier%20(1934).mp4', dur:2982 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'’Neath the Arizona Skies (1934) — John Wayne', src:'https://archive.org/download/neathTheArizonaSkiesVideoQualityUpgrade/neathTheArizonaSkiesVideoQualityUpgrade.mp4', dur:3150 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'Texas Terror (1935) — John Wayne', src:'https://archive.org/download/texas-terror-1935/Texas%20Terror%20(1935).mp4', dur:3090 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'The Dawn Rider (1935) — John Wayne', src:'https://archive.org/download/the-dawn-rider-1935-john-wayne/The%20Dawn%20Rider%20(1935)%20JOHN%20WAYNE.mp4', dur:3210 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'Paradise Canyon (1935) — John Wayne', src:'https://archive.org/download/paradise-canyon-1935/Paradise%20Canyon%20(1935).mp4', dur:3190 },
+  { type:'show', group:'JOHN WAYNE — FEATURE FILMS', title:'Winds of the Wasteland (1936) — John Wayne', src:'https://archive.org/download/WINDSOFTHEWASTELANDVideoQualityUpgrade/WINDS%20OF%20THE%20WASTELAND%20video%20quality%20upgrade.mp4', dur:3272 },
+  { type:'show', group:'RANDOLPH SCOTT — FEATURE FILMS', title:'To the Last Man (1933) — Randolph Scott', src:'https://archive.org/download/ZaneGreysToTheLastMan1933-RandolphScott/ZaneGreys-toTheLastMan-RandolphScott1933_512kb.mp4', dur:3954 },
+  { type:'show', group:'RANDOLPH SCOTT — FEATURE FILMS', title:'Wagon Wheels (1934) — Randolph Scott', src:'https://archive.org/download/WagonWheelsZaneGreyWesternWRandolphScott.mp4/Wagon%20Wheels%20(Zane%20Grey%20Western%20w%20Randolph%20Scott).mp4.mp4', dur:3553 },
+  { type:'show', group:'RANDOLPH SCOTT — FEATURE FILMS', title:'Rocky Mountain Mystery (1935) — Randolph Scott', src:'https://archive.org/download/Rocky_Mountain_Mystery_1935/Rocky_Mountain_Mystery_1935.mp4', dur:3928 },
+  { type:'show', group:'RANDOLPH SCOTT — FEATURE FILMS', title:'The Thundering Herd (1933) — Randolph Scott', src:'https://archive.org/download/the-thundering-herd/The%20Thundering%20Herd.mp4', dur:3435 },
+  { type:'show', group:'GARY COOPER — FEATURE FILM', title:'Fighting Caravans (1931) — Gary Cooper', src:'https://archive.org/download/fighting-caravans-1931/Fighting%20Caravans%20(1931).mp4', dur:4838 },
+  { type:'show', group:'ROY ROGERS — FEATURE FILMS', title:'Under Western Stars (1938) — Roy Rogers', src:'https://archive.org/download/UnderWesternStars/UnderWesternStars_512kb.mp4', dur:3882 },
+  { type:'show', group:'ROY ROGERS — FEATURE FILMS', title:'Billy the Kid Returns (1938) — Roy Rogers', src:'https://archive.org/download/billy-the-kid-returns-1938/Billy%20the%20Kid%20Returns%20(1938).mp4', dur:3203 },
+  { type:'show', group:'ROY ROGERS — FEATURE FILMS', title:'Saga of Death Valley (1939) — Roy Rogers', src:'https://archive.org/download/saga-of-death-valley-1939_202402/Saga%20of%20Death%20Valley%20(1939).mp4', dur:3190 },
+  { type:'show', group:'ROY ROGERS — FEATURE FILMS', title:'Days of Jesse James (1939) — Roy Rogers', src:'https://archive.org/download/days-of-jesse-james-1939/Days%20of%20Jesse%20James%20(1939).mp4', dur:3184 },
+  { type:'show', group:'ROY ROGERS — FEATURE FILMS', title:'The Arizona Kid (1939) — Roy Rogers', src:'https://archive.org/download/Arizona_Kid_1939/Arizona_Kid_1939.mp4', dur:3188 },
+  { type:'show', group:'GENE AUTRY — THE PHANTOM EMPIRE (1935 SERIAL)', title:'The Phantom Empire — Chapter 1 (1935)', src:'https://archive.org/download/PhantomEmpire1/Phantom%20Empire%20-%201.mp4', dur:1796 },
+  { type:'show', group:'GENE AUTRY — THE PHANTOM EMPIRE (1935 SERIAL)', title:'The Phantom Empire — Chapter 2 (1935)', src:'https://archive.org/download/PhantomEmpire1/Phantom%20Empire%20-%202.mp4', dur:1197 },
+  { type:'show', group:'GENE AUTRY — THE PHANTOM EMPIRE (1935 SERIAL)', title:'The Phantom Empire — Chapter 3 (1935)', src:'https://archive.org/download/PhantomEmpire1/Phantom%20Empire%20-%203.mp4', dur:1200 },
+  { type:'show', group:'GENE AUTRY — THE PHANTOM EMPIRE (1935 SERIAL)', title:'The Phantom Empire — Chapter 4 (1935)', src:'https://archive.org/download/PhantomEmpire1/Phantom%20Empire%20-%204.mp4', dur:1079 },
+  { type:'show', group:'GENE AUTRY — THE PHANTOM EMPIRE (1935 SERIAL)', title:'The Phantom Empire — Chapter 5 (1935)', src:'https://archive.org/download/PhantomEmpire1/Phantom%20Empire%20-%205.mp4', dur:1225 },
+  { type:'show', group:'GENE AUTRY — THE PHANTOM EMPIRE (1935 SERIAL)', title:'The Phantom Empire — Chapter 6 (1935)', src:'https://archive.org/download/PhantomEmpire1/Phantom%20Empire%20-%206.mp4', dur:1068 },
+  { type:'show', group:'GENE AUTRY — THE PHANTOM EMPIRE (1935 SERIAL)', title:'The Phantom Empire — Chapter 7 (1935)', src:'https://archive.org/download/PhantomEmpire1/Phantom%20Empire%20-%207.mp4', dur:1183 },
+  { type:'show', group:'GENE AUTRY — THE PHANTOM EMPIRE (1935 SERIAL)', title:'The Phantom Empire — Chapter 8 (1935)', src:'https://archive.org/download/PhantomEmpire1/Phantom%20Empire%20-%208.mp4', dur:1203 },
+  { type:'show', group:'GENE AUTRY — THE PHANTOM EMPIRE (1935 SERIAL)', title:'The Phantom Empire — Chapter 9 (1935)', src:'https://archive.org/download/PhantomEmpire1/Phantom%20Empire%20-%209.mp4', dur:1079 },
+  { type:'show', group:'GENE AUTRY — THE PHANTOM EMPIRE (1935 SERIAL)', title:'The Phantom Empire — Chapter 10 (1935)', src:'https://archive.org/download/PhantomEmpire1/Phantom%20Empire%20-%2010.mp4', dur:1152 },
+  { type:'show', group:'GENE AUTRY — THE PHANTOM EMPIRE (1935 SERIAL)', title:'The Phantom Empire — Chapter 11 (1935)', src:'https://archive.org/download/PhantomEmpire1/Phantom%20Empire%20-%2011.mp4', dur:1118 },
+  { type:'show', group:'GENE AUTRY — THE PHANTOM EMPIRE (1935 SERIAL)', title:'The Phantom Empire — Chapter 12 (1935)', src:'https://archive.org/download/PhantomEmpire1/Phantom%20Empire%20-%2012.mp4', dur:1119 },
+  { type:'show', group:'GENE AUTRY — FEATURE FILMS', title:'Red River Valley (1936) — Gene Autry', src:'https://archive.org/download/red-river-valley-1936/Red%20River%20Valley%20(1936).mp4', dur:3310 },
+  { type:'show', group:'GENE AUTRY — FEATURE FILMS', title:'Yodelin’ Kid from Pine Ridge (1937) — Gene Autry', src:'https://archive.org/download/YodelinKidFromPineRidge/Yodelin%27%20Kid%20from%20Pine%20Ridge.mp4', dur:3190 },
+  { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 1 “Holy Night” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/01_Holy%20Night.mp4', dur:1803 },
+  { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 2 “Escape to Egypt” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/02_Escape%20to%20Egypt.mp4', dur:1720 },
+  { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 3 “Boyhood” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/03_Boyhood.mp4', dur:1719 },
+  { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 4 “Men of the Wilderness” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/04_Men%20of%20the%20Wilderness.mp4', dur:1778 },
+  { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 5 “Challenge of Faith” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/05_Challenge%20of%20Faith.mp4', dur:1704 },
+  { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 6 “Discipleship” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/06_Discipleship.mp4', dur:1688 },
+  { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 7 “Return to Nazareth” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/07_Return%20to%20Nazareth.mp4', dur:1712 },
+  { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 8 “Conflict” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/08_Conflict.mp4', dur:1704 },
+  { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 9 “Fate of John the Baptist” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/09_Fate%20of%20John%20the%20Baptist.mp4', dur:1677 },
+  { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 10 “Retreat and Decision” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/10_Retreat%20and%20Decision.mp4', dur:1801 },
+  { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 11 “Triumph and Defeat” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/11_Triumph%20and%20Defeat.mp4', dur:1754 },
+  { type:'show', group:'SUNDAY BIBLE', title:'The Living Christ — Ep 12 “Crucifixion and Resurrection” (1951)', src:'https://archive.org/download/The_Living_Christ_Series_1951_remastered/12_Crucifixion%20and%20Resurrection.mp4', dur:1705 },
+  { type:'show', group:'SUNDAY BIBLE', title:'From the Manger to the Cross (1912) — silent feature', src:'https://archive.org/download/from-the-manger-to-the-cross-1912_202605/From_the_Manger_to_the_Cross_(1912).mp4', dur:4219 },
+  { type:'show', group:'SUNDAY SERMON', title:'Dust or Destiny — A Sermon from Science (1949)', src:'https://archive.org/download/DustOrDestiny/DustOrDestiny.mp4', dur:2466 },
+  { type:'show', group:'SUNDAY SERMON', title:'God of Creation — Sermons from Science (1945)', src:'https://archive.org/download/GodOfCreation/GodOfCreation.mp4', dur:1657 },
+  { type:'show', group:'SUNDAY SERMON', title:'Hidden Treasures — Sermons from Science (1951)', src:'https://archive.org/download/HiddenTreasures/HiddenTreasures.mp4', dur:2601 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — All Hail the Power (bells opener)', src:'hymns/hymn-00-all-hail-the-power.mp4', dur:159 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Holy, Holy, Holy · Trinity Choir (1904)', src:'hymns/hymn-01-holy-holy-holy.mp4', dur:148 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Rock of Ages', src:'hymns/hymn-02-rock-of-ages.mp4', dur:157 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Sweet Hour of Prayer', src:'hymns/hymn-03-sweet-hour-of-prayer.mp4', dur:169 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — The Precious Name', src:'hymns/hymn-04-the-precious-name.mp4', dur:171 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Night Hymn at Sea', src:'hymns/hymn-05-night-hymn-at-sea.mp4', dur:179 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Abide with Me', src:'hymns/hymn-06-abide-with-me.mp4', dur:194 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — What a Friend We Have in Jesus', src:'hymns/hymn-07-what-a-friend-we-have-in-jesus.mp4', dur:193 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Jesus, Lover of My Soul', src:'hymns/hymn-08-jesus-lover-of-my-soul.mp4', dur:202 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — In the Garden', src:'hymns/hymn-09-in-the-garden.mp4', dur:196 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — When the Roll Is Called Up Yonder', src:'hymns/hymn-10-when-the-roll-is-called-up-yonder.mp4', dur:144 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Nearer, My God, to Thee', src:'hymns/hymn-11-nearer-my-god-to-thee.mp4', dur:183 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Pass Me Not, O Gentle Saviour', src:'hymns/hymn-12-pass-me-not-o-gentle-saviour.mp4', dur:167 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Day Is Dying in the West', src:'hymns/hymn-13-day-is-dying-in-the-west.mp4', dur:166 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Shall We Gather at the River', src:'hymns/hymn-14-shall-we-gather-at-the-river.mp4', dur:179 },
+  { type:'show', group:'SUNDAY HYMNS', title:'Hymn Sing — Aberystwyth · Welsh Choir (bonus)', src:'hymns/hymn-15-aberystwyth-welsh-choir.mp4', dur:204 },
+  { type:'show', group:'CANAL 2 — CINE DE ORO', title:'La vida de Carlos Gardel (1939) — Argentina', src:'https://archive.org/download/la-vida-de-carlos-gardel-1939/La%20vida%20de%20Carlos%20Gardel%20%281939%29.mp4', dur:6004 },
+  { type:'show', group:'CANAL 2 — CINE MUDO', title:'El automóvil gris (1919) — México', src:'https://archive.org/download/ElAutomvilGris/El_autom%C3%B3vil_gris.mp4', dur:6672 },
+  { type:'show', group:'CANAL 2 — CINE DE ORO', title:'Loco lindo (1936) — Argentina', src:'https://archive.org/download/loco-lindo-1936/Loco%20lindo%20%281936%29.mp4', dur:4481 },
+  { type:'show', group:'CANAL 2 — CINE MUDO', title:'Alma provinciana (1925) — Colombia', src:'https://archive.org/download/silent-alma-provinciana/Alma%20provinciana.mp4', dur:3814 },
+  { type:'show', group:'CANAL 2 — CINE DE ORO', title:'La guerra gaucha (1942) — Argentina', src:'https://archive.org/download/la-guerra-gaucha-1942/La%20guerra%20gaucha%281942%29.mp4', dur:5164 },
+  { type:'show', group:'CANAL 2 — DIBUJOS ANIMADOS', title:'Caperucita Roja — dibujos animados', src:'https://archive.org/download/CaperucitaRoja_201903/Caperucita%20Roja.mp4', dur:1105 },
+  { type:'show', group:'CANAL 2 — CINE DE ORO', title:'Carmen (1943) — Argentina', src:'https://archive.org/download/carmen-1943/Carmen%281943%29.mp4', dur:5689 },
+  { type:'show', group:'CANAL 2 — CINE MUDO', title:'La virgen de la Caridad (1930) — Cuba', src:'https://archive.org/download/la-virgen-de-la-caridad_1930/la-virgen-de-la-caridad_1930.mp4', dur:4377 },
+  { type:'show', group:'CANAL 2 — CINE DE ORO', title:'Chingolo (1940) — Argentina', src:'https://archive.org/download/chingolo-1940/Chingolo%281940%29.mp4', dur:4647 },
+  { type:'show', group:'CANAL 2 — CINE DE MEDIANOCHE', title:'La noche de los muertos vivientes (1968) — doblada al español', src:'https://archive.org/download/night-of-the-living-dead-1968-doblada-al-espanol/Night%20of%20the%20Living%20Dead%20%281968%29%20Doblada%20al%20espa%C3%B1ol.mp4', dur:5753 },
+  { type:'show', group:'CANAL 2 — CINE DE ORO', title:'Tres hombres del río (1943) — Argentina', src:'https://archive.org/download/tres-hombres-del-rio-1943/Tres%20hombres%20del%20rio%20%281943%29.mp4', dur:5257 },
+  { type:'show', group:'CANAL 2 — CINE DE ORO', title:'Los tallos amargos (1956) — Argentina', src:'https://archive.org/download/los-tallos-amargos-1956/Los%20tallos%20amargos%281956%29.mp4', dur:5269 },
+  { type:'show', group:'CANAL 2 — JOYA DE 1896', title:'Puerta del Sol (1896) — España, la primera joya', src:'https://archive.org/download/puertadelsol1896/lv_0_20250108203803.mp4', dur:36 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Cat-Women of the Moon (1953)', src:'https://archive.org/download/CatWomenOfTheMoon/CatWomenOfTheMoon.mp4', dur:3818 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Missile to the Moon (1958)', src:'https://archive.org/download/MissileToTheMoon/Missile%20to%20the%20Moon.mp4', dur:4640 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Mesa of Lost Women (1953)', src:'https://archive.org/download/MesaOfLostWomen/MesaOfLostWomen_512kb.mp4', dur:4137 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Plan 9 from Outer Space (1959)', src:'https://archive.org/download/plan-9-from-outer-space/plan-9-from-outer-space.mp4', dur:4700 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Robot Monster (1953)', src:'https://archive.org/download/robot-monster-1953/Robot%20Monster%20%281953%29.mp4', dur:3756 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Eegah (1962)', src:'https://archive.org/download/Eegah/Eegah_512kb.mp4', dur:5426 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'The Last Man on Earth (1964)', src:'https://archive.org/download/TheLastManOnEarth1964_201808/The%20Last%20Man%20on%20Earth%20%281964%29.mp4', dur:5204 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Teenagers from Outer Space (1959)', src:'https://archive.org/download/teenagers_from_outerspace/Teenagers_from_Outer_Space_512kb.mp4', dur:5129 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Santa Claus Conquers the Martians (1964)', src:'https://archive.org/download/SantaClausConquerstheMartians1964/SantaClausConquerstheMartians1964.mp4', dur:4857 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'The Snow Creature (1954)', src:'https://archive.org/download/TheSnowCreature/TheSnowCreature_512kb.mp4', dur:4246 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Assignment: Outer Space (1960)', src:'https://archive.org/download/Assignment_Outer_Space/Assignment_Outer_Space_512kb.mp4', dur:4354 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'The Phantom Planet (1961)', src:'https://archive.org/download/Phantom_Planet/The_Phantom_Planet_512kb.mp4', dur:4925 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Beyond the Time Barrier (1960)', src:'https://archive.org/download/beyond.the.-time.-barrier.-1960/Beyond%20the%20Time%20Barrier%20%281960%29%2Fmp4%2FBeyond.the.Time.Barrier.1960.ia.mp4', dur:4454 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'The Amazing Transparent Man (1960)', src:'https://archive.org/download/TheAmazingTransparentMan1960/the-amazing-transparent-man_512kb.mp4', dur:3438 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Attack of the Giant Leeches (1959)', src:'https://archive.org/download/cco_attackofthegiantleeches/ccoPublicDomainAttack_of_the_Giant_Leeches_512kb.mp4', dur:3739 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'The Incredible Petrified World (1957)', src:'https://archive.org/download/TheIncrediblePetrifiedWorld/TheIncrediblePetrifiedWorld_512kb.mp4', dur:3797 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'The Brain That Wouldn\'t Die (1962)', src:'https://archive.org/download/brain_that_wouldnt_die/brain_that_wouldnt_die_512kb.mp4', dur:4255 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Monstrosity — “The Atomic Brain” (1963)', src:'https://archive.org/download/monstrosity-1963/Monstrosity%20%281963%29.mp4', dur:3892 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Project Moonbase (1953)', src:'https://archive.org/download/ProjectMoonBase1953_201809/Project%20MoonBase%20%281953%29.mp4', dur:3785 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Unknown World (1951)', src:'https://archive.org/download/UnknownWorld/UnknownWorld_512kb.mp4', dur:4437 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'Battle of the Worlds (1961) — Claude Rains', src:'https://archive.org/download/BattleOfTheWorldsWidesceen/Battle%20of%20the%20Worlds%20NTSC_1.mp4', dur:5007 },
+  { type:'show', group:'SCI-FI NETWORK — FEATURES', title:'First Spaceship on Venus (1960)', src:'https://archive.org/download/FirstSpaceshipOnVenusMPEG/First_Spaceship_On_Venus_512kb.mp4', dur:4712 },
+  { type:'show', group:'SCI-FI NETWORK — SILENT SPACE', title:'A Trip to the Moon (1902)', src:'https://archive.org/download/Levoyagedanslalune/Le_voyage_dans_la_lune_A_trip_to_the_moon__Georges_Mlis_1902_512kb.mp4', dur:709 },
+  { type:'show', group:'SCI-FI NETWORK — SILENT SPACE', title:'The Lost World (1925)', src:'https://archive.org/download/lost_world/lost_world_512kb.mp4', dur:4085 },
+  { type:'show', group:'SCI-FI NETWORK — SILENT SPACE', title:'Woman in the Moon (1929)', src:'https://archive.org/download/WomanInTheMoon/zzWomanMoon.mp4', dur:10189 },
+  { type:'show', group:'SCI-FI NETWORK — EARLY TV', title:'Tales of Tomorrow — “The Crystal Egg” (1951)', src:'https://archive.org/download/tales_of_tomorrow_09_the_crystal_egg/tales_of_tomorrow_9_the_crystal_egg_512kb.mp4', dur:1427 },
+  { type:'show', group:'SCI-FI NETWORK — EARLY TV', title:'Captain Video and His Video Rangers (1949)', src:'https://archive.org/download/captainvideo/captainvideo.ia.mp4', dur:1722 },
+  { type:'show', group:'SCI-FI NETWORK — EARLY TV', title:'Tom Corbett, Space Cadet — “Runaway Rocket” (1954)', src:'https://archive.org/download/tomCorbettSpaceCadet-RunawayRocket1954/Tom_Corbett_Runaway_Rocket_05_22_54.ia.mp4', dur:1732 },
+  { type:'show', group:'SCI-FI NETWORK — EARLY TV', title:'Space Patrol — “The Wandering Asteroid”', src:'https://archive.org/download/SpacePatrolEpisode2TheWanderingAsteroid/1963-SpacePatrol-02TheWanderingAsteroid.mp4', dur:1491 },
+  { type:'show', group:'SCI-FI NETWORK — EARLY TV', title:'Flash Gordon (1954 TV) — episode of Nov. 5, 1954', src:'https://archive.org/download/TheSpaceAdventuresOfFlashGordon_981/TheSpaceAdventuresOfFlashGordon11-5-1954_512kb.mp4', dur:1573 },
+  { type:'show', group:'SCI-FI NETWORK — EARLY TV', title:'Rocky Jones, Space Ranger — Crash of the Moons (1954)', src:'https://archive.org/download/CrashoftheMoons/CrashoftheMoons_512kb.mp4', dur:4322 },
+  { type:'show', group:'SCI-FI NETWORK — SERIALS', title:'The Phantom Empire (1935) — complete 12-chapter serial', src:'https://archive.org/download/PhotosbyHaroldThePhantomEmpireAll12Chapters/Phantom_Empire_512kb.mp4', dur:13480 },
+  { type:'show', group:'SCI-FI NETWORK — SERIALS', title:'Zombies of the Stratosphere (1952) — complete 12-chapter serial', src:'https://archive.org/download/ZombiesOfTheStratosphere/Zombies%20of%20the%20Stratosphere.mp4', dur:10022 },
+  { type:'show', group:'SCI-FI NETWORK — SERIALS', title:'Radar Men from the Moon (1952) — Chapter 1', src:'https://archive.org/download/radarmen1/radarmen_chapter1_512kb.mp4', dur:1204 },
+  { type:'show', group:'SCI-FI NETWORK — SERIALS', title:'King of the Rocket Men (1949) — Chapter 1', src:'https://archive.org/download/king-of-the-rocket-men/01%20Dr.%20Vulcan%20-%20Traitor.mp4', dur:1202 },
+  { type:'show', group:'SCI-FI NETWORK — SERIALS', title:'Flying Disc Man from Mars (1950) — Chapter 1', src:'https://archive.org/download/flying-disc-man/01%20Menace%20from%20Mars.mp4', dur:1202 },
+  { type:'show', group:'SCI-FI NETWORK — SERIALS', title:'The Purple Monster Strikes (1945) — Chapter 1 (B&W)', src:'https://archive.org/download/chapter-01-the-man-in-the-meteor/Chapter%2001%20-%20The%20Man%20in%20the%20Meteor.ia.mp4', dur:1342 },
+  { type:'show', group:'SCI-FI NETWORK — SERIALS', title:'Undersea Kingdom (1936) — Chapter 1', src:'https://archive.org/download/undersea_kingdom1/uk1_512kb.mp4', dur:1849 },
+  { type:'show', group:'SCI-FI NETWORK — SERIALS', title:'Flash Gordon (1936) — complete 13-chapter serial', src:'https://archive.org/download/flash-gordon-1936/Flash%20Gordon%201936.ia.mp4', dur:14727 }
+];
+const byTitle = t => LIBRARY.find(x => x.title.includes(t));
+const PROGRAM = [ byTitle('Fights On'), ...POD, byTitle('Mad Scientist'), byTitle('Cisco Kid — S1 E1'), ...POD, byTitle('Minnie the Moocher'), byTitle('Rose for Lotta'), ...POD, byTitle('Falling Hare') ];
+const LOOP = PROGRAM.reduce((a,s)=>a+s.dur,0);
+// ---- Sunday Bible Block: Sundays (viewer-local) midnight–10 AM, The Living
+// Christ episodes run in series order with the usual sponsor pods between them,
+// looping the series if it runs out before 10 AM. 10 AM onward the regular
+// rotation above takes over, same as every other day. ----
+const SUNDAY_SHOWS = LIBRARY.filter(function(x){ return x.group === 'SUNDAY BIBLE' && x.title.indexOf('The Living Christ') === 0; });
+const SUNDAY_PROGRAM = [];
+SUNDAY_SHOWS.forEach(function(s){ SUNDAY_PROGRAM.push(s); POD.forEach(function(a){ SUNDAY_PROGRAM.push(a); }); });
+const SUNDAY_LOOP = SUNDAY_PROGRAM.reduce((a,s)=>a+s.dur,0);
+// ---- Sunday Sermon: Sundays (viewer-local) 11 AM–12 PM. "Dust or Destiny"
+// (1949) — Rev. Irwin A. Moon preaching a Sermon from Science (Moody
+// Institute of Science) — followed by the usual sponsor pod, looping inside
+// the hour. The other two Sermons from Science films sit in the DVR library
+// under SUNDAY SERMON for on-demand viewing. ----
+const SERMON_SHOW = LIBRARY.find(function(x){ return x.group === 'SUNDAY SERMON' && x.title.indexOf('Dust or Destiny') === 0; });
+const SERMON_PROGRAM = SERMON_SHOW ? [SERMON_SHOW].concat(POD) : [];
+const SERMON_LOOP = SERMON_PROGRAM.reduce((a,s)=>a+s.dur,0);
+// ---- Sunday Hymn Sing: Sundays (viewer-local) 10–11 AM. The 16 hymn
+// videos Perry had built, in play order (46:51 of hymns), one sponsor pod
+// after hymn 9 and one at the end — the hour fills cleanly, then the
+// sequence loops inside the hour until the 11 AM sermon, same as the
+// other Sunday blocks. The hymns stream from this site's own hymns/
+// folder — Lobo owns the files outright. ----
+const HYMN_SHOWS = LIBRARY.filter(function(x){ return x.group === 'SUNDAY HYMNS'; });
+const HYMN_PROGRAM = [];
+HYMN_SHOWS.forEach(function(s,i){ HYMN_PROGRAM.push(s); if (i === 8) POD.forEach(function(a){ HYMN_PROGRAM.push(a); }); });
+POD.forEach(function(a){ HYMN_PROGRAM.push(a); });
+const HYMN_LOOP = HYMN_PROGRAM.reduce((a,s)=>a+s.dur,0);
+const EPOCH = Date.UTC(2026,0,1,6,0,0); // schedule anchored 2026-01-01 06:00 UTC
+
+function slotAt(nowMs){
+  const d = new Date(nowMs);
+  if (d.getDay() === 0 && d.getHours() < 10 && SUNDAY_PROGRAM.length){
+    const midnight = new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+    let pos = (((nowMs - midnight)/1000) % SUNDAY_LOOP + SUNDAY_LOOP) % SUNDAY_LOOP;
+    let acc = 0;
+    for (let i=0;i<SUNDAY_PROGRAM.length;i++){
+      if (pos < acc + SUNDAY_PROGRAM[i].dur) return { idx:i, offset: pos-acc, slotStartMs: nowMs - (pos-acc)*1000, list: SUNDAY_PROGRAM };
+      acc += SUNDAY_PROGRAM[i].dur;
+    }
+    return { idx:0, offset:0, slotStartMs: nowMs, list: SUNDAY_PROGRAM };
+  }
+  if (d.getDay() === 0 && d.getHours() === 10 && HYMN_PROGRAM.length){
+    const ten = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 10).getTime();
+    let pos = (((nowMs - ten)/1000) % HYMN_LOOP + HYMN_LOOP) % HYMN_LOOP;
+    let acc = 0;
+    for (let i=0;i<HYMN_PROGRAM.length;i++){
+      if (pos < acc + HYMN_PROGRAM[i].dur) return { idx:i, offset: pos-acc, slotStartMs: nowMs - (pos-acc)*1000, list: HYMN_PROGRAM };
+      acc += HYMN_PROGRAM[i].dur;
+    }
+    return { idx:0, offset:0, slotStartMs: nowMs, list: HYMN_PROGRAM };
+  }
+  if (d.getDay() === 0 && d.getHours() === 11 && SERMON_PROGRAM.length){
+    const eleven = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 11).getTime();
+    let pos = (((nowMs - eleven)/1000) % SERMON_LOOP + SERMON_LOOP) % SERMON_LOOP;
+    let acc = 0;
+    for (let i=0;i<SERMON_PROGRAM.length;i++){
+      if (pos < acc + SERMON_PROGRAM[i].dur) return { idx:i, offset: pos-acc, slotStartMs: nowMs - (pos-acc)*1000, list: SERMON_PROGRAM };
+      acc += SERMON_PROGRAM[i].dur;
+    }
+    return { idx:0, offset:0, slotStartMs: nowMs, list: SERMON_PROGRAM };
+  }
+  let pos = (((nowMs - EPOCH)/1000) % LOOP + LOOP) % LOOP;
+  let acc = 0;
+  for (let i=0;i<PROGRAM.length;i++){
+    if (pos < acc + PROGRAM[i].dur) return { idx:i, offset: pos-acc, slotStartMs: nowMs - (pos-acc)*1000, list: PROGRAM };
+    acc += PROGRAM[i].dur;
+  }
+  return { idx:0, offset:0, slotStartMs: nowMs, list: PROGRAM };
+}
+
+function nextShow(fromIdx, list){
+  list = list || PROGRAM;
+  for (let k=1;k<=list.length;k++){ const s = list[(fromIdx+k)%list.length]; if (s.type==='show') return s; }
+  return list[0];
+}
+
+const CH3_LC = LIBRARY.filter(function(x){ return x.group === 'SUNDAY BIBLE' && x.title.indexOf('The Living Christ') === 0; });
+const CH3_MANGER = LIBRARY.find(function(x){ return x.title.indexOf('From the Manger to the Cross') === 0; });
+const CH3_SERMONS = LIBRARY.filter(function(x){ return x.group === 'SUNDAY SERMON'; });
+const CH3_HYMNS = LIBRARY.filter(function(x){ return x.group === 'SUNDAY HYMNS'; });
+const CH3_PROGRAM = [];
+CH3_LC.forEach(function(s){ CH3_PROGRAM.push(s); });
+POD.forEach(function(a){ CH3_PROGRAM.push(a); });
+if (CH3_MANGER) CH3_PROGRAM.push(CH3_MANGER);
+POD.forEach(function(a){ CH3_PROGRAM.push(a); });
+CH3_SERMONS.forEach(function(s){ CH3_PROGRAM.push(s); });
+POD.forEach(function(a){ CH3_PROGRAM.push(a); });
+CH3_HYMNS.forEach(function(s){ CH3_PROGRAM.push(s); });
+POD.forEach(function(a){ CH3_PROGRAM.push(a); });
+const CH3_LOOP = CH3_PROGRAM.reduce((a,s)=>a+s.dur,0);
+function slotAtCh3(nowMs){
+  let pos = (((nowMs - EPOCH)/1000) % CH3_LOOP + CH3_LOOP) % CH3_LOOP;
+  let acc = 0;
+  for (let i=0;i<CH3_PROGRAM.length;i++){
+    if (pos < acc + CH3_PROGRAM[i].dur) return { idx:i, offset: pos-acc, slotStartMs: nowMs - (pos-acc)*1000, list: CH3_PROGRAM };
+    acc += CH3_PROGRAM[i].dur;
+  }
+  return { idx:0, offset:0, slotStartMs: nowMs, list: CH3_PROGRAM };
+}
+// ---- Canal 2: cine clásico en español, todo el día. Golden-age features
+// from México, Colombia, Cuba, Argentina and España, streamed from the
+// Internet Archive (public-domain / feature-films collections), with the
+// house sponsor pods between pictures. Same epoch anchor as Channels 1
+// and 3, so every viewer lands mid-broadcast.
+const CH2_TITLES = ['Puerta del Sol','La vida de Carlos Gardel','El automóvil gris','Loco lindo','Alma provinciana','La guerra gaucha','Caperucita Roja','Carmen','La virgen de la Caridad','Chingolo','La noche de los muertos vivientes','Tres hombres del río','Los tallos amargos'];
+const CH2_PROGRAM = [];
+CH2_TITLES.forEach(function(t){ const it = LIBRARY.find(function(x){ return x.title.indexOf(t) === 0; }); if (it){ CH2_PROGRAM.push(it); POD.forEach(function(a){ CH2_PROGRAM.push(a); }); } });
+const CH2_LOOP = CH2_PROGRAM.reduce((a,s)=>a+s.dur,0);
+function slotAtCh2(nowMs){
+  let pos = (((nowMs - EPOCH)/1000) % CH2_LOOP + CH2_LOOP) % CH2_LOOP;
+  let acc = 0;
+  for (let i=0;i<CH2_PROGRAM.length;i++){
+    if (pos < acc + CH2_PROGRAM[i].dur) return { idx:i, offset: pos-acc, slotStartMs: nowMs - (pos-acc)*1000, list: CH2_PROGRAM };
+    acc += CH2_PROGRAM[i].dur;
+  }
+  return { idx:0, offset:0, slotStartMs: nowMs, list: CH2_PROGRAM };
+}
+// ---- Channel 4: LOBO SCI-FI NETWORK. Forgotten public-domain science
+// fiction streamed from the Internet Archive, stacked the way the scout
+// brief laid it out: the DRIVE-IN DOUBLE FEATURE bills lead (DF-1 MOON
+// MADNESS — a film and its own remake, back to back), the double
+// features sit adjacent, a PD drive-in intermission reel runs between
+// the two pictures of every bill ("Let's All Go to the Lobby" leads the
+// rotation — the signature piece), and the house sponsor pods separate
+// the bills, same as Channels 2 and 3. The intermission reels are from
+// the Archive's Drive-In Movie Ads collection, each carrying the
+// Creative Commons Public Domain Mark in its item metadata; "Let's All
+// Go to the Lobby" (Filmack, 1957) is wired from the Archive item whose
+// metadata carries the same Public Domain Mark. Same epoch anchor as
+// the other channels, so every viewer lands mid-broadcast.
+const CH4_INTERMISSIONS = [
+  { type:'ad', title:'Let’s All Go to the Lobby (1957) — drive-in intermission', src:'https://archive.org/download/lets-all-go-to-the-lobby-intermission-bumper-4k-update/lets-all-go-to-the-lobby-intermission-bumper-4k-update.ia.mp4', dur:40 },
+  { type:'ad', title:'Drive-In Intermission', src:'https://archive.org/download/Intermission1/intermission1.mp4', dur:38 },
+  { type:'ad', title:'Drive-In Intermission — Coke Painter', src:'https://archive.org/download/Intermission3CokePainter/intermission3_coke_painter.mp4', dur:56 },
+  { type:'ad', title:'Drive-In Intermission', src:'https://archive.org/download/Intermission2b/intermission2b.mp4', dur:35 },
+  { type:'ad', title:'Drive-In Intermission — Circus', src:'https://archive.org/download/Intermission4bCircus/intermission4_circus_b.mp4', dur:53 }
+];
+// The broadcast sequence: show titles resolve against the DVR library
+// by prefix; 'INT' drops the next intermission reel in, 'POD' the house
+// sponsor pod. Double-feature partners stay adjacent, in brief order.
+const CH4_SEQ = [
+  'Cat-Women of the Moon','INT','Missile to the Moon','POD',
+  'The Phantom Empire','POD',
+  'Mesa of Lost Women','POD',
+  'Zombies of the Stratosphere','POD',
+  'Robot Monster','INT','Eegah','POD',
+  'Plan 9 from Outer Space','POD',
+  'Assignment: Outer Space','INT','The Phantom Planet','POD',
+  'Beyond the Time Barrier','INT','The Amazing Transparent Man','POD',
+  'The Last Man on Earth','INT','Teenagers from Outer Space','POD',
+  'Attack of the Giant Leeches','INT','The Incredible Petrified World','POD',
+  "The Brain That Wouldn't Die",'INT','Monstrosity','POD',
+  'Santa Claus Conquers the Martians','INT','The Snow Creature','POD',
+  'A Trip to the Moon','INT','The Lost World','POD',
+  'Project Moonbase','POD',
+  'Unknown World','POD',
+  'Battle of the Worlds','POD',
+  'First Spaceship on Venus','POD',
+  'Woman in the Moon','POD',
+  'Tales of Tomorrow','POD',
+  'Captain Video','Tom Corbett, Space Cadet','POD',
+  'Space Patrol','Flash Gordon (1954 TV)','POD',
+  'Rocky Jones, Space Ranger','POD',
+  'Radar Men from the Moon','King of the Rocket Men','POD',
+  'Flying Disc Man from Mars','The Purple Monster Strikes','POD',
+  'Undersea Kingdom','POD',
+  'Flash Gordon (1936)','POD'
+];
+const CH4_PROGRAM = [];
+let ch4IntIdx = 0;
+CH4_SEQ.forEach(function(t){
+  if (t === 'POD'){ POD.forEach(function(a){ CH4_PROGRAM.push(a); }); return; }
+  if (t === 'INT'){ CH4_PROGRAM.push(CH4_INTERMISSIONS[ch4IntIdx % CH4_INTERMISSIONS.length]); ch4IntIdx++; return; }
+  const it = LIBRARY.find(function(x){ return x.title.indexOf(t) === 0; });
+  if (it) CH4_PROGRAM.push(it);
+});
+const CH4_LOOP = CH4_PROGRAM.reduce((a,s)=>a+s.dur,0);
+function slotAtCh4(nowMs){
+  let pos = (((nowMs - EPOCH)/1000) % CH4_LOOP + CH4_LOOP) % CH4_LOOP;
+  let acc = 0;
+  for (let i=0;i<CH4_PROGRAM.length;i++){
+    if (pos < acc + CH4_PROGRAM[i].dur) return { idx:i, offset: pos-acc, slotStartMs: nowMs - (pos-acc)*1000, list: CH4_PROGRAM };
+    acc += CH4_PROGRAM[i].dur;
+  }
+  return { idx:0, offset:0, slotStartMs: nowMs, list: CH4_PROGRAM };
+}
+// ================= PROGRAM GUIDE RENDERING =================
+// Everything above this line is Lobo Television's own broadcast engine,
+// copied byte-for-byte from tv.html: the same playlists (POD, LIBRARY,
+// PROGRAM, CH2_PROGRAM, CH3_PROGRAM, CH4_PROGRAM), the same EPOCH anchor
+// (2026-01-01 06:00 UTC) and the same clocks (slotAt, slotAtCh2,
+// slotAtCh3, slotAtCh4). This page only READS that engine — it keeps no
+// schedule of its own — so the guide and the tuner cannot disagree.
+function slotForChannel(ch, nowMs){
+  if (ch === 4) return slotAtCh4(nowMs);
+  if (ch === 3) return slotAtCh3(nowMs);
+  if (ch === 2) return slotAtCh2(nowMs);
+  return slotAt(nowMs);
+}
+var TZ = 'America/Chicago';
+var fmtT = new Intl.DateTimeFormat('en-US', { timeZone: TZ, hour: 'numeric', minute: '2-digit' });
+var fmtDay = new Intl.DateTimeFormat('en-US', { timeZone: TZ, weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+function ctParts(ms){
+  var parts = new Intl.DateTimeFormat('en-US', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23' }).formatToParts(new Date(ms));
+  var o = {};
+  for (var i = 0; i < parts.length; i++) o[parts[i].type] = parts[i].value;
+  return { y: +o.year, mo: +o.month, d: +o.day, h: (+o.hour) % 24, mi: +o.minute, s: +o.second };
+}
+function ctOffsetMs(ms){
+  var p = ctParts(ms);
+  return Date.UTC(p.y, p.mo - 1, p.d, p.h, p.mi, p.s) - Math.floor(ms / 1000) * 1000;
+}
+function floorHalfHourCT(nowMs){
+  var p = ctParts(nowMs);
+  var mi = p.mi - (p.mi % 30);
+  var wall = Date.UTC(p.y, p.mo - 1, p.d, p.h, mi, 0);
+  var t = wall - ctOffsetMs(nowMs);
+  var q = ctParts(t);
+  if (q.d !== p.d || q.h !== p.h || q.mi !== mi) t = wall - ctOffsetMs(t);
+  return t;
+}
+// Walk the channel's own clock forward from the window start, collecting
+// the true block boundaries (slotStartMs + dur) the tuner itself returns.
+function enumerateBlocks(ch, winStart, winEnd){
+  var out = [];
+  var s = slotForChannel(ch, winStart);
+  var cur = { slot: s.list[s.idx], start: s.slotStartMs };
+  cur.end = cur.start + cur.slot.dur * 1000;
+  out.push(cur);
+  var guard = 0;
+  while (cur.end < winEnd && guard++ < 800){
+    var n = slotForChannel(ch, cur.end + 5);
+    cur = { slot: n.list[n.idx], start: n.slotStartMs };
+    cur.end = cur.start + cur.slot.dur * 1000;
+    out.push(cur);
+  }
+  return out;
+}
+// Consecutive sponsor spots are one break on the air; group them into a
+// single break block (exact outer boundaries, every spot kept in the
+// tooltip). A lone intermission reel stays its own block, by its title.
+function mergeBreaks(blocks){
+  var out = [];
+  for (var i = 0; i < blocks.length; i++){
+    var b = blocks[i];
+    var last = out[out.length - 1];
+    if (b.slot.type === 'ad'){
+      if (last && last.isBreak && Math.abs(last.end - b.start) < 2000){
+        last.end = b.end; last.parts.push(b); continue;
+      }
+      out.push({ isBreak: true, start: b.start, end: b.end, parts: [b] });
+    } else {
+      out.push({ isBreak: false, start: b.start, end: b.end, parts: [b], slot: b.slot });
+    }
+  }
+  return out;
+}
+var CHANNELS = [
+  { n: 1, name: 'CHANNEL 1', sub: 'Classic Movies', tag: 'Westerns & golden-age cartoons' },
+  { n: 2, name: 'CANAL 2', sub: 'Cine Clásico', tag: 'Cine clásico en español, todo el día' },
+  { n: 3, name: 'CHANNEL 3', sub: 'Bible Films', tag: 'The Living Christ · Sermons from Science · Hymn Sing' },
+  { n: 4, name: 'CHANNEL 4', sub: 'Lobo Sci-Fi Network', tag: 'Forgotten sci-fi · Drive-in double features' }
+];
+var PALETTE = ['#ffd9a0', '#cdeac0', '#b8e0d2', '#ffc9c9', '#dccdf2', '#bcd6f5', '#ffb3c1', '#ffe29a',
+               '#a8d8ea', '#e3d7f2', '#b5ead7', '#ffdac1', '#e2f0cb', '#f1c0e8', '#c7ceea', '#f6efbe'];
+function esc(s){ return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+function nowNext(ch, nowMs){
+  var s = slotForChannel(ch, nowMs);
+  var slot = s.list[s.idx];
+  var endMs = s.slotStartMs + slot.dur * 1000;
+  var nx = nextShow(s.idx, s.list);
+  var nowTxt;
+  if (slot.type === 'show') nowTxt = slot.title;
+  else nowTxt = (ch === 2) ? 'Pausa comercial — un mensaje de nuestros patrocinadores' : 'Commercial break — a word from our sponsors';
+  return { nowTxt: nowTxt, endMs: endMs, nextTxt: nx.title };
+}
+function renderGuide(){
+  var nowMs = Date.now();
+  var winStart = floorHalfHourCT(nowMs);
+  var winMs = 8 * 3600 * 1000;
+  var winEnd = winStart + winMs;
+  document.getElementById('dateline').textContent = fmtDay.format(new Date(nowMs));
+  // time header: a label every half hour across the 8-hour window
+  var head = document.getElementById('timehead');
+  head.innerHTML = '';
+  for (var k = 0; k <= 16; k++){
+    var t = winStart + k * 1800000;
+    var sp = document.createElement('span');
+    sp.className = 'tick' + (k % 2 === 0 ? ' hour' : '');
+    sp.style.left = (k * 6.25) + '%';
+    sp.textContent = (k < 16) ? fmtT.format(new Date(t)) : '';
+    head.appendChild(sp);
+  }
+  var nowFrac = ((nowMs - winStart) / winMs * 100);
+  var hnl = document.createElement('div');
+  hnl.className = 'nowline headflag';
+  hnl.style.left = nowFrac + '%';
+  hnl.innerHTML = '<span>NOW</span>';
+  head.appendChild(hnl);
+  CHANNELS.forEach(function(c, ci){
+    var track = document.getElementById('track' + c.n);
+    track.innerHTML = '';
+    var blocks = mergeBreaks(enumerateBlocks(c.n, winStart, winEnd));
+    var colorIdx = ci * 3;
+    var trackPx = track.clientWidth || 900;
+    blocks.forEach(function(b){
+      var L = (b.start - winStart) / winMs * 100;
+      var R = (b.end - winStart) / winMs * 100;
+      if (R <= 0 || L >= 100) return;
+      L = Math.max(0, L); R = Math.min(100, R);
+      var el = document.createElement('div');
+      var onair = nowMs >= b.start && nowMs < b.end;
+      el.className = 'blk' + (b.isBreak ? ' brk' : '') + (onair ? ' onair' : '');
+      el.style.left = L + '%';
+      el.style.width = 'calc(' + (R - L) + '% - 3px)';
+      var label, tip;
+      if (b.isBreak){
+        label = b.parts.length === 1 ? b.parts[0].slot.title : ((c.n === 2) ? 'Pausa comercial' : 'Commercial Break');
+        tip = b.parts.map(function(p){ return fmtT.format(new Date(p.start)) + ' — ' + p.slot.title; }).join('\n');
+      } else {
+        label = b.slot.title;
+        tip = label;
+        el.style.background = PALETTE[colorIdx % PALETTE.length];
+        colorIdx++;
+      }
+      el.title = tip + '\n' + fmtT.format(new Date(b.start)) + ' – ' + fmtT.format(new Date(b.end)) + ' CT';
+      var wpx = trackPx * (R - L) / 100;
+      if (wpx > 46){
+        var tt = document.createElement('div');
+        tt.className = 'btitle';
+        tt.textContent = (onair && !b.isBreak ? '● ' : '') + label;
+        el.appendChild(tt);
+      }
+      if (wpx > 150){
+        var tm = document.createElement('div');
+        tm.className = 'btime';
+        tm.textContent = fmtT.format(new Date(b.start)) + ' – ' + fmtT.format(new Date(b.end));
+        el.appendChild(tm);
+      }
+      track.appendChild(el);
+    });
+    var nl = document.createElement('div');
+    nl.className = 'nowline';
+    nl.style.left = nowFrac + '%';
+    track.appendChild(nl);
+    var nn = nowNext(c.n, nowMs);
+    document.getElementById('now' + c.n).innerHTML =
+      '<span class="nnlab">NOW</span> ' + esc(nn.nowTxt) + ' <span class="nnend">(ends ' + fmtT.format(new Date(nn.endMs)) + ')</span>';
+    document.getElementById('next' + c.n).innerHTML =
+      '<span class="nnlab">NEXT</span> ' + esc(nn.nextTxt);
+  });
+}
+renderGuide();
+setInterval(renderGuide, 30000);
+var rsz = null;
+window.addEventListener('resize', function(){ clearTimeout(rsz); rsz = setTimeout(renderGuide, 250); });
+</script>
+</body>
+</html>
