@@ -92,11 +92,43 @@
 .nowshowing { text-align:center; color:#f0d489; margin:14px 0 2px; font-size:17px; letter-spacing:.03em; }
 .feet { display:flex; justify-content:space-between; padding:0 36px; }
 .feet span { display:block; width:64px; height:16px; background:linear-gradient(180deg,#3a2410,#1d1004); border-radius:0 0 8px 8px; }
-.rotation { max-width:820px; margin:18px auto 4px; color:#f5f0dc; }
-.rotation h2 { text-align:center; color:#d4af37; }
-.rotation table { width:100%; border-collapse:collapse; font-size:15px; }
-.rotation td { padding:7px 10px; border-bottom:1px solid rgba(212,175,55,.25); }
-.rotation td.t { text-align:right; color:#f0d489; white-space:nowrap; }
+/* ---- compact program guide under the set: a miniature of guide.html,
+   same newspaper dress, sized to the old rotation list's footprint ---- */
+.miniguide { max-width:820px; margin:18px auto 4px; background:#f8f3e6; color:#1c1a17;
+  font-family:Georgia,'Times New Roman',Times,serif; border:1px solid #d8cfb4;
+  box-shadow:0 8px 26px rgba(0,0,0,.5); padding:12px 14px 10px; }
+.miniguide .mg-head { display:flex; justify-content:space-between; align-items:baseline; gap:10px; flex-wrap:wrap;
+  border-top:3px solid #1c1a17; border-bottom:4px double #1c1a17; padding:6px 2px 5px; }
+.miniguide .mg-title { font-size:17px; font-weight:900; letter-spacing:.14em; text-transform:uppercase; }
+.miniguide .mg-note { font-size:11px; letter-spacing:.06em; color:#4a4232; }
+.miniguide .mg-note a { color:#b3001b; font-weight:bold; text-decoration:none; }
+.miniguide .mg-note a:hover { text-decoration:underline; }
+.miniguide .mg-gridwrap { overflow-x:auto; margin-top:8px; border:2px solid #1c1a17; background:#fbf7ec; }
+.miniguide .mg-grid { min-width:600px; }
+.miniguide .mg-timerow { display:flex; border-bottom:2px solid #1c1a17; background:#efe7d0; }
+.miniguide .mg-corner { flex:0 0 104px; padding:4px 8px; font-size:9.5px; letter-spacing:.14em; text-transform:uppercase;
+  border-right:2px solid #1c1a17; display:flex; align-items:center; }
+.miniguide .mg-timehead { position:relative; flex:1; height:24px; }
+.miniguide .mg-timehead .tick { position:absolute; top:5px; transform:translateX(3px); font-size:9.5px; color:#5a5142; white-space:nowrap; }
+.miniguide .mg-timehead .tick.hour { font-size:11px; font-weight:bold; color:#1c1a17; }
+.miniguide .mg-row { display:flex; border-bottom:1px solid #8d8474; }
+.miniguide .mg-row:last-child { border-bottom:none; }
+.miniguide .mg-chlabel { flex:0 0 104px; padding:6px 8px; border-right:2px solid #1c1a17; background:#f3ecd9; }
+.miniguide .mg-ch { font-size:12.5px; font-weight:900; letter-spacing:.03em; }
+.miniguide .mg-chsub { font-size:10.5px; font-style:italic; color:#4a4232; margin-top:1px; line-height:1.3; }
+.miniguide .mg-track { position:relative; flex:1; height:46px;
+  background-image:linear-gradient(to right, rgba(28,26,23,.16) 1px, transparent 1px); background-size:12.5% 100%; }
+.miniguide .mg-blk { position:absolute; top:5px; bottom:5px; border:1px solid rgba(28,26,23,.55); border-radius:3px;
+  padding:3px 5px; overflow:hidden; }
+.miniguide .mg-blk .btitle { font-size:10.5px; font-weight:bold; line-height:1.25; display:-webkit-box;
+  -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.miniguide .mg-blk.brk { background:repeating-linear-gradient(45deg,#e9dfc6 0 7px,#ddd0ac 7px 14px); color:#4a4232; }
+.miniguide .mg-blk.brk .btitle { font-weight:normal; font-style:italic; font-size:10px; }
+.miniguide .mg-blk.onair { outline:3px solid #b3001b; outline-offset:-1px; box-shadow:0 0 0 1px #f8f3e6 inset; }
+.miniguide .mg-nowline { position:absolute; top:0; bottom:0; width:2px; background:#b3001b; z-index:6; pointer-events:none; }
+.miniguide .mg-nowline.headflag span { position:absolute; top:-1px; left:50%; transform:translateX(-50%);
+  background:#b3001b; color:#fff; font-size:8.5px; font-weight:bold; letter-spacing:.08em; padding:1px 4px; border-radius:2px; }
+.miniguide .mg-foot { margin-top:8px; font-size:11px; font-style:italic; color:#4a4232; line-height:1.45; }
 .tvfineprint { text-align:center; color:#cfc7a8; opacity:.75; font-size:13px; margin:10px auto 0; max-width:760px; }
 @media (max-width:760px){
   .console-inner { flex-direction:column; }
@@ -336,51 +368,19 @@
   </div>
   <div class="feet" aria-hidden="true"><span></span><span></span></div>
 
-  <div class="rotation">
-    <h2>Today's Rotation</h2>
-    <table>
-      <tr><td>⛪ <strong>SUNDAYS until 10 AM</strong> — Sunday Bible Block: <strong>The Living Christ Series</strong> (1951), episode after episode — then the Hymn Sing at 10</td><td class="t">Sun AM</td></tr>
-      <tr><td>🎶 <strong>SUNDAYS at 10 AM</strong> — Sunday Hymn Sing: <strong>16 classic hymns</strong>, choir and congregation recordings — then the sermon at 11</td><td class="t">Sun 10 AM</td></tr>
-      <tr><td>⛪ <strong>SUNDAYS at 11 AM</strong> — Sunday Sermon: <strong>Dust or Destiny</strong> (1949) — Rev. Irwin A. Moon preaches a “Sermon from Science”</td><td class="t">Sun 11 AM</td></tr>
-      <tr><td>🤠 <strong>The Lone Ranger</strong> — “The Lone Ranger Fights On” (1949)</td><td class="t">24 min</td></tr>
-      <tr><td>📺 Commercial break — a word from our sponsors</td><td class="t">~5 min</td></tr>
-      <tr><td>🎞️ <strong>Superman</strong> — “The Mad Scientist” (1941)</td><td class="t">10 min</td></tr>
-      <tr><td>🤠 <strong>The Cisco Kid</strong> — Season 1, Episode 1</td><td class="t">24 min</td></tr>
-      <tr><td>📺 Commercial break — a word from our sponsors</td><td class="t">~5 min</td></tr>
-      <tr><td>🎞️ <strong>Betty Boop</strong> — “Minnie the Moocher” (1932)</td><td class="t">8 min</td></tr>
-      <tr><td>🤠 <strong>Bonanza</strong> — “A Rose for Lotta”</td><td class="t">50 min</td></tr>
-      <tr><td>📺 Commercial break — a word from our sponsors</td><td class="t">~5 min</td></tr>
-      <tr><td>🎞️ <strong>Bugs Bunny</strong> — “Falling Hare” (1943) — then the rotation starts again</td><td class="t">9 min</td></tr>
-    </table>
-    <h2 style="margin-top:24px">Channel 3 — Biblical, All Day Every Day</h2>
-    <table>
-      <tr><td>⛪ <strong>The Living Christ Series</strong> (1951) — all 12 episodes, in series order, from “Holy Night” to “Crucifixion and Resurrection”</td><td class="t">5 hrs 46 min</td></tr>
-      <tr><td>📺 Commercial break — a word from our sponsors</td><td class="t">~5 min</td></tr>
-      <tr><td>🎞️ <strong>From the Manger to the Cross</strong> (1912) — the silent feature life of Christ</td><td class="t">1 hr 10 min</td></tr>
-      <tr><td>📺 Commercial break — a word from our sponsors</td><td class="t">~5 min</td></tr>
-      <tr><td>🔬 <strong>Sermons from Science</strong> — Rev. Irwin A. Moon: “Dust or Destiny” (1949), “God of Creation” (1945), “Hidden Treasures” (1951)</td><td class="t">1 hr 52 min</td></tr>
-      <tr><td>📺 Commercial break — a word from our sponsors</td><td class="t">~5 min</td></tr>
-      <tr><td>🎶 <strong>The Hymn Sing</strong> — 16 classic hymns, choir and congregation recordings — then the Channel 3 rotation starts again</td><td class="t">47 min</td></tr>
-    </table>
-    <h2 style="margin-top:24px">Channel 2 — Cine Clásico en Español, Todo el Día</h2>
-    <table>
-      <tr><td>🎬 <strong>Cine de Oro</strong> — la época dorada: <strong>La vida de Carlos Gardel</strong> (1939), <strong>La guerra gaucha</strong> (1942), <strong>Carmen</strong> (1943), <strong>Los tallos amargos</strong> (1956) y más, de Argentina</td><td class="t">9 hrs</td></tr>
-      <tr><td>📺 Pausa comercial — un mensaje de nuestros patrocinadores</td><td class="t">~5 min</td></tr>
-      <tr><td>🎞️ <strong>Cine Mudo</strong> — los pioneros: <strong>El automóvil gris</strong> (México, 1919), <strong>Alma provinciana</strong> (Colombia, 1925), <strong>La virgen de la Caridad</strong> (Cuba, 1930)</td><td class="t">4 hrs</td></tr>
-      <tr><td>🧒 <strong>Dibujos Animados</strong> — <strong>Caperucita Roja</strong></td><td class="t">18 min</td></tr>
-      <tr><td>🌙 <strong>Cine de Medianoche</strong> — <strong>La noche de los muertos vivientes</strong> (1968), doblada al español</td><td class="t">1 hr 36 min</td></tr>
-      <tr><td>🇪🇸 <strong>La joya de 1896</strong> — <strong>Puerta del Sol</strong>, Madrid — y la rotación empieza otra vez</td><td class="t">1 min</td></tr>
-    </table>
-    <h2 style="margin-top:24px">Channel 4 — Lobo Sci-Fi Network, All Day</h2>
-    <table>
-      <tr><td>🚀 <strong>DRIVE-IN DOUBLE FEATURE</strong> — the flagship bill: <strong>Cat-Women of the Moon</strong> (1953) + its own remake <strong>Missile to the Moon</strong> (1958), with “Let’s All Go to the Lobby” at the intermission</td><td class="t">2 hrs 22 min</td></tr>
-      <tr><td>📺 Commercial break — a word from our sponsors</td><td class="t">~5 min</td></tr>
-      <tr><td>🤠🚀 <strong>The Phantom Empire</strong> (1935) — Gene Autry’s complete 12-chapter serial: robots and ray guns under the ranch</td><td class="t">3 hrs 45 min</td></tr>
-      <tr><td>🕷️ <strong>Mesa of Lost Women</strong> (1953) — the signature forgotten gem: giant spiders and spider-women in the Mexican desert</td><td class="t">69 min</td></tr>
-      <tr><td>🛸 <strong>Zombies of the Stratosphere</strong> (1952) — the complete serial, with a young Leonard Nimoy as a Martian</td><td class="t">2 hrs 47 min</td></tr>
-      <tr><td>🎬 <strong>Double features all day</strong> — Gorilla Suit Sunday, Ulmer After Dark, Swamp Night, Brain Damage Matinee, Silent Space Matinee — plus the anchor classics <strong>Plan 9 from Outer Space</strong>, <strong>Robot Monster</strong> and <strong>The Last Man on Earth</strong></td><td class="t">All day</td></tr>
-      <tr><td>📼 <strong>TV Time Machine &amp; the Serial Strip</strong> — Captain Video, Tom Corbett, Space Patrol, Radar Men from the Moon and the Rocket Men — then the rotation starts again</td><td class="t">All day</td></tr>
-    </table>
+  <div class="miniguide" id="miniguide">
+    <div class="mg-head">
+      <span class="mg-title">🗞 Program Guide</span>
+      <span class="mg-note">The next four hours · <strong>All times Central</strong> · <a href="guide.html">Full listings ▸</a></span>
+    </div>
+    <div class="mg-gridwrap"><div class="mg-grid">
+      <div class="mg-timerow"><div class="mg-corner">Channel</div><div class="mg-timehead" id="cgTimehead"></div></div>
+      <div class="mg-row"><div class="mg-chlabel"><div class="mg-ch">CH 1</div><div class="mg-chsub">Classic Movies</div></div><div class="mg-track" id="cgTrack1"></div></div>
+      <div class="mg-row"><div class="mg-chlabel"><div class="mg-ch">CANAL 2</div><div class="mg-chsub">Cine Clásico</div></div><div class="mg-track" id="cgTrack2"></div></div>
+      <div class="mg-row"><div class="mg-chlabel"><div class="mg-ch">CH 3</div><div class="mg-chsub">Bible Films</div></div><div class="mg-track" id="cgTrack3"></div></div>
+      <div class="mg-row"><div class="mg-chlabel"><div class="mg-ch">CH 4</div><div class="mg-chsub">Sci-Fi Network</div></div><div class="mg-track" id="cgTrack4"></div></div>
+    </div></div>
+    <div class="mg-foot">Striped blocks are commercial breaks &amp; intermissions. These listings are read live off the same broadcast clock that runs the television above — the guide and the set cannot tell different stories.</div>
   </div>
   <p class="tvfineprint">All programs on Lobo Television are public-domain classics, streamed courtesy of the Internet Archive. The broadcast rotation runs continuously — whenever you tune in live, you're joining the program already in progress, same as everybody else. The DVR library holds the same classics, ready to watch from the beginning whenever you like.</p>
 </div>
@@ -1070,6 +1070,149 @@ document.addEventListener('keydown', function(e){
 // so the slate steps aside (LIVE TV restores it via goLive).
 libBtn.addEventListener('click', function(){ hideSlate2(); });
 updateTunerUI();
+</script>
+<script>
+// ---- Compact program guide under the set: a miniature of guide.html,
+// rendered natively by THIS page's own broadcast engine — the same
+// slotAt / slotAtCh2 / slotAtCh3 / slotAtCh4 clocks, the same playlists
+// and the same EPOCH anchor defined above. It keeps no schedule of its
+// own; it only walks the tuner's clocks forward and paints the blocks.
+(function(){
+  function cgSlot(ch, nowMs){
+    if (ch === 4 && typeof slotAtCh4 === 'function') return slotAtCh4(nowMs);
+    if (ch === 3 && typeof slotAtCh3 === 'function') return slotAtCh3(nowMs);
+    if (ch === 2 && typeof slotAtCh2 === 'function') return slotAtCh2(nowMs);
+    return slotAt(nowMs);
+  }
+  var CG_TZ = 'America/Chicago';
+  var cgFmtT = new Intl.DateTimeFormat('en-US', { timeZone: CG_TZ, hour: 'numeric', minute: '2-digit' });
+  function cgParts(ms){
+    var parts = new Intl.DateTimeFormat('en-US', { timeZone: CG_TZ, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23' }).formatToParts(new Date(ms));
+    var o = {};
+    for (var i = 0; i < parts.length; i++) o[parts[i].type] = parts[i].value;
+    return { y: +o.year, mo: +o.month, d: +o.day, h: (+o.hour) % 24, mi: +o.minute, s: +o.second };
+  }
+  function cgOffsetMs(ms){
+    var p = cgParts(ms);
+    return Date.UTC(p.y, p.mo - 1, p.d, p.h, p.mi, p.s) - Math.floor(ms / 1000) * 1000;
+  }
+  function cgFloorHalf(nowMs){
+    var p = cgParts(nowMs);
+    var mi = p.mi - (p.mi % 30);
+    var wall = Date.UTC(p.y, p.mo - 1, p.d, p.h, mi, 0);
+    var t = wall - cgOffsetMs(nowMs);
+    var q = cgParts(t);
+    if (q.d !== p.d || q.h !== p.h || q.mi !== mi) t = wall - cgOffsetMs(t);
+    return t;
+  }
+  // Walk the channel's own clock forward from the window start, collecting
+  // the true block boundaries (slotStartMs + dur) the tuner itself returns.
+  function cgEnumerate(ch, winStart, winEnd){
+    var out = [];
+    var s = cgSlot(ch, winStart);
+    var cur = { slot: s.list[s.idx], start: s.slotStartMs };
+    cur.end = cur.start + cur.slot.dur * 1000;
+    out.push(cur);
+    var guard = 0;
+    while (cur.end < winEnd && guard++ < 800){
+      var n = cgSlot(ch, cur.end + 5);
+      cur = { slot: n.list[n.idx], start: n.slotStartMs };
+      cur.end = cur.start + cur.slot.dur * 1000;
+      out.push(cur);
+    }
+    return out;
+  }
+  // Consecutive sponsor spots are one break on the air; group them into a
+  // single break block (exact outer boundaries, every spot in the tooltip).
+  // A lone intermission reel stays its own block, by its title.
+  function cgMerge(blocks){
+    var out = [];
+    for (var i = 0; i < blocks.length; i++){
+      var b = blocks[i];
+      var last = out[out.length - 1];
+      if (b.slot.type === 'ad'){
+        if (last && last.isBreak && Math.abs(last.end - b.start) < 2000){
+          last.end = b.end; last.parts.push(b); continue;
+        }
+        out.push({ isBreak: true, start: b.start, end: b.end, parts: [b] });
+      } else {
+        out.push({ isBreak: false, start: b.start, end: b.end, parts: [b], slot: b.slot });
+      }
+    }
+    return out;
+  }
+  var CG_PALETTE = ['#ffd9a0', '#cdeac0', '#b8e0d2', '#ffc9c9', '#dccdf2', '#bcd6f5', '#ffb3c1', '#ffe29a',
+                    '#a8d8ea', '#e3d7f2', '#b5ead7', '#ffdac1', '#e2f0cb', '#f1c0e8', '#c7ceea', '#f6efbe'];
+  function cgRender(){
+    var nowMs = Date.now();
+    var winStart = cgFloorHalf(nowMs);
+    var winMs = 4 * 3600 * 1000;
+    var winEnd = winStart + winMs;
+    var head = document.getElementById('cgTimehead');
+    if (!head) return;
+    head.innerHTML = '';
+    for (var k = 0; k <= 8; k++){
+      var t = winStart + k * 1800000;
+      var sp = document.createElement('span');
+      sp.className = 'tick' + (k % 2 === 0 ? ' hour' : '');
+      sp.style.left = (k * 12.5) + '%';
+      sp.textContent = (k < 8) ? cgFmtT.format(new Date(t)) : '';
+      head.appendChild(sp);
+    }
+    var nowFrac = ((nowMs - winStart) / winMs * 100);
+    var hnl = document.createElement('div');
+    hnl.className = 'mg-nowline headflag';
+    hnl.style.left = nowFrac + '%';
+    hnl.innerHTML = '<span>NOW</span>';
+    head.appendChild(hnl);
+    [1, 2, 3, 4].forEach(function(n, ci){
+      var track = document.getElementById('cgTrack' + n);
+      if (!track) return;
+      track.innerHTML = '';
+      var blocks = cgMerge(cgEnumerate(n, winStart, winEnd));
+      var colorIdx = ci * 3;
+      var trackPx = track.clientWidth || 640;
+      blocks.forEach(function(b){
+        var L = (b.start - winStart) / winMs * 100;
+        var R = (b.end - winStart) / winMs * 100;
+        if (R <= 0 || L >= 100) return;
+        L = Math.max(0, L); R = Math.min(100, R);
+        var el = document.createElement('div');
+        var onair = nowMs >= b.start && nowMs < b.end;
+        el.className = 'mg-blk' + (b.isBreak ? ' brk' : '') + (onair ? ' onair' : '');
+        el.style.left = L + '%';
+        el.style.width = 'calc(' + (R - L) + '% - 3px)';
+        var label, tip;
+        if (b.isBreak){
+          label = b.parts.length === 1 ? b.parts[0].slot.title : ((n === 2) ? 'Pausa comercial' : 'Commercial Break');
+          tip = b.parts.map(function(p){ return cgFmtT.format(new Date(p.start)) + ' — ' + p.slot.title; }).join('\n');
+        } else {
+          label = b.slot.title;
+          tip = label;
+          el.style.background = CG_PALETTE[colorIdx % CG_PALETTE.length];
+          colorIdx++;
+        }
+        el.title = tip + '\n' + cgFmtT.format(new Date(b.start)) + ' – ' + cgFmtT.format(new Date(b.end)) + ' CT';
+        var wpx = trackPx * (R - L) / 100;
+        if (wpx > 40){
+          var tt = document.createElement('div');
+          tt.className = 'btitle';
+          tt.textContent = (onair && !b.isBreak ? '● ' : '') + label;
+          el.appendChild(tt);
+        }
+        track.appendChild(el);
+      });
+      var nl = document.createElement('div');
+      nl.className = 'mg-nowline';
+      nl.style.left = nowFrac + '%';
+      track.appendChild(nl);
+    });
+  }
+  cgRender();
+  setInterval(cgRender, 30000);
+  var cgRsz = null;
+  window.addEventListener('resize', function(){ clearTimeout(cgRsz); cgRsz = setTimeout(cgRender, 250); });
+})();
 </script>
 <script>
 let deferredPrompt = null;
