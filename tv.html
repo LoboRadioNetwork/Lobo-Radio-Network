@@ -653,7 +653,17 @@ const LIBRARY = [
 ];
 const byTitle = t => LIBRARY.find(x => x.title.includes(t));
 const BONANZA = LIBRARY.filter(x => x.group === 'BONANZA — TV SERIES');
-const PROGRAM = [ byTitle('Fights On'), ...POD, byTitle('Mad Scientist'), byTitle('Cisco Kid — S1 E1'), ...POD, byTitle('Minnie the Moocher'), ...BONANZA.flatMap(ep => [ep, ...POD]), byTitle('Falling Hare') ];
+const CISCO = LIBRARY.filter(x => x.group === 'THE CISCO KID — TV SERIES');
+const RANGER = LIBRARY.filter(x => x.group === 'THE LONE RANGER');
+// Western block: Bonanza episodes with Cisco Kid between them, and a Lone
+// Ranger episode in every sixth gap — sponsor pod after every show.
+const WESTERN = [];
+BONANZA.forEach((ep, i) => {
+  WESTERN.push(ep, ...POD);
+  const filler = (i % 6 === 5) ? RANGER[Math.floor(i/6) % RANGER.length] : CISCO[(i+1) % CISCO.length];
+  WESTERN.push(filler, ...POD);
+});
+const PROGRAM = [ byTitle('Fights On'), ...POD, byTitle('Mad Scientist'), byTitle('Cisco Kid — S1 E1'), ...POD, byTitle('Minnie the Moocher'), ...WESTERN, byTitle('Falling Hare') ];
 const LOOP = PROGRAM.reduce((a,s)=>a+s.dur,0);
 // ---- Sunday Bible Block: Sundays (viewer-local) midnight–10 AM, The Living
 // Christ episodes run in series order with the usual sponsor pods between them,
