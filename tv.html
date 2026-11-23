@@ -175,12 +175,13 @@
   box-shadow:0 2px 5px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.15);
 }
 .chguide:hover { border-color:#d4af37; color:#f0d489; }
-/* ---- the channel-change test pattern (our own Indian-head style card) ---- */
+/* ---- the channel-change test pattern (the real Indian Head photo) ---- */
 .testpattern {
   position:absolute; inset:0; z-index:5; display:none; background:#101010;
   align-items:center; justify-content:center;
 }
 .testpattern svg { position:absolute; inset:0; width:100%; height:100%; }
+.testpattern img.tpimg { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; }
 .testpattern .tpch {
   position:absolute; left:50%; bottom:5.5%; transform:translateX(-50%);
   display:flex; align-items:center; gap:9px;
@@ -252,81 +253,7 @@
             <div class="c2url">loboradio.com/tejano.html</div>
           </div>
           <div class="testpattern" id="testpattern" aria-hidden="true">
-            <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-              <defs>
-                <pattern id="xhp" width="9" height="9" patternUnits="userSpaceOnUse">
-                  <rect width="9" height="9" fill="#1b1b1b"></rect>
-                  <path d="M0,0 L9,9 M9,0 L0,9" stroke="#5c5c5c" stroke-width="1"></path>
-                </pattern>
-                <clipPath id="bigring"><circle cx="200" cy="150" r="86"></circle></clipPath>
-              </defs>
-              <rect x="0" y="0" width="400" height="300" fill="#121212"></rect>
-              <rect x="5" y="5" width="390" height="290" fill="none" stroke="#9a9a9a" stroke-width="2"></rect>
-              <rect x="13" y="13" width="374" height="274" fill="none" stroke="#4c4c4c" stroke-width="1"></rect>
-              <rect x="17" y="17" width="62" height="42" fill="url(#xhp)" stroke="#777"></rect>
-              <rect x="321" y="17" width="62" height="42" fill="url(#xhp)" stroke="#777"></rect>
-              <rect x="17" y="241" width="62" height="42" fill="url(#xhp)" stroke="#777"></rect>
-              <rect x="321" y="241" width="62" height="42" fill="url(#xhp)" stroke="#777"></rect>
-              <g stroke="#888" stroke-width="1">
-                <path d="M48,74 v14 M41,81 h14"></path>
-                <path d="M352,74 v14 M345,81 h14"></path>
-                <path d="M48,212 v14 M41,219 h14"></path>
-                <path d="M352,212 v14 M345,219 h14"></path>
-              </g>
-              <g>
-                <rect x="152" y="17" width="16" height="17" fill="#f2f2f2"></rect>
-                <rect x="168" y="17" width="16" height="17" fill="#c8c8c8"></rect>
-                <rect x="184" y="17" width="16" height="17" fill="#9e9e9e"></rect>
-                <rect x="200" y="17" width="16" height="17" fill="#747474"></rect>
-                <rect x="216" y="17" width="16" height="17" fill="#4a4a4a"></rect>
-                <rect x="232" y="17" width="16" height="17" fill="#262626"></rect>
-                <rect x="152" y="266" width="16" height="17" fill="#262626"></rect>
-                <rect x="168" y="266" width="16" height="17" fill="#4a4a4a"></rect>
-                <rect x="184" y="266" width="16" height="17" fill="#747474"></rect>
-                <rect x="200" y="266" width="16" height="17" fill="#9e9e9e"></rect>
-                <rect x="216" y="266" width="16" height="17" fill="#c8c8c8"></rect>
-                <rect x="232" y="266" width="16" height="17" fill="#f2f2f2"></rect>
-              </g>
-              <line x1="96" y1="150" x2="304" y2="150" stroke="#6a6a6a" stroke-width="1" stroke-dasharray="3 4"></line>
-              <line x1="200" y1="46" x2="200" y2="254" stroke="#6a6a6a" stroke-width="1" stroke-dasharray="3 4"></line>
-              <circle cx="200" cy="150" r="104" fill="#1e1e1e" stroke="#e8e8e8" stroke-width="2"></circle>
-              <g clip-path="url(#bigring)" stroke="#bdbdbd" stroke-width="1.4">
-                <path d="M168,64 v34 M176,64 v34 M184,64 v34 M192,64 v34 M200,64 v34 M208,64 v34 M216,64 v34 M224,64 v34 M232,64 v34"></path>
-                <path d="M168,202 v34 M176,202 v34 M184,202 v34 M192,202 v34 M200,202 v34 M208,202 v34 M216,202 v34 M224,202 v34 M232,202 v34"></path>
-                <path d="M114,118 h34 M114,126 h34 M114,134 h34 M114,142 h34 M114,158 h34 M114,166 h34 M114,174 h34 M114,182 h34"></path>
-                <path d="M252,118 h34 M252,126 h34 M252,134 h34 M252,142 h34 M252,158 h34 M252,166 h34 M252,174 h34 M252,182 h34"></path>
-              </g>
-              <circle cx="200" cy="150" r="96" fill="none" stroke="#dedede" stroke-width="9" stroke-dasharray="5 4" opacity="0.5"></circle>
-              <circle cx="200" cy="150" r="86" fill="none" stroke="#8a8a8a" stroke-width="1"></circle>
-              <g fill="none" stroke="#e8e8e8" stroke-width="1.4">
-                <circle cx="200" cy="64" r="6"></circle>
-                <circle cx="200" cy="236" r="6"></circle>
-                <circle cx="114" cy="150" r="6"></circle>
-                <circle cx="286" cy="150" r="6"></circle>
-              </g>
-              <g font-family="Courier New, monospace" font-size="11" fill="#c9c9c9">
-                <text x="191" y="52">300</text>
-                <text x="296" y="154">400</text>
-                <text x="191" y="262">200</text>
-                <text x="82" y="154">400</text>
-              </g>
-              <circle cx="200" cy="150" r="37" fill="#e9e9e9" stroke="#111" stroke-width="2"></circle>
-              <g transform="translate(200,150)">
-                <g fill="#141414">
-                  <path d="M0,-50 C4.5,-38 4.5,-27 0,-17 C-4.5,-27 -4.5,-38 0,-50 Z" transform="rotate(-58 0 -6)"></path>
-                  <path d="M0,-50 C4.5,-38 4.5,-27 0,-17 C-4.5,-27 -4.5,-38 0,-50 Z" transform="rotate(-36 0 -6)"></path>
-                  <path d="M0,-50 C4.5,-38 4.5,-27 0,-17 C-4.5,-27 -4.5,-38 0,-50 Z" transform="rotate(-14 0 -6)"></path>
-                  <path d="M0,-50 C4.5,-38 4.5,-27 0,-17 C-4.5,-27 -4.5,-38 0,-50 Z" transform="rotate(8 0 -6)"></path>
-                  <path d="M0,-50 C4.5,-38 4.5,-27 0,-17 C-4.5,-27 -4.5,-38 0,-50 Z" transform="rotate(30 0 -6)"></path>
-                  <path d="M0,-50 C4.5,-38 4.5,-27 0,-17 C-4.5,-27 -4.5,-38 0,-50 Z" transform="rotate(52 0 -6)"></path>
-                </g>
-                <path fill="#141414" d="M3,-20 C-6,-20 -12,-14 -12,-6 L-13,-1 L-18,4 L-12,6 L-13,9 L-11,13 C-8,17 -4,19 0,19 L1,26 L10,26 C12,14 12,4 11,-4 C10,-13 8,-20 3,-20 Z"></path>
-                <rect x="-13.5" y="-13" width="26" height="5" rx="2" transform="rotate(-8)" fill="#e9e9e9"></rect>
-                <circle cx="-8" cy="-10.5" r="2.3" fill="#e9e9e9"></circle>
-                <circle cx="-6.5" cy="-3.5" r="1.3" fill="#e9e9e9"></circle>
-              </g>
-              <text x="200" y="290" text-anchor="middle" font-family="Courier New, monospace" font-size="11" letter-spacing="4" fill="#8f8f8f">LOBO TELEVISION</text>
-            </svg>
+            <img class="tpimg" src="assets/test-pattern-indian-head.jpg" alt="" aria-hidden="true">
             <div class="tpch" id="tpch"><span>CH</span><svg class="segsvg" id="tpdigit" viewBox="0 0 60 102" aria-hidden="true"><polygon class="seg" data-seg="a" points="9,1 51,1 58,7 51,13 9,13 2,7"/><polygon class="seg on" data-seg="b" points="53,11 59,17 59,43 53,49 47,43 47,17"/><polygon class="seg on" data-seg="c" points="53,55 59,61 59,87 53,93 47,87 47,61"/><polygon class="seg" data-seg="d" points="9,89 51,89 58,95 51,101 9,101 2,95"/><polygon class="seg" data-seg="e" points="7,55 13,61 13,87 7,93 1,87 1,61"/><polygon class="seg" data-seg="f" points="7,11 13,17 13,43 7,49 1,43 1,17"/><polygon class="seg" data-seg="g" points="9,45 51,45 58,51 51,57 9,57 2,51"/></svg></div>
           </div>
         </div>
