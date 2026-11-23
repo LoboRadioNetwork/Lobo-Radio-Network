@@ -652,7 +652,8 @@ const LIBRARY = [
   { type:'show', group:'SCI-FI NETWORK — SERIALS', title:'Flash Gordon (1936) — complete 13-chapter serial', src:'https://archive.org/download/flash-gordon-1936/Flash%20Gordon%201936.ia.mp4', dur:14727 }
 ];
 const byTitle = t => LIBRARY.find(x => x.title.includes(t));
-const PROGRAM = [ byTitle('Fights On'), ...POD, byTitle('Mad Scientist'), byTitle('Cisco Kid — S1 E1'), ...POD, byTitle('Minnie the Moocher'), byTitle('Rose for Lotta'), ...POD, byTitle('Falling Hare') ];
+const BONANZA = LIBRARY.filter(x => x.group === 'BONANZA — TV SERIES');
+const PROGRAM = [ byTitle('Fights On'), ...POD, byTitle('Mad Scientist'), byTitle('Cisco Kid — S1 E1'), ...POD, byTitle('Minnie the Moocher'), ...BONANZA.flatMap(ep => [ep, ...POD]), byTitle('Falling Hare') ];
 const LOOP = PROGRAM.reduce((a,s)=>a+s.dur,0);
 // ---- Sunday Bible Block: Sundays (viewer-local) midnight–10 AM, The Living
 // Christ episodes run in series order with the usual sponsor pods between them,
