@@ -121,4 +121,4 @@ canvas.game{background:#05050f;border:2px solid #d4af37;border-radius:8px;width:
   nav a.tab .stlive { display:none; }
 }
 
-.approw { display:flex; gap:18px; flex-wrap:wrap; justify-content:center; align-items:stretch; max-width:1180px; margin:18px auto; padding:0 6px; }
+.approw { display:flex; gap:14px; flex-wrap:nowrap; justify-content:center; align-items:stretch; width:100vw; margin:18px calc(50% - 50vw); padding:0 12px; box-sizing:border-box; }
